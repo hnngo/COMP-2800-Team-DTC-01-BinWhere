@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<form method="post" action="/form">
+    <div>Username:</div>
+    <input aria-label="username" name="username" /><br>
+    <div>Password:</div>
+    <input aria-label="password" name="password" /><br>
+    <input type="submit" />
+</form>
+
+{% endblock %}
