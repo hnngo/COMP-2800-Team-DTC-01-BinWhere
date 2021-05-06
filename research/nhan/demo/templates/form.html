@@ -2,11 +2,13 @@
 
 {% block body %}
 
-<form method="post" action="/form">
+<form method="post" action="{{ "/form" }}" enctype="multipart/form-data">
     <div>Username:</div>
     <input aria-label="username" name="username" /><br>
     <div>Password:</div>
     <input aria-label="password" name="password" /><br>
+    <div>Photo:</div>
+    <input type="file" name="photo" /><br>
     <input type="submit" />
 </form>
 

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from firebase_admin import credentials, firestore
 import firebase_admin
+import base64
 
 cred = credentials.Certificate("./firebase-cred.json")
 firebase_admin.initialize_app(cred)
@@ -32,11 +33,19 @@ def get_form():
 def post_form():
     username = request.form['username']
     password = request.form['password']
+    photo_obj = request.files['photo']
 
     # Validate username password Firebase
-    isUserExisted = True
+    print(f"Username: {username}")
+    print(f"Password: {password}")
 
-    if isUserExisted:
+    encoded_string = "data:image/png;base64," + str(base64.b64encode(photo_obj.read()))[2:-1]
+    print(f"Encoded string: {encoded_string}")
+    print(encoded_string[:40])
+
+    db.collection('photos')
+
+    if True:
         return redirect("/more_page")
     else:
         return "Bad"
