@@ -45,10 +45,7 @@ def post_form():
 
     db.collection('photos')
 
-    if True:
-        return redirect("/more_page")
-    else:
-        return "Bad"
+    return redirect("/more_page", code=301)
 
 
 @app.route("/login", methods=["POST"])
@@ -60,20 +57,14 @@ def post_login():
     isUserExisted = True
 
     if isUserExisted:
-        return redirect("/more_page")
+        return redirect("/more_page",  code=301)
     else:
         return "Bad"
 
 
 @app.route("/more_page", methods=["GET", "POST"])
 def get_money():
-    # Do something
-
     result = 100
-    fib = 1467
-
-    # login
-
     username = "Kaz"
 
     # Do something
@@ -85,11 +76,9 @@ def get_feedback():
     return render_template("feedback.html")
 
 
-@app.route("/home/<string:name>/<int:id>")
-def index(name, id):
-    a = id + 1
-    print(a)
-    return f"Hello, your name is {name}, and your id is {id}"
+@app.route("/home/<string:name>/<int:user_id>")
+def index(name, user_id):
+    return f"Hello, your name is {name}, and your id is {user_id}"
 
 
 @app.route("/post", methods=["POST"])
