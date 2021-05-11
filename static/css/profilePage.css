@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #262E40;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/* HEADER */
+header {
+    background-color: #93C62E;
+    height: 7%;
+    margin: 0 auto;
+    padding: 3%;
+}
+
+header p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 5em;
+    margin: 3% auto 0;
+    float: left;
+    color: black;
+}
+
+#back-btn {
+    margin-right: 5%;
+    margin-left: 3%;
+}
+
+
+/*Profile*/
+main {
+    font-size: 4em;
+    margin: 3% auto;
+    padding: 3%;
+    text-align: center;
+}
+
+#profile-img {
+    display: block;
+    margin: 4% auto;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#username {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+#user-email {
+    font-size: 0.6em;
+    margin-top: 2%;
+}
+
+#edit-img {
+    width: 35%;
+    font-size: 0.6em;
+    margin-top: 2%;
+    padding: 3%;
+    border-radius: 50px;
+    background-color: #F1C40F;
+    color: white;
+}
+
+
+/*Bin Picture*/
+article {
+    font-size: 3em;
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#delete-btn {
+    font-size: 0.6em;
+    background-color: #F1C40F;
+    padding: 3% 5%;
+}
+
+#photo1 {
+    width: 20%;
+    grid-row: 1 / span 2;
+}
