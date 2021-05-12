@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.heading-container {
+    background-color: var(--primary-green);
+    height: 62px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading-title {
+    color: var(--primary-black);
+    font-size: 36px;
+    font-weight: bold;
+    font-family: Montserrat, sans-serif;
+}
