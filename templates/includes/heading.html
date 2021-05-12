@@ -1,0 +1,10 @@
+{% include "includes/source.html" %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/heading.css') }}">
+
+<div class="heading-container">
+    {% if show_back %}
+        <div>Back</div>
+    {% endif %}
+    <div class="heading-title">{{ title }}</div>
+</div>
