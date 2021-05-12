@@ -18,21 +18,25 @@
 
     <main class="profile">
         <img id="profile-img" src="https://briansmith.com/wp-content/uploads/2012/02/Brian-Smith-Samuel-L-Jackson.jpg" alt="Man is smiling">
-        <p id="username">Nick Fury</p>
+        <div id="username">
+            <p>Nick Fury</p>
+            <i class="fas fa-pen" id="edit-name"></i>
+        </div>
         <p id="user-email">nickF@binwhere.ca</p>
-        <button id="edit-img">Edit Image<i class="fas fa-chevron-right"></i></button>
     </main>
 
     <article class="posted-pictures">
+        <h1>Pictures you posted</h1>
+        <hr>
         <section id="picture1">
-            <div id="photo-info">
+            <div class="bin-photo">
+                <img id="photo1" src="https://images.dailyhive.com/20170717155920/vancouver-west-end-garbage-bins.jpg" alt="garbage bin in Vancouver">
+            </div>
+            <div class="photo-info">
                 <p id="reliability">Reliability: 50%</p>
                 <p id="date">Date Posted: 2021-05-10</p>
                 <button id="delete-btn">Delete</button>
             </div>
-            <div id="bin-photo">
-                <img id="photo1" src="https://images.dailyhive.com/20170717155920/vancouver-west-end-garbage-bins.jpg" alt="garbage bin in Vancouver">
-            </div
         </section>
     </article>
 </body>
