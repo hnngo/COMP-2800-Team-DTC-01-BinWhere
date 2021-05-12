@@ -37,19 +37,6 @@ def init(app, db):
 
         return redirect("/more_page", code=301)
 
-    @app.route("/login", methods=["POST"])
-    def post_login():
-        username = request.form['username']
-        password = request.form['password']
-
-        # Validate username password Firebase
-        isUserExisted = True
-
-        if isUserExisted:
-            return redirect("/more_page", code=301)
-        else:
-            return "Bad"
-
     @app.route("/index", methods=["GET", "POST"])
     def get_money():
         result = 100
