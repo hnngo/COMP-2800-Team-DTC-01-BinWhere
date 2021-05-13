@@ -14,6 +14,9 @@ function initMap() {
         $.each(data.records, function (key, data) {
             var coords = new google.maps.LatLng(data.lat, data.long);
             var pin = new google.maps.Marker({position: coords, map, title: data.id});
+            google.maps.event.addListener(pin, 'click', function () {
+                window.location.href = '/bin-details&id=' + data.id;
+            });
         });
     });
 
