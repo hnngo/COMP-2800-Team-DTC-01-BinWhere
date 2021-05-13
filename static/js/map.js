@@ -10,6 +10,13 @@ function initMap() {
     });
     console.log('Map loaded');
 
+    $.getJSON('/static/json/test-coords.json', function(data) {
+        $.each(data.records, function (key, data) {
+            var coords = new google.maps.LatLng(data.lat, data.long);
+            var pin = new google.maps.Marker({position: coords, map, title: data.id});
+        });
+    });
+
     infoWindow = new google.maps.InfoWindow();
     const locationButton = document.createElement("button");
     locationButton.textContent = "Pan to Current Location";
