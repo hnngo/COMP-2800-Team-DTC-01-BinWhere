@@ -1,5 +1,8 @@
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, url_for, session
 import base64
+
+
+photo_string = ""
 
 
 def initialize(app, db):
@@ -30,12 +33,12 @@ def initialize(app, db):
         print(f"Password: {password}")
 
         encoded_string = "data:image/png;base64," + str(base64.b64encode(photo_obj.read()))[2:-1]
-        print(f"Encoded string: {encoded_string}")
-        print(encoded_string[:40])
 
-        db.collection('photos')
+        global photo_string
+        photo_string = encoded_string
 
-        return redirect("/more_page", code=301)
+        # return redirect(f"/more_page?avatar={encoded_string}")
+        return redirect('/more_page')
 
     @app.route("/login", methods=["POST"])
     def post_login():
@@ -55,8 +58,11 @@ def initialize(app, db):
         result = 100
         username = "Kaz"
 
+        # avatar = request.args.get('avatar')  # counterpart for url_for()
+        # avatar = session['avatar']  # counterpart for session
+        # print(avatar)
         # Do something
-        return render_template("index.html", result=result, name=username)
+        return render_template("index.html", result=result, name=username, avatar=photo_string)
 
     @app.route("/feedback")
     def get_feedback():
