@@ -11,10 +11,6 @@ def init(app, db):
     def get_hi():
         return "<h1 style='color: red'>Hi there</h1>"
 
-    @app.route("/page", methods=["GET", "POST"])
-    def get_page():
-        return render_template("hello.html")
-
     @app.route("/form", methods=["GET"])
     def get_form():
         return render_template("form.html")
