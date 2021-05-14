@@ -72,6 +72,25 @@ main {
     font-size: 25px;
 }
 
+.new-name {
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+#change-username {
+    display: none;
+}
+
+#submit-new-username {
+    display: none;
+    position: absolute;
+    height: 27px;
+    right: 1px;
+    padding-right: 4px;
+    padding-left: 4px;
+}
+
 #edit-name-btn {
     margin: 7px 7px 0;
     font-size: 20px;
@@ -173,7 +192,7 @@ section img {
 .btn-close {
     position: absolute;
     top: 4px;
-    right: 3px;
+    right: 5px;
     font-size: 16px;
     border: none;
 }
