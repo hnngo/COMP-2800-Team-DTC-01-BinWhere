@@ -1,19 +1,15 @@
 from flask import Flask
 from routes import routes
 import pyrebase_auth
-import firebase
 
 # Init application
 app = Flask(__name__)
 
 # Init pyrebase
-auth = pyrebase_auth.init()
-
-# Get a reference to the database service
-db = firebase.initialize()
+firebase = pyrebase_auth.init()
 
 # Setup routes
-routes.initialize(app, db, auth)
+routes.initialize(app, firebase.database(), firebase.auth())
 
 if __name__ == '__main__':
     # RUN IT
