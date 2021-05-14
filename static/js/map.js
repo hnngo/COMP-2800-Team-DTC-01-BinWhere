@@ -40,7 +40,7 @@ function initMap() {
                     icon: icons[data.type].icon
                 });
                 google.maps.event.addListener(pin, 'click', function () {
-                    window.location.href = '/templates/bin-details.html&id=' + data.id;
+                    window.location.href = '/templates/bin-details.html?id=' + data.id;
                 });
             }
         });
