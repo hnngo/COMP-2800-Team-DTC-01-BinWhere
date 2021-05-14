@@ -10,15 +10,15 @@ function initMap() {
     });
     console.log('Map loaded');
 
-    const iconPath = "http:// google.com/mapfiles/ms/micons";
+    const iconPath = "http://maps.google.com/mapfiles/ms/micons/";
     const icons = {
-        recycling: {
+        "recycling": {
             icon: iconPath + "green-dot.png"
         },
-        trash: {
+        "trash": {
             icon: iconPath + "yellow-dot.png"
         },
-        dog: {
+        "dog": {
             icon: iconPath + "orange-dot.png"
         }
     };
@@ -30,6 +30,7 @@ function initMap() {
                 position: coords, 
                 map, 
                 title: data.id,
+                icon: icons[data.type].icon
             });
             google.maps.event.addListener(pin, 'click', function () {
                 window.location.href = '/bin-details&id=' + data.id;
