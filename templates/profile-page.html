@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{#    font-awesome#}
+    <script src="https://kit.fontawesome.com/8ec9a3f1e7.js" crossorigin="anonymous"></script>
+
+{#    CSS#}
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/profile-page.css") }}">
+
+    <title>Profile Page</title>
+</head>
+<body>
+    <div class="container">
+        {%  include "includes/heading.html" %}
+
+        <main>
+            <div class="profile-img">
+                <div class="profile-avatar">
+                    <img id="user-img" src="{{ url_for('static', filename="assets/images/nhan.png") }}" alt="avatar">
+                    <div id="edit">Edit</div>
+                </div>
+            </div>
+            <div class="username">
+                <div id="user-name">Huynh Nhan</div>
+                <div class="new-name">
+                    <input type="text" id="change-username">
+                    <input type="submit" id="submit-new-username">
+                </div>
+                <i class="fas fa-pen" id="edit-name-btn"></i>
+            </div>
+            <div class="useremail">
+                <div id="user-email">nhanH@binwhere.ca</div>
+            </div>
+        </main>
+
+        <article>
+            <div class="posted-pictures">
+                <div class="picture-title">
+                    Pictures you posted
+                </div>
+
+                <section id="picture1">
+                    <div class="bin-photo">
+                        <img id="photo-1" src="https://images.dailyhive.com/20170717155920/vancouver-west-end-garbage-bins.jpg" alt="garbage bin in Vancouver">
+                    </div>
+                    <div class="photo-info">
+                        <p id="reliability">Reliability: 50%</p>
+                        <p id="date">Date Posted: 2021-05-10</p>
+                        <button id="delete-btn">Delete</button>
+                    </div>
+                </section>
+            </div>
+        </article>
+
+{#        DELETE-BUTTON-MODAL#}
+        <div class="modal" id="delete-button-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Confirmation</h5>
+                        <button type="button" class="btn-close" id="btn-close" aria-label="Close"><i class="fas fa-times"></i></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete the picture?</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="confirm-delete">Delete</button>
+                        <button type="button" id="close-btn">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/profile-page.js') }}"></script>
+</body>
+</html>

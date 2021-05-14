@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+#back-btn {
+    color: var(--primary-black);
+    font-size: 30px;
+    margin: 0 3%;
+    position: absolute;
+    top: 17px;
+    left: 10px;
+}
+
 .heading-container {
     background-color: var(--primary-green);
     height: 62px;
