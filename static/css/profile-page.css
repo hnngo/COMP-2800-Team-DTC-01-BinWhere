@@ -20,7 +20,7 @@ body {
 
 /*Profile*/
 main {
-    margin-top: 5px;
+    margin: 20px auto;
     padding: 10px;
 }
 
@@ -43,6 +43,7 @@ main {
     height: 150px;
     object-fit: cover;
     border-radius: 50%;
+    border: 2px solid var(--primary-green);
 }
 
 #edit {
