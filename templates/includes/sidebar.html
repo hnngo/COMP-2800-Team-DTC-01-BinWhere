@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
 
-<div class="container">
+<div class="container animate__animated d-none" id="sidebar">
     <img
         class="sidebar-wave"
         src="{{ url_for('static', filename='assets/images/sidebar-wave.png') }}"
@@ -21,7 +21,7 @@
 
         <div class="sidebar-menu">
             {% if is_login %}
-                <a class="sidebar-menu-item" href="/">Profile</a>
+                <a class="sidebar-menu-item" href={{ "/profile" }}>Profile</a>
             {% else %}
                 <a class="sidebar-menu-item" href={{ "/login" }}>Login</a>
             {% endif %}

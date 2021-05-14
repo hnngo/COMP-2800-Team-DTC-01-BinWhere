@@ -1,0 +1,11 @@
+{% extends "includes/base.html" %}
+
+{% block head %}
+<title>Navbar</title>
+{% endblock %}
+
+{% block body %}
+    {% with is_login=True %}
+        {% include "includes/navbar.html" %}
+    {% endwith %}
+{% endblock %}

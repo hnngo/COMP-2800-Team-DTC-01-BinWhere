@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 
 <div class="nav-container">
-    <div class="nav-menu">
+    <div class="nav-menu" id="navbar-icon">
         <img
             class="nav-menu-icon"
             src="{{ url_for('static', filename='assets/icons/icon-hamburger.png') }}"
@@ -18,3 +18,7 @@
         />
     </div>
 </div>
+
+{% include "includes/sidebar.html" %}
+
+<script defer src="{{ url_for('static', filename='js/navbar.js') }}"></script>

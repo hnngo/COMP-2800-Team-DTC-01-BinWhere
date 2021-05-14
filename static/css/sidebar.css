@@ -5,6 +5,10 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+.d-none {
+    display: none;
+}
+
 .container {
     background-color: var(--primary-black);
     width: 287px;

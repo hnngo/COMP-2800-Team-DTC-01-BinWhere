@@ -9,27 +9,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px;
+    padding: 20px;
+    position: absolute;
 }
 
 .nav-menu-icon {
-    width: 80px;
+    width: 40px;
+    cursor: pointer;
 }
 
 .search-container {
     position: relative;
     flex: 1;
     display: flex;
-    margin-left: 50px;
+    margin-left: 20px;
     justify-content: center;
     align-items: center;
 }
 
 .search-input {
     width: 100%;
-    font-size: 46px;
-    padding: 20px 80px 20px 40px;
-    border-radius: 40px;
+    font-size: 22px;
+    padding: 10px 50px 10px 10px;
+    border-radius: 20px;
     border: 1px solid var(--primary-black);
     outline: none;
 }
@@ -37,4 +39,5 @@
 .search-menu-icon {
     position: absolute;
     right: 20px;
+    width: 26px;
 }

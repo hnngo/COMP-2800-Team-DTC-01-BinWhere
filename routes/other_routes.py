@@ -4,7 +4,7 @@ from flask import render_template
 def init(app):
     @app.route("/", methods=["GET"])
     def get_index():
-        return render_template("sidebar-example.html")
+        return render_template("navbar-example.html")
 
     @app.route("/about-us", methods=["GET"])
     def get_about_us():
@@ -16,4 +16,4 @@ def init(app):
 
     @app.route("/nav", methods=["GET"])
     def get_nav():
-        return render_template("includes/navbar.html")
+        return render_template("navbar-example.html")
