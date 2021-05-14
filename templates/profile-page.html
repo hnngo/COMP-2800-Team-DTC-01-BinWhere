@@ -2,42 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/8ec9a3f1e7.js" crossorigin="anonymous"></script>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-
-    <link rel="stylesheet" href="../static/css/profilePage.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/profile-page.css") }}">
+    <title>Profile Page</title>
 </head>
 <body>
-    <header>
-        <p id="back-btn"><i class="fas fa-arrow-left"></i></p>
-        <p>My Account</p>
-    </header>
+    <div class="container">
+        {%  include "includes/heading.html" %}
 
-    <main class="profile">
-        <img id="profile-img" src="https://briansmith.com/wp-content/uploads/2012/02/Brian-Smith-Samuel-L-Jackson.jpg" alt="Man is smiling">
-        <div id="username">
-            <p>Nick Fury</p>
-            <i class="fas fa-pen" id="edit-name"></i>
-        </div>
-        <p id="user-email">nickF@binwhere.ca</p>
-    </main>
+        <main>
+            <div class="profile-img">
+                <div class="profile-avatar">
+                    <img id="user-img" src="https://briansmith.com/wp-content/uploads/2012/02/Brian-Smith-Samuel-L-Jackson.jpg" alt="Nick's profile image">
+                    <div id="edit">Edit</div>
+                </div>
+            </div>
+            <div class="username">
+                <div id="user-name">Nick Fury</div>
+                <i class="fas fa-pen" id="edit-name-btn"></i>
+            </div>
+            <div class="useremail">
+                <div id="user-email">nickF@binwhere.ca</div>
+            </div>
+        </main>
 
-    <article class="posted-pictures">
-        <h1>Pictures you posted</h1>
-        <hr>
-        <section id="picture1">
-            <div class="bin-photo">
-                <img id="photo1" src="https://images.dailyhive.com/20170717155920/vancouver-west-end-garbage-bins.jpg" alt="garbage bin in Vancouver">
+        <article>
+            <div class="posted-pictures">
+                <div class="picture-title">
+                    Pictures you posted
+                </div>
+
+                <section id="picture1">
+                    <div class="bin-photo">
+                        <img id="photo-1" src="https://images.dailyhive.com/20170717155920/vancouver-west-end-garbage-bins.jpg" alt="garbage bin in Vancouver">
+                    </div>
+                    <div class="photo-info">
+                        <p id="reliability">Reliability: 50%</p>
+                        <p id="date">Date Posted: 2021-05-10</p>
+                        <button id="delete-btn">Delete</button>
+                    </div>
+                </section>
             </div>
-            <div class="photo-info">
-                <p id="reliability">Reliability: 50%</p>
-                <p id="date">Date Posted: 2021-05-10</p>
-                <button id="delete-btn">Delete</button>
-            </div>
-        </section>
-    </article>
+        </article>
+</div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 </body>
 </html>

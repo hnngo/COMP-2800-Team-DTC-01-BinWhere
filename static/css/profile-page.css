@@ -1,80 +1,90 @@
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     height: 100vh;
     width: 100vw;
-    background-color: #262E40;
+    background-color: var(--primary-black);
     color: white;
     font-family: 'Roboto', sans-serif;
 }
 
 
-/* HEADER */
-header {
-    background-color: #93C62E;
-    height: 7%;
-    margin: 0 auto;
-    padding: 3%;
-}
-
-header p {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 5em;
-    margin: 3% auto 0;
-    float: left;
-    color: black;
-}
-
-#back-btn {
-    margin-right: 5%;
-    margin-left: 3%;
-}
-
-
 /*Profile*/
 main {
-    font-size: 4em;
     margin: 3% auto;
     padding: 3%;
     text-align: center;
 }
 
-#profile-img {
+.profile-img {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-avatar {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+}
+
+#user-img {
     display: block;
-    margin: 4% auto;
-    width: 300px;
-    height: 300px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border-radius: 50%;
 }
 
-#username::after {
+#edit {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(85, 85, 85, 0.6);
+    width: 150px;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 0;
+}
+
+.username::after {
     content: "";
     display: block;
     clear: both;
 }
 
-#username * {
-    display: inline-block;
-    font-weight: bold;
-    margin: 0 auto;
-    float: left;
-    position: relative;
-    left: 34%;
+.username {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 
-#edit-name {
+#user-name {
+    font-size: 25px;
+}
+
+#edit-name-btn {
     margin: 2% 2% 0;
-    font-size: 40px;
+    font-size: 20px;
     color: #959595;
 }
 
-#edit-name:hover {
+#edit-name-btn:hover {
     cursor: pointer;
     color: white;
 }
 
-#user-email {
-    margin-top: 2%;
+.useremail {
+    margin-top: 7px;
+    display: flex;
+    justify-content: center;
+}
+
+.user-email {
     font-size: 40px;
     clear: both;
 }
@@ -82,17 +92,17 @@ main {
 
 /*Bin Picture*/
 article {
-    margin: 5% 3%;
+    padding: 20px;
 }
 
-article h1 {
-    font-size: 60px;
-    margin-left: 3%;
+.picture-title {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    border-bottom: 1px solid white;
 }
 
 section {
-    font-size: 40px;
-    margin: 5% 3%;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-areas:
@@ -101,22 +111,20 @@ section {
 
 .bin-photo {
     grid-area: picture;
+    padding: 2px;
 }
 
 .photo-info {
-    padding-left: 5%;
     grid-area: information;
-}
-
-#reliability, #date {
-    margin: 0 auto;
+    font-size: 16px;
+    padding: 6px;
 }
 
 #delete-btn {
-    margin-top: 2%;
-    font-size: 40px;
-    background-color: #F1C40F;
-    padding: 3% 5%;
+    font-size: 16px;
+    background-color: var(--primary-yellow);
+    padding: 3px 6px;
+    margin-top: 2px;
 }
 
 section img {
