@@ -1,4 +1,4 @@
-from . import authentication_route, user_route, demo_route, other_routes
+from . import authentication_route, user_route, demo_route, other_routes, map_route
 
 
 def initialize(app, db):
@@ -11,3 +11,4 @@ def initialize(app, db):
     user_route.init(app)
     demo_route.init(app, db)
     other_routes.init(app)
+    map_route.init(app)
