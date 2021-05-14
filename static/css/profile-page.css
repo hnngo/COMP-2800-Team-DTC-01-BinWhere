@@ -12,12 +12,16 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.container {
+    margin: 0;
+    padding: 0;
+}
+
 
 /*Profile*/
 main {
-    margin: 3% auto;
-    padding: 3%;
-    text-align: center;
+    margin-top: 5px;
+    padding: 10px;
 }
 
 .profile-img {
@@ -68,7 +72,7 @@ main {
 }
 
 #edit-name-btn {
-    margin: 2% 2% 0;
+    margin: 7px 7px 0;
     font-size: 20px;
     color: #959595;
 }
@@ -112,6 +116,9 @@ section {
 .bin-photo {
     grid-area: picture;
     padding: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .photo-info {
@@ -120,13 +127,82 @@ section {
     padding: 6px;
 }
 
+.photo-info * {
+    margin: 0;
+}
+
 #delete-btn {
     font-size: 16px;
     background-color: var(--primary-yellow);
-    padding: 3px 6px;
-    margin-top: 2px;
+    padding: 3px 15px;
+    margin-top: 7px;
 }
 
 section img {
     width: 100%;
 }
+
+
+/*MODAL*/
+.modal {
+    display: none;
+    width: 87%;
+    background-color: rgba(250, 250, 250);
+    color: black;
+    padding: 18px;
+    position: absolute;
+    top: 30%;
+    left: 7%;
+    border-radius: 3%;
+}
+
+.modal-header {
+    position: relative;
+    display: flex;
+    justify-content: left;
+    margin: 10px auto;
+    padding-bottom: 16px;
+    border-bottom: 1px solid grey;
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.btn-close {
+    position: absolute;
+    top: 4px;
+    right: 3px;
+    font-size: 16px;
+    border: none;
+}
+
+.modal-body {
+    padding: 14px 0;
+    font-size: 16px;
+}
+
+.modal-footer {
+    margin-top: 14px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-footer button {
+    font-size: 17px;
+    padding: 5px 17px;
+    margin: 3px 5px;
+    border-radius: 5%;
+}
+
+#confirm-delete {
+    color: #FF1A1A;
+    background-color: white;
+    border: 0.5px solid;
+}
+
+#close-btn {
+    background-color: white;
+    border: 0.5px solid var(--primary-black)
+}
+

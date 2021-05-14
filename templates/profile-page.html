@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{#    font-awesome#}
     <script src="https://kit.fontawesome.com/8ec9a3f1e7.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+{#    CSS#}
     <link rel="stylesheet" href="{{ url_for('static', filename="css/profile-page.css") }}">
+
     <title>Profile Page</title>
 </head>
 <body>
@@ -47,8 +50,30 @@
                 </section>
             </div>
         </article>
-</div>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
+{#        DELETE-BUTTON-MODAL#}
+        <div class="modal" id="delete-button-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Confirmation</h5>
+                        <button type="button" class="btn-close" id="btn-close" aria-label="Close"><i class="fas fa-times"></i></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete the picture?</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="confirm-delete">Delete</button>
+                        <button type="button" id="close-btn">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/profile-page.js') }}"></script>
 </body>
 </html>
