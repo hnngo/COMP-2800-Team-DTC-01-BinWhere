@@ -1,6 +1,6 @@
 .container {
     background-color: var(--primary-black);
-    height: 100vh;
+    min-height: 100%;
 }
 
 .profile-container {
@@ -57,4 +57,18 @@
     padding: 0 20px 20px 20px;
     font-family: 'Roboto', sans-serif;
     letter-spacing: 1px;
+}
+
+.paragraph-head {
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 20px 0;
+    color: var(--primary-yellow);
+}
+
+.paragraph {
+    font-family: Montserrat, sans-serif;
+    margin: 10px 0;
+    font-size: 13px;
 }

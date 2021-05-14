@@ -1,10 +1,11 @@
 {% include "includes/source.html" %}
 
+<script src="https://kit.fontawesome.com/8ec9a3f1e7.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/heading.css') }}">
 
 <div class="heading-container">
     {% if show_back %}
-        <div>Back</div>
+        <a href="/"><i class="fas fa-arrow-left" id="back-btn"></i></a>
     {% endif %}
     <div class="heading-title">{{ title }}</div>
 </div>

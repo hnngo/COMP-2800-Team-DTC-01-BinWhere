@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <link rel="stylesheet" href="{{ url_for('static', filename="css/signup.css") }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/heading.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +9,8 @@
 
 </head>
 <body>
-    <form action="/login" method="post">
-{#        <input type="name" name="name">#}
+    <form action="/signup" method ="post">
+    {#        <input type="name" name="name">#}
 {#        <input type="password" name="pass">#}
 {#        <input type="submit" name="submit">#}
 
@@ -62,6 +61,7 @@
                 <button type = "submit" name ="submit">SIGN UP</button>
             </div>
         </div>
+        </div>
         <div class = "no_account">
             <p>ALREADY HAVE AN ACCOUNT?</p>
         </div>
@@ -69,6 +69,13 @@
             <p><U>LOG IN</U></p>
         </div>
 
+{#    <title></title>#}
+{#</head>#}
+{#<body>#}
+{#    <form action="/signup" method ="post">#}
+{#        <input type="name" name="name">#}
+{#        <input type="password" name="pass">#}
+{#        <input type="submit" name="submit">#}
     </form>
 
 </body>
