@@ -36,7 +36,7 @@ function initMap() {
                 var pin = new google.maps.Marker({
                     position: coords,
                     map,
-                    title: data.id,
+                    title: data.type,
                     icon: icons[data.type].icon
                 });
                 google.maps.event.addListener(pin, 'click', function () {
