@@ -4,7 +4,7 @@ from flask import render_template
 def init(app):
     @app.route("/", methods=["GET"])
     def get_index():
-        return render_template("navbar-example.html", is_login=True)
+        return render_template("navbar-example.html")
 
     @app.route("/about-us", methods=["GET"])
     def get_about_us():

@@ -21,12 +21,19 @@ window.onload = () => {
     }
 
     // Handle close hamburger menu
-    window.addEventListener('click', (event) => {
+    function closeSideBar() {
         const sidebarElem = document.querySelector("#sidebar");
         if (sidebarElem && isSidebarOpen && event.pageX > 287) {
                 sidebarElem.classList.remove("animate__slideInLeft");
                 sidebarElem.classList.add("animate__slideOutLeft");
                 isSidebarOpen = false;
         }
+    }
+
+    window.addEventListener('click', (event) => {
+        closeSideBar();
+    })
+    window.addEventListener('touchstart', (event) => {
+        closeSideBar();
     })
 }
