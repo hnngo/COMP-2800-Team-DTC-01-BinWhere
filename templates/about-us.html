@@ -7,8 +7,9 @@
 
 {% block body %}
 <div class="container">
-    {% include "includes/heading.html" %}
-
+    {% with show_back=show_back %}
+        {% include "includes/heading.html" %}
+    {% endwith %}
     <div class="short-paragraph">
         <div class="paragraph-head">Make the Green Snowball Effect with our neighbours</div>
 

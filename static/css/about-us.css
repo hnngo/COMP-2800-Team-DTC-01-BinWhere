@@ -1,6 +1,6 @@
 .container {
     background-color: var(--primary-black);
-    height: 100%;
+    min-height: 100%;
 }
 
 .profile-container {

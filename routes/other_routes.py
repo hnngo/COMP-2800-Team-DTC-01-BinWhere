@@ -4,11 +4,11 @@ from flask import render_template
 def init(app):
     @app.route("/", methods=["GET"])
     def get_index():
-        return render_template("navbar-example.html")
+        return render_template("navbar-example.html", is_login=True)
 
     @app.route("/about-us", methods=["GET"])
     def get_about_us():
-        return render_template("about-us.html", title="About Us")
+        return render_template("about-us.html", title="About Us", show_back=True)
 
     @app.route("/sidebar", methods=["GET"])
     def get_sidebar():

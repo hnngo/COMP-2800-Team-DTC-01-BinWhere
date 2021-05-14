@@ -16,6 +16,7 @@
 
 .loading-logo {
     width: 60%;
+    max-width: 300px;
 }
 
 .loader {
