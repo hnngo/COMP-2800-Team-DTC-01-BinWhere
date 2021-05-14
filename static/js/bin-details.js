@@ -12,11 +12,6 @@ $.getJSON('/static/json/test-coords.json', function (data) {
         }
     });
 }).then(function () {
-    console.log(type);
     $('#bin-details-type').append(type);
-    //$('#bin-details-location').append(address);
+    $('#bin-details-location').append('(' + lat + ' ' + long + ')');
 });
-
-
-
-
