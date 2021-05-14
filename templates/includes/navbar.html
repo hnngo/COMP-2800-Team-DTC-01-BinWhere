@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+
+<div class="nav-container">
+    <div class="nav-menu">
+        <img
+            class="nav-menu-icon"
+            src="{{ url_for('static', filename='assets/icons/icon-hamburger.png') }}"
+            alt="menu-icon"
+        />
+    </div>
+    <div class="search-container">
+        <input class="search-input" type="text" name="keyword"/>
+        <img
+            class="search-menu-icon"
+            src="{{ url_for('static', filename='assets/icons/icon-search.png') }}"
+            alt="menu-icon"
+        />
+    </div>
+</div>

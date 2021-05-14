@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.nav-menu-icon {
+    width: 80px;
+}
+
+.search-container {
+    position: relative;
+    flex: 1;
+    display: flex;
+    margin-left: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    font-size: 46px;
+    padding: 20px 80px 20px 40px;
+    border-radius: 40px;
+    border: 1px solid var(--primary-black);
+    outline: none;
+}
+
+.search-menu-icon {
+    position: absolute;
+    right: 20px;
+}

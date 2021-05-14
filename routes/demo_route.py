@@ -78,6 +78,3 @@ def init(app, db):
             text += f"{doc.id} => {doc.to_dict()}\n"
         return text
 
-    @app.route("/sidebar", methods=["GET"])
-    def get_sidebar():
-        return render_template('sidebar-example.html')
