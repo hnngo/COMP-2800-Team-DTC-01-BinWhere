@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    {% include "includes/loading-screen.html" %}
     {% with is_login=True %}
         {% include "includes/navbar.html" %}
     {% endwith %}

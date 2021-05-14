@@ -1,19 +1,12 @@
 {% extends 'includes/base.html' %}
 
 {% block head %}
-<title>Welcome</title>
+<title>Bin Where</title>
 {% endblock %}
 
 {% block body %}
-<h1>Template</h1>
-<h2>Your number {{ result }}</h2>
-<h2>Hello {{ name }}</h2>
-{% endblock %}
-
-{% block bottom %}
-
-<h1>Bottom</h1>
-<div class="p">
-<h2></h2>
-</div>
+    {% include "includes/loading-screen.html" %}
+    {% with is_login=True %}
+        {% include "includes/navbar.html" %}
+    {% endwith %}
 {% endblock %}

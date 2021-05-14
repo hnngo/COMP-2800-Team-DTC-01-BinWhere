@@ -17,3 +17,7 @@ def init(app):
     @app.route("/nav", methods=["GET"])
     def get_nav():
         return render_template("navbar-example.html")
+
+    @app.route("/loading", methods=["GET"])
+    def get_loading():
+        return render_template("includes/loading-screen.html")

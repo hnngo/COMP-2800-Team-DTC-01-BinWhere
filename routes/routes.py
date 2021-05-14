@@ -9,5 +9,4 @@ def initialize(app, db):
     """
     authentication_route.init(app)
     user_route.init(app)
-    demo_route.init(app, db)
     other_routes.init(app)
