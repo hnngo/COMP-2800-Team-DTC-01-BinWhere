@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename="css/login.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/signup.css") }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/heading.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% include "includes/source.html" %}
@@ -23,39 +23,50 @@
             <img src= "{{ url_for('static', filename="assets/images/temp_bin_icons.png") }}"
                  alt = "logo_icons">
         </div>
-        <div class = "login_container">
+        <div class = "signup_container">
             <div class = "input_container">
+                <div class = "user_container">
+                    <div class = "username">
+                        <h4> USERNAME </h4>
+                    </div>
+                    <div class = "get_username">
+                        <P>Enter your name</P>
+                    </div>
+                </div>
                 <div class = "email_container">
                     <div class = "email_address">
                         <h4> EMAIL ADDRESS</h4>
                     </div>
                     <div class = "get_email">
-                        <img src= "{{ url_for('static', filename="assets/icons/icon-profile.png") }}"
-                                alt = "icon-password"/>
-                        <input name="name" type="text" placeholder="Type your email address" />
+                        <P>Enter your email address</P>
                     </div>
-                </div>
-                <div class = "password_container">
+                <div class = "password_container_one">
                     <div class = "password">
                         <h4>PASSWORD</h4>
                     </div>
                     <div class = "get_password">
-
-                        <img src= "{{ url_for('static', filename="assets/icons/icon-password.png") }}"
-                                alt = "icon-password">
-                        <input name="pass" type="password" placeholder="Type your password" />
+                        <p>Enter your password</p>
                     </div>
                 </div>
+                <div class = "password_container_two">
+                    <div class = "confirm_password">
+                        <h4>PASSWORD</h4>
+                    </div>
+                    <div class = "retype_password">
+                        <p>Enter your password again</p>
+                    </div>
+                </div>
+
             </div>
-            <div class = "login_button_container">
-                <button type = "submit" name ="submit">LOGIN IN</button>
+            <div class = "signup_button_container">
+                <button type = "submit" name ="submit">SIGN UP</button>
             </div>
         </div>
         <div class = "no_account">
-            <p>DON'T HAVE AN ACCOUNT YET?</p>
+            <p>ALREADY HAVE AN ACCOUNT?</p>
         </div>
-        <div class = "signup">
-            <p><U>SIGN UP</U></p>
+        <div class = "login">
+            <p><U>LOG IN</U></p>
         </div>
 
     </form>

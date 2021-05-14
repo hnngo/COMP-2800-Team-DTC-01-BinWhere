@@ -1,0 +1,101 @@
+form {
+    background-color: var(--primary-black);
+    height: 100vh;
+    flex-direction: column;
+    /*align-items: baseline;*/
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo_name {
+    align-items: center;
+}
+
+.logo_name img {
+    width: 250px;
+}
+
+.logo_icons img {
+    width: 180px;
+}
+
+.login_container{
+}
+
+.input_container{
+    background-color: var(--primary-yellow);
+    width: 350px;
+    /*height: 40vh;*/
+    border-radius: 2.5rem;
+    /*padding-left: 1.5em;*/
+    padding: 2em 1.5em;
+    margin-top: 30px;
+}
+
+.email_container{
+    /*margin-top: 2em;*/
+    /*padding-bottom: 4em;*/
+    /*width: 40vh;*/
+    margin-bottom: 20px;
+}
+
+.email_address{
+    padding-bottom: 2em;
+}
+
+/*.get_email {*/
+/*    border-bottom: black solid 2px;*/
+/*    padding-bottom: 10px;*/
+/*    color: #5B5022;*/
+/*}*/
+
+.password_container {
+    /*width: 40v;*/
+}
+
+.password {
+    padding-bottom: 2em;
+}
+
+.get_email,
+.get_password {
+    border-bottom: black solid 2px;
+    padding-bottom: 10px;
+    color: #5B5022;
+    display: flex;
+}
+
+.get_password input,
+.get_email input {
+    width: 100%;
+    background: none;
+    border: none;
+    font-size: 16px;
+    margin-left: 5px;
+    /*color: #5B5022;*/
+}
+
+.login_button_container  {
+    margin: 20px 0 40px 0;
+}
+
+.login_button_container button{
+    background-color: var(--primary-green);
+    height: 10vh;
+    width: 350px;
+    border-radius: 2.5rem;
+    font-size: 1.5em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600
+}
+
+.no_account{
+    color: whitesmoke;
+}
+
+.signup{
+    color: whitesmoke;
+}

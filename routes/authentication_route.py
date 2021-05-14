@@ -25,3 +25,5 @@ def init(app, auth):
     def post_login():
         pass
 
+    # @app.route("/signup", methods=[['GET', 'POST'])
+
