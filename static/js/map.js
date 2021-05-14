@@ -10,10 +10,27 @@ function initMap() {
     });
     console.log('Map loaded');
 
+    const iconPath = "http:// google.com/mapfiles/ms/micons";
+    const icons = {
+        recycling: {
+            icon: iconPath + "green-dot.png"
+        },
+        trash: {
+            icon: iconPath + "yellow-dot.png"
+        },
+        dog: {
+            icon: iconPath + "orange-dot.png"
+        }
+    };
+
     $.getJSON('/static/json/test-coords.json', function(data) {
         $.each(data.records, function (key, data) {
             var coords = new google.maps.LatLng(data.lat, data.long);
-            var pin = new google.maps.Marker({position: coords, map, title: data.id});
+            var pin = new google.maps.Marker({
+                position: coords, 
+                map, 
+                title: data.id,
+            });
             google.maps.event.addListener(pin, 'click', function () {
                 window.location.href = '/bin-details&id=' + data.id;
             });
