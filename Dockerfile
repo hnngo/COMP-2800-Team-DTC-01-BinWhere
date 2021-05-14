@@ -1,10 +1,10 @@
-FROM python:3
+FROM python:3.9
 
 EXPOSE 5000
 
-WORKDIR /app
+WORKDIR ./
 
-COPY * /app/
+COPY * ./
 
 RUN pip3 install flask
 RUN pip3 install firebase_admin
