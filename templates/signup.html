@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/signup.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/heading.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "includes/source.html" %}
+    <title>Login</title>
+
+</head>
+<body>
+    <form action="/signup" method ="post">
+    {#        <input type="name" name="name">#}
+{#        <input type="password" name="pass">#}
+{#        <input type="submit" name="submit">#}
+
+        <div class = "logo_name">
+            <img src= "{{ url_for('static', filename="assets/images/temp_logo_name.png") }}"
+                 alt = "logo_name">
+        </div>
+        <div class = "logo_icons">
+            <img src= "{{ url_for('static', filename="assets/images/temp_bin_icons.png") }}"
+                 alt = "logo_icons">
+        </div>
+        <div class = "signup_container">
+            <div class = "input_container">
+                <div class = "user_container">
+                    <div class = "username">
+                        <h4> USERNAME </h4>
+                    </div>
+                    <div class = "get_username">
+                        <P>Enter your name</P>
+                    </div>
+                </div>
+                <div class = "email_container">
+                    <div class = "email_address">
+                        <h4> EMAIL ADDRESS</h4>
+                    </div>
+                    <div class = "get_email">
+                        <P>Enter your email address</P>
+                    </div>
+                <div class = "password_container_one">
+                    <div class = "password">
+                        <h4>PASSWORD</h4>
+                    </div>
+                    <div class = "get_password">
+                        <p>Enter your password</p>
+                    </div>
+                </div>
+                <div class = "password_container_two">
+                    <div class = "confirm_password">
+                        <h4>PASSWORD</h4>
+                    </div>
+                    <div class = "retype_password">
+                        <p>Enter your password again</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class = "signup_button_container">
+                <button type = "submit" name ="submit">SIGN UP</button>
+            </div>
+        </div>
+        </div>
+        <div class = "no_account">
+            <p>ALREADY HAVE AN ACCOUNT?</p>
+        </div>
+        <div class = "login">
+            <p><U>LOG IN</U></p>
+        </div>
+
+{#    <title></title>#}
+{#</head>#}
+{#<body>#}
+{#    <form action="/signup" method ="post">#}
+{#        <input type="name" name="name">#}
+{#        <input type="password" name="pass">#}
+{#        <input type="submit" name="submit">#}
+    </form>
+
+</body>
+</html>

@@ -11,10 +11,6 @@ def init(app, db):
     def get_hi():
         return "<h1 style='color: red'>Hi there</h1>"
 
-    @app.route("/page", methods=["GET", "POST"])
-    def get_page():
-        return render_template("hello.html")
-
     @app.route("/form", methods=["GET"])
     def get_form():
         return render_template("form.html")
@@ -36,19 +32,6 @@ def init(app, db):
         db.collection('photos')
 
         return redirect("/more_page", code=301)
-
-    @app.route("/login", methods=["POST"])
-    def post_login():
-        username = request.form['username']
-        password = request.form['password']
-
-        # Validate username password Firebase
-        isUserExisted = True
-
-        if isUserExisted:
-            return redirect("/more_page", code=301)
-        else:
-            return "Bad"
 
     @app.route("/index", methods=["GET", "POST"])
     def get_money():
@@ -81,3 +64,4 @@ def init(app, db):
             print(f'{doc.id} => {doc.to_dict()}')
             text += f"{doc.id} => {doc.to_dict()}\n"
         return text
+

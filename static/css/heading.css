@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#back-btn {
+    color: var(--primary-black);
+    font-size: 30px;
+    margin: 0 3%;
+    position: absolute;
+    top: 17px;
+    left: 10px;
+}
+
+.heading-container {
+    background-color: var(--primary-green);
+    height: 62px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading-title {
+    color: var(--primary-black);
+    font-size: 36px;
+    font-weight: bold;
+    font-family: Montserrat, sans-serif;
+}

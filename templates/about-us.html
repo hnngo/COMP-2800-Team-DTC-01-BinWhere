@@ -1,0 +1,69 @@
+{% extends "includes/base.html" %}
+
+{% block head %}
+<title>About us</title>
+<link rel="stylesheet" href="{{ url_for('static', filename="css/about-us.css") }}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% with show_back=show_back %}
+        {% include "includes/heading.html" %}
+    {% endwith %}
+    <div class="short-paragraph">
+        <div class="paragraph-head">Make the Green Snowball Effect with our neighbours</div>
+
+        <div class="paragraph">Our story starts with one of our developers, Nhan from Singapore. He recently moved to Canada and loves walking his dog along English bay. He realized it is hard to find a bin to dispose of his dog waste. This was the light bulb moment for us to develop BinWhere.</div>
+
+        <div class="paragraph">At BinWhere, we believe there should be a practical application that solves environmental problems people encounter every day. By offering locations of garbage and recycling bins, we aim to help people make environmentally friendly decisions and avoid littering on the street. We value small but salient individual actions that will allow our neighbourhoods to be greener and cleaner.</div>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-person">
+            <div class="profile-avatar">
+                <img
+                    src="{{ url_for('static', filename="assets/images/michael.png") }}"
+                    alt="avatar"
+                />
+            </div>
+            <div class="profile-name">Michael</div>
+        </div>
+        <div class="profile-person">
+            <div class="profile-avatar">
+                <img
+                    src="{{ url_for('static', filename="assets/images/subin.png") }}"
+                    alt="avatar"
+                />
+            </div>
+            <div class="profile-name">Subin</div>
+        </div>
+        <div class="profile-person">
+            <div class="profile-avatar">
+                <img
+                    src="{{ url_for('static', filename="assets/images/nhan.png") }}"
+                    alt="avatar"
+                />
+            </div>
+            <div class="profile-name">Huynh Nhan</div>
+        </div>
+        <div class="profile-person">
+            <div class="profile-avatar">
+                <img
+                    src="{{ url_for('static', filename="assets/images/heather.png") }}"
+                    alt="avatar"
+                />
+            </div>
+            <div class="profile-name">Heather</div>
+        </div>
+        <div class="profile-person">
+            <div class="profile-avatar">
+                <img
+                    src="{{ url_for('static', filename="assets/images/kaz.jpeg") }}"
+                    alt="avatar"
+                />
+            </div>
+            <div class="profile-name">Kaz</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
