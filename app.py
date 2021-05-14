@@ -9,7 +9,7 @@ app = Flask(__name__)
 # Init pyrebase
 auth = pyrebase_auth.init()
 
-# Init database
+# Get a reference to the database service
 db = firebase.initialize()
 
 # Setup routes
