@@ -4,12 +4,14 @@
 let map, infoWindow;
 
 function initMap() {
+    // Display the map
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 49.2827, lng: -123.1207 },
         zoom: 12,
     });
     console.log('Map loaded');
 
+    // Define map icons for different bin types
     const iconPath = "http://maps.google.com/mapfiles/ms/micons/";
     const icons = {
         "recycling": {
@@ -23,6 +25,7 @@ function initMap() {
         }
     };
 
+    // Read JSON and display map icons
     $.getJSON('/static/json/test-coords.json', function(data) {
         $.each(data.records, function (key, data) {
             var coords = new google.maps.LatLng(data.lat, data.long);
@@ -38,6 +41,7 @@ function initMap() {
         });
     });
 
+    // Place location button
     infoWindow = new google.maps.InfoWindow();
     const locationButton = document.createElement("button");
     locationButton.textContent = "Pan to Current Location";
@@ -69,6 +73,7 @@ function initMap() {
     });
 }
 
+// Handle errors for when location button doesn't work
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(
