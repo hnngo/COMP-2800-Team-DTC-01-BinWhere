@@ -1,6 +1,7 @@
-from flask import request, render_template
+from flask import request, render_template, redirect
 import requests
 import json
+
 
 
 def init(app, auth):
@@ -15,7 +16,8 @@ def init(app, auth):
 
         try:
             auth.sign_in_with_email_and_password(email, password)
-            return "Login Successful"
+            return redirect("/map")
+
         except (requests.HTTPError, requests.exceptions.HTTPError) as error:
             error_dict = json.loads(error.strerror)
             return error_dict["error"]["message"]
