@@ -1,6 +1,9 @@
 // API code has been adapted from examples given in the Google Maps API documentation.
 // https://developers.google.com/maps/documentation/javascript/
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
 let map, infoWindow;
 
 function initMap() {
@@ -26,18 +29,20 @@ function initMap() {
     };
 
     // Read JSON and display map icons
-    $.getJSON('/static/json/test-coords.json', function(data) {
+    $.getJSON('/static/json/test-coords.json', function (data) {
         $.each(data.records, function (key, data) {
-            var coords = new google.maps.LatLng(data.lat, data.long);
-            var pin = new google.maps.Marker({
-                position: coords, 
-                map, 
-                title: data.id,
-                icon: icons[data.type].icon
-            });
-            google.maps.event.addListener(pin, 'click', function () {
-                window.location.href = '/bin-details&id=' + data.id;
-            });
+            if (urlParams.get("filter") === null || urlParams.get("filter") === data.type) {
+                var coords = new google.maps.LatLng(data.lat, data.long);
+                var pin = new google.maps.Marker({
+                    position: coords,
+                    map,
+                    title: data.id,
+                    icon: icons[data.type].icon
+                });
+                google.maps.event.addListener(pin, 'click', function () {
+                    window.location.href = '/bin-details&id=' + data.id;
+                });
+            }
         });
     });
 
