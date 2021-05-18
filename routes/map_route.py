@@ -2,10 +2,10 @@ from flask import render_template
 
 
 def init(app):
-    @app.route("/map", methods=["GET"])
+    @app.route("/", methods=["GET"])
     def get_map():
         return render_template("map.html", title="Map")
 
-    @app.route("/map/bin-details", methods=["GET"])
+    @app.route("/bin", methods=["GET"])
     def get_bin_details():
         return render_template("bin-details.html", title="Details")
