@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+<div class="container animate__animated d-none" id="sidebar">
+    <img
+        class="sidebar-wave"
+        src="{{ url_for('static', filename='assets/images/sidebar-wave.png') }}"
+        alt="sidebar-wave"
+    />
+
+    <div class="sidebar-content">
+        <div class="sidebar-header">
+            <div class="profile">
+                <img
+                    class="profile-avatar"
+                    src="{{ url_for('static', filename='assets/images/nhan.png') }}"
+                    alt="sidebar-wave"
+                />
+                <div class="profile-name">Huynh Nhan</div>
+            </div>
+        </div>
+
+        <div class="sidebar-menu">
+            {% if is_login %}
+                <a class="sidebar-menu-item" href={{ "/profile" }}>Profile</a>
+            {% else %}
+                <a class="sidebar-menu-item" href={{ "/login" }}>Login</a>
+            {% endif %}
+
+            <a class="sidebar-menu-item" href={{ "/map" }}>Map</a>
+            <a class="sidebar-menu-item" href={{ "/bookmark" }}>Bookmarks</a>
+            <a class="sidebar-menu-item" href={{ "/wiki" }}>Waste Wiki</a>
+            <a class="sidebar-menu-item" href={{ "/about-us" }}>About Us</a>
+
+            {% if is_login %}
+                <a class="sidebar-menu-item" href="/">Logout</a>
+            {% endif %}
+        </div>
+
+        <div class="sidebar-footer">
+            <img
+                class="sidebar-footer-logo"
+                src="{{ url_for('static', filename='assets/images/logo-v1.png') }}"
+                alt="sidebar-wave"
+            />
+        </div>
+
+        <div class="sidebar-version">Version 0.0.1</div>
+    </div>
+</div>
