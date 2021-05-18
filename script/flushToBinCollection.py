@@ -9,7 +9,7 @@ def run(db):
         data = json.load(file_object)
         # db = firebase.database()
         for record in data["records"]:
-            db.collection("bin").add({
+            db.collection("bins").add({
                 "downvote": 0,
                 "upvote": 0,
                 "image": "",
