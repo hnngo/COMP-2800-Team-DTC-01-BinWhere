@@ -11,6 +11,8 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 49.2827, lng: -123.1207 },
         zoom: 12,
+        fullscreenControl: false,
+        mapTypeControl: false
     });
     console.log('Map loaded');
 
@@ -40,7 +42,7 @@ function initMap() {
                     icon: icons[data.type].icon
                 });
                 google.maps.event.addListener(pin, 'click', function () {
-                    window.location.href = '/map/bin-details?id=' + data.id;
+                    window.location.href = '/bin?id=' + data.id;
                 });
             }
         });

@@ -3,7 +3,6 @@ import requests
 import json
 
 
-
 def init(app, auth):
     @app.route('/login', methods=['GET'])
     def get_login():
