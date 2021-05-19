@@ -30,22 +30,19 @@ function initMap() {
         }
     };
 
-    // Read JSON and display map icons
-    $.getJSON('/static/json/test-coords.json', function (data) {
-        $.each(data.records, function (key, data) {
-            if (urlParams.get("filter") === null || urlParams.get("filter") === data.type) {
-                var coords = new google.maps.LatLng(data.lat, data.long);
-                var pin = new google.maps.Marker({
-                    position: coords,
-                    map,
-                    title: data.type,
-                    icon: icons[data.type].icon
-                });
-                google.maps.event.addListener(pin, 'click', function () {
-                    window.location.href = '/bin?id=' + data.id;
-                });
-            }
-        });
+    $.each(bins, function (key, data) {
+        if (urlParams.get("filter") === null || urlParams.get("filter") === data.type) {
+            let coords = new google.maps.LatLng(data.lat, data.long);
+            let pin = new google.maps.Marker({
+                position: coords,
+                map,
+                title: data.type,
+                //icon: icons[data.type].icon
+            });
+            google.maps.event.addListener(pin, 'click', function () {
+                    window.location.href = '/bin?id=' + data.userId;
+            });
+        }
     });
 
     // Place location button
