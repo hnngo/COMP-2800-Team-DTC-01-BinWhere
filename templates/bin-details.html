@@ -4,19 +4,51 @@
 
 <title>Bin details</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename="css/bin-details.css") }}">
 
 {% endblock %}
 
-
 {% block body %}
+<div class="masterContainer">
+    <div class = "returnButton">
+        <button onclick="window.history.back()">Return to map</button>
+        </div>
+    <div class = "locationContainer">
+        <div class ="locationHeader">
+            <img src= "{{ url_for('static', filename="assets/icons/icon-location.png") }}"
+                        alt = "icon-location"/> <h3> Location </h3>
+        </div>
+        <div id="bin-details-location">location goes here</div>
+    </div>
 
-<button onclick="window.history.back()">Return to map</button>
+    <div>
+        <div id="bin-details-images">Images goes here</div>
+    </div>
+    <div class = "modificationContainer">
+        <div class ="lastModified">
+            <p>Last Modified</p>
+            <p>DD/MM/YYYY</p>
+        </div>
+        <div class ="deleteButton">
+{#            make the image clickable#}
+            <img src= "{{ url_for('static', filename="assets/icons/icon-delete.png") }}"
+                        alt = "icon-location"/> <h3> delete </h3>
+        </div>
+    </div>
+    <div class = "reliabilityContainer">
+        <div class ="reliabilityHeader">
+            <img src= "{{ url_for('static', filename="assets/icons/icon-reliability.png") }}"
+                        alt = "icon-location"/> <h3> Reliability</h3>
+        </div>
+        <div clas ="thumbsUpandDown">
+            <img src= "{{ url_for('static', filename="assets/icons/icon-thumb-up.png") }}"
+                        alt = "icon-location"/> <h3> 10%</h3>
+             <img src= "{{ url_for('static', filename="assets/icons/icon-thumb-down.png") }}"
+                        alt = "icon-location"/>
+        </div>
 
-<h1>Bin details</h1>
-<hr>
+    </div>
 
-<h2>Location</h2>
-<div id="bin-details-location"></div>
 
 <h2>Type</h2>
 <div id="bin-details-type"> {{ bin_type }}</div>
@@ -30,8 +62,6 @@
 <div id="bin-details-upload">
     <button>Upload image</button>
 </div>
-
-<script src="/static/js/bin-details.js"></script>
 
 {% endblock %}
 

@@ -1,0 +1,10 @@
+div.masterContainer {
+    background-color: var(--primary-black);
+    height: 100vh;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
