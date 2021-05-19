@@ -44,7 +44,6 @@ window.onload = () => {
         })
     });
 
-
     function showError(msg) {
         alert(msg);
     }

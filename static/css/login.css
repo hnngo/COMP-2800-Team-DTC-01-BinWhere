@@ -2,7 +2,6 @@ form {
     background-color: var(--primary-black);
     height: 100vh;
     flex-direction: column;
-    /*align-items: baseline;*/
     font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-wrap: nowrap;
@@ -28,17 +27,12 @@ form {
 .input_container{
     background-color: var(--primary-yellow);
     width: 350px;
-    /*height: 40vh;*/
     border-radius: 2.5rem;
-    /*padding-left: 1.5em;*/
     padding: 2em 1.5em;
     margin-top: 30px;
 }
 
 .email_container{
-    /*margin-top: 2em;*/
-    /*padding-bottom: 4em;*/
-    /*width: 40vh;*/
     margin-bottom: 20px;
 }
 
@@ -46,15 +40,6 @@ form {
     padding-bottom: 2em;
 }
 
-/*.get_email {*/
-/*    border-bottom: black solid 2px;*/
-/*    padding-bottom: 10px;*/
-/*    color: #5B5022;*/
-/*}*/
-
-.password_container {
-    /*width: 40v;*/
-}
 
 .password {
     padding-bottom: 2em;
@@ -75,7 +60,6 @@ form {
     border: none;
     font-size: 16px;
     margin-left: 5px;
-    /*color: #5B5022;*/
     outline: none;
 }
 
@@ -99,4 +83,8 @@ form {
 
 .signup{
     color: whitesmoke;
+    background-color: var(--primary-black);
+    border: var(--primary-black) solid 2px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
 }

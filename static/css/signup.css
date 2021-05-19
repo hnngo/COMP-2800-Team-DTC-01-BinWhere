@@ -1,0 +1,110 @@
+form {
+    background-color: var(--primary-black);
+    height: 100vh;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo_name {
+    align-items: center;
+}
+
+.logo_name img {
+    width: 250px;
+}
+
+.logo_icons img {
+    width: 180px;
+}
+
+
+.input_container{
+    background-color: var(--primary-yellow);
+    width: 350px;
+    /*height: 40vh;*/
+    border-radius: 2.5rem;
+    /*padding-left: 1.5em;*/
+    padding: 2em 1.5em;
+    margin-top: 30px;
+}
+
+.username_container{
+    margin-bottom: 10px;
+}
+
+.username {
+    padding-bottom: 0.5em;
+}
+
+
+.email_container{
+    margin-bottom: 10px;
+}
+
+.email_address{
+    padding-bottom: 0.5em;
+}
+
+.password_container{
+    margin-bottom: 10px;
+}
+.password {
+    padding-bottom: 0.5em;
+}
+
+.confirm_pwd {
+    padding-bottom: 0.5em;
+}
+
+.get_username,
+.get_email,
+.get_password,
+.get_confirmed_pwd{
+    border-bottom: black solid 2px;
+    padding-bottom: 10px;
+    color: #5B5022;
+    display: flex;
+}
+
+.get_username input,
+.get_password input,
+.get_email input,
+.get_confirmed_pwd input{
+    width: 100%;
+    background: none;
+    border: none;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.signup_button_container  {
+    margin: 20px 0 20px 0;
+}
+
+.signup_button_container button{
+    background-color: var(--primary-green);
+    height: 10vh;
+    width: 350px;
+    border-radius: 2.5rem;
+    font-size: 1.5em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600
+}
+
+.no_account{
+    color: whitesmoke;
+}
+
+.login{
+    color: whitesmoke;
+    background-color: var(--primary-black);
+    border: var(--primary-black) solid 2px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+
+
+}
