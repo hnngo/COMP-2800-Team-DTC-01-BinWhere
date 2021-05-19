@@ -1,4 +1,4 @@
-from flask import request, render_template, session, jsonify
+from flask import request, render_template, session, jsonify, redirect
 import requests
 import json
 
@@ -10,6 +10,11 @@ def init(app, db, auth):
             return jsonify({'error': 0, 'session_id': session['session_id'], 'user_id': session['user_id']})
         except KeyError:
             return jsonify({"session_id": "", "user_id": ""})
+
+    @app.route('/logout', methods=['GET'])
+    def post_logout():
+        session.clear()
+        return redirect("/")
 
     @app.route('/login', methods=['GET'])
     def get_login():
