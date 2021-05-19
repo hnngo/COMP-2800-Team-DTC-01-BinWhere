@@ -2,7 +2,11 @@ from flask import Flask
 from flask_session import Session
 from routes import routes
 import pyrebase_auth
+<<<<<<< HEAD
 from firebase import initialize
+=======
+import firebase
+>>>>>>> cc3d9f1 (Added voting routes and connected them to Firebase.)
 
 # Init application
 app = Flask(__name__)
