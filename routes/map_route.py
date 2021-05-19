@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, request
 
 
 def init(app, db):
@@ -10,4 +10,9 @@ def init(app, db):
 
     @app.route("/bin", methods=["GET"])
     def get_bin_details():
-        return render_template("bin-details.html", title="Details")
+        bin_id = request.args.get("id")
+        doc = db.collection("bins").document(bin_id).get()
+        lat = doc.get("lat")
+        long = doc.get("long")
+        bin_type = doc.get("type")
+        return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type)
