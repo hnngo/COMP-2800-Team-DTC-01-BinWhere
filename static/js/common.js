@@ -24,6 +24,17 @@ function clearSpinner() {
     }
 }
 
-function getCurrentUserID() {
-    return localStorage.getItem('user_id') || null;
+function getCurrentUserId() {
+    return new Promise((res, rej) => {
+        $.ajax({
+            url: "/current-user",
+            success: (data) => {
+                if (data && data.session_id !== "" && data.user_id !== "") {
+                    res(data.user_id);
+                } else {
+                    res(null);
+                }
+            }
+        })
+    });
 }
