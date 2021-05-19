@@ -19,7 +19,7 @@
 <div id="bin-details-location"></div>
 
 <h2>Type</h2>
-<div id="bin-details-type"></div>
+<div id="bin-details-type"> {{ bin_type }}</div>
 
 <h2>Images</h2>
 <div id="bin-details-images">Images go here</div>
@@ -37,7 +37,11 @@
 
 
 {% block bottom %}
-
 <script src="/static/js/bin-details.js"></script>
+<script type="text/javascript">
+    const lat = {{ lat }};
+    const long = {{ long }};
+    reverseGeoCode();
+</script>
 
 {% endblock %}
