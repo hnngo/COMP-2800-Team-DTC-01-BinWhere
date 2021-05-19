@@ -4,6 +4,7 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename="css/login.css") }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/heading.css') }}">
+    <script src="/static/js/login.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% include "includes/source.html" %}
     <title>Login</title>
@@ -54,10 +55,9 @@
         <div class = "no_account">
             <p>DON'T HAVE AN ACCOUNT YET?</p>
         </div>
-        <div class = "signup">
-            <p><U>SIGN UP</U></p>
+        <div>
+            <button onclick="redirectToSignup()" class="signup"><U>SIGN UP</U></button>
         </div>
-
     </form>
 
 </body>

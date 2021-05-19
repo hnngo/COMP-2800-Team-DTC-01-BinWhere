@@ -99,6 +99,12 @@ form {
     color: whitesmoke;
 }
 
-a.login{
+.login{
     color: whitesmoke;
+    background-color: var(--primary-black);
+    border: var(--primary-black) solid 2px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+
+
 }
