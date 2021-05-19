@@ -76,6 +76,7 @@ form {
     font-size: 16px;
     margin-left: 5px;
     /*color: #5B5022;*/
+    outline: none;
 }
 
 .login_button_container  {

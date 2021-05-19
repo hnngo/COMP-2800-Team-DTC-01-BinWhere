@@ -4,6 +4,13 @@ import json
 
 
 def init(app, db, auth):
+    @app.route('/current-user', methods=['GET'])
+    def get_current_user():
+        try:
+            return jsonify({'error': 0, 'session_id': session['session_id'], 'user_id': session['user_id']})
+        except KeyError:
+            return jsonify({"session_id": "", "user_id": ""})
+
     @app.route('/login', methods=['GET'])
     def get_login():
         return render_template("login.html")
@@ -21,7 +28,6 @@ def init(app, db, auth):
 
             session['session_id'] = session_id
             session['user_id'] = user_ref.id
-
             return jsonify({'error': 0, 'session_id': session_id, 'user_id': user_ref.id})
 
         except (requests.HTTPError, requests.exceptions.HTTPError) as error:

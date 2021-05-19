@@ -5,6 +5,7 @@ window.onload = () => {
 
     loginButton.addEventListener('click', (event) => {
         event.preventDefault();
+        showSpinner()
 
         $.ajax({
             url: "/login",
@@ -14,22 +15,37 @@ window.onload = () => {
                 pass: passwordElem.value
             },
             success: (response) => {
+                clearSpinner();
+
                 if (!response.error) {
                     localStorage.setItem('session_id', response.sessionId);
                     localStorage.setItem('user_id', response.sessionId);
                     window.location.href = "/";
                 } else {
-                    showError();
+                    switch (response.error) {
+                        case "MISSING_PASSWORD":
+                        case "INVALID_PASSWORD":
+                            showError("Wrong password");
+                            break;
+                        case "EMAIL_NOT_FOUND":
+                            showError("Email not found");
+                            break;
+                        default:
+                            showError("Something is wrong, please try again!");
+                            break;
+                    }
+                    passwordElem.value = "";
                 }
             },
             fail: (err) => {
-                showError();
+                clearSpinner();
+                showError("Something is wrong, please try again!");
             }
         })
     });
 
 
-    function showError() {
-
+    function showError(msg) {
+        alert(msg);
     }
 }
