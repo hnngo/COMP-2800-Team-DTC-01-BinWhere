@@ -1,4 +1,5 @@
 import json
+import firebase_admin
 
 
 def run(db):
@@ -16,5 +17,6 @@ def run(db):
                 "lat": record["lat"],
                 "long": record["long"],
                 "type": record["type"],
+                "date_created": firebase_admin.datetime.datetime.now(),
                 "userId": "aVvtD79PXvcjI0qB2kn6"  # Admin
             })
