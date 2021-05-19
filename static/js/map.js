@@ -31,16 +31,18 @@ function initMap() {
     };
 
     $.each(bins, function (key, data) {
-        if (urlParams.get("filter") === null || urlParams.get("filter") === data.type) {
-            let coords = new google.maps.LatLng(data.lat, data.long);
+        let bin = Object.keys(data)[0];
+
+        if (urlParams.get("filter") === null || urlParams.get("filter") === data[bin].type) {
+            let coords = new google.maps.LatLng(data[bin].lat, data[bin].long);
             let pin = new google.maps.Marker({
                 position: coords,
                 map,
-                title: data.type,
-                //icon: icons[data.type].icon
+                title: bin,
+                //icon: icons[data[bin].type].icon
             });
             google.maps.event.addListener(pin, 'click', function () {
-                    window.location.href = '/bin?id=' + data.userId;
+                    window.location.href = '/bin?id=' + bin;
             });
         }
     });
