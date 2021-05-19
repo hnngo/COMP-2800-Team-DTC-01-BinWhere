@@ -3,9 +3,9 @@ window.onload = () => {
     const navbarElement = document.querySelector("#navbar-icon");
 
     // Simulate loading
-    setTimeout(() => {
-        clearLoadingScreen();
-    }, 2000)
+    // setTimeout(() => {
+    //     clearLoadingScreen();
+    // }, 2000)
 
     // Handle open hamburger menu
     if (navbarElement) {
