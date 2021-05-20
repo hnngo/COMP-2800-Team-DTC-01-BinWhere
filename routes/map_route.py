@@ -16,3 +16,15 @@ def init(app, db):
         long = doc.get("long")
         bin_type = doc.get("type")
         return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type)
+
+    @app.route("/search", methods=["GET"])
+    def get_search_results():
+        item_id = request.args.get("id")
+        doc = db.collection("bins").document(item_id).get()
+        description = doc.get("description")
+        image = doc.get("image")
+        name = doc.get("name")
+        not_include = doc.get("not_include")
+        waste_type = doc.get("type")
+        return render_template("bin-details.html", title=name, description=description, image=image,
+                               not_include=not_include, waste_type=waste_type)
