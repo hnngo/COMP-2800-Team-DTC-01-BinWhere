@@ -27,13 +27,16 @@ def init(app, db, auth):
         password = request.form['pass']
 
         try:
+            # Login
             user = auth.sign_in_with_email_and_password(email, password)
+
+            # Get user_id and session_id to store
             user = auth.refresh(user['refreshToken'])
             session_id = user['idToken']
             user_ref = db.collection("users").where("email", '==', email).get()[0]
-
             session['session_id'] = session_id
             session['user_id'] = user_ref.id
+
             return jsonify({'error': 0, 'session_id': session_id, 'user_id': user_ref.id})
 
         except (requests.HTTPError, requests.exceptions.HTTPError) as error:
@@ -46,22 +49,28 @@ def init(app, db, auth):
 
     @app.route('/signup', methods=['POST'])
     def post_signup():
-        email = request.form['name']
+        name = request.form['name']
+        email = request.form['email']
         password = request.form['pass']
 
         try:
+            # Signup
             user = auth.create_user_with_email_and_password(email, password)
-            session_id = user['idToken']
+
+            # Create user in firestore
             db.collection("users").add({
-                "name": "Name",
+                "name": name,
                 "uploaded_bin": [],
                 "email": email,
                 "avatar": constants.getDefaultAvatar()
             })
-            user_ref = db.collection("users").where("email", '==', email).get()[0]
 
+            # Get user_id and session_id to store
+            user_ref = db.collection("users").where("email", '==', email).get()[0]
+            session_id = user['idToken']
             session['session_id'] = session_id
             session['user_id'] = user_ref.id
+
             return jsonify({'error': 0, 'session_id': session_id, 'user_id': user_ref.id})
 
         except (requests.HTTPError, requests.exceptions.HTTPError) as error:
