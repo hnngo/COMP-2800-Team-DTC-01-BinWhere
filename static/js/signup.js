@@ -1,14 +1,16 @@
 window.onload = () => {
-    const loginButton = document.querySelector("#login-button");
-    const emailElem = document.querySelector('input[name="name"]');
+    const signupButton = document.querySelector("#signup-button");
+    const nameElem = document.querySelector('input[name="name"]');
+    const emailElem = document.querySelector('input[name="email"]');
     const passwordElem = document.querySelector('input[name="pass"]');
+    const confirmPasswordElem = document.querySelector('input[name="confirm-pass"]');
 
-    loginButton.addEventListener('click', (event) => {
+    signupButton.addEventListener('click', (event) => {
         event.preventDefault();
         showSpinner()
 
         $.ajax({
-            url: "/login",
+            url: "/signup",
             method: "POST",
             data: {
                 name: emailElem.value,
@@ -21,12 +23,8 @@ window.onload = () => {
                     window.location.href = "/";
                 } else {
                     switch (response.error) {
-                        case "MISSING_PASSWORD":
-                        case "INVALID_PASSWORD":
-                            showError("Wrong password");
-                            break;
-                        case "EMAIL_NOT_FOUND":
-                            showError("Email not found");
+                        case "EMAIL_EXISTS":
+                            showError("Email existed, please try another email");
                             break;
                         default:
                             showError("Something is wrong, please try again!");
