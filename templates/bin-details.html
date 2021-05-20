@@ -5,62 +5,71 @@
 <title>Bin details</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename="css/bin-details.css") }}">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
 {% block body %}
-<div class="masterContainer">
-    <div class = "returnButton">
-        <button onclick="window.history.back()">Return to map</button>
+<div class = "pageContainer">
+{%  include "includes/heading.html" %}
+    <div class="masterContainer">
+        <div class="locationContainer">
+            <div class="locationHeader">
+                <img src= "{{ url_for('static', filename="assets/icons/icon-location.png") }}"
+                            alt = "icon-location"/>
+                <h4 class = "location"> Location </h4>
+            </div>
+            <div id="bin-details-location">location goes here</div>
         </div>
-    <div class = "locationContainer">
-        <div class ="locationHeader">
-            <img src= "{{ url_for('static', filename="assets/icons/icon-location.png") }}"
-                        alt = "icon-location"/> <h3> Location </h3>
+
+        <div class="bin-image-container">
+            <div id="bin-details-images">Images goes here</div>
         </div>
-        <div id="bin-details-location">location goes here</div>
+        <div class = "modificationContainer">
+            <div class ="lastModified">
+                <p>Last Modified</p>
+                <p>DD/MM/YYYY</p>
+            </div>
+            <div class ="deleteButton">
+                <img src= "{{ url_for('static', filename="assets/icons/icon-delete.png") }}"
+                            alt = "icon-delete"/>
+                <h6 class ="delete">Delete </h6>
+            </div>
+        </div>
+        <div id="bin-details-vote">
+            <div class ="reliabilityHeader">
+                <img src= "{{ url_for('static', filename="assets/icons/icon-reliability.png") }}"
+                            alt = "icon-reliability"/>
+                <h4 class = "reliability">Reliability</h4>
+            </div>
+            <div class ="thumbsUpDown">
+                <img src= "{{ url_for('static', filename="assets/icons/icon-thumb-up.png") }}"
+                            alt = "icon-thumb-up"/> <h4 class = "percentage">10%</h4>
+                 <img src= "{{ url_for('static', filename="assets/icons/icon-thumb-down.png") }}"
+                            alt = "icon-thumb-down"/>
+            </div>
+        </div>
+
+
+        <div class = "wasteTypeContainer">
+                <div class ="wasteTypeHeader">
+                    <img src= "{{ url_for('static', filename="assets/icons/icon-waste-type.png") }}"
+                                alt = "icon-wasteType"/> <h4 class = "wasteType"> Waste Type </h4>
+                </div>
+                <div id="bin-details-type">Waste type goes here {{ bin_type }}</div>
+            </div>
+        <div class = "commentContainer">
+            <div class ="commentHeader">
+                <img src= "{{ url_for('static', filename="assets/icons/icon-comment.png") }}"
+                            alt = "icon-wasteType"/> <h4 class = "comment"> Comment </h4>
+            </div>
+            <div class="commentList">comment goes here{{ postedComment }}</div>
+            <div class="commentInput-container">
+                <input class ="commentInput" type="text" placeholder="Add a comment..." >
+                <img class = "sendIcon" src= "{{ url_for('static', filename="assets/icons/icon-send.png") }}"
+                            alt = "icon-send"/>
+            </div>
+        </div>
     </div>
-
-    <div>
-        <div id="bin-details-images">Images goes here</div>
-    </div>
-    <div class = "modificationContainer">
-        <div class ="lastModified">
-            <p>Last Modified</p>
-            <p>DD/MM/YYYY</p>
-        </div>
-        <div class ="deleteButton">
-{#            make the image clickable#}
-            <img src= "{{ url_for('static', filename="assets/icons/icon-delete.png") }}"
-                        alt = "icon-location"/> <h3> delete </h3>
-        </div>
-    </div>
-    <div class = "reliabilityContainer">
-        <div class ="reliabilityHeader">
-            <img src= "{{ url_for('static', filename="assets/icons/icon-reliability.png") }}"
-                        alt = "icon-location"/> <h3> Reliability</h3>
-        </div>
-        <div clas ="thumbsUpandDown">
-            <img src= "{{ url_for('static', filename="assets/icons/icon-thumb-up.png") }}"
-                        alt = "icon-location"/> <h3> 10%</h3>
-             <img src= "{{ url_for('static', filename="assets/icons/icon-thumb-down.png") }}"
-                        alt = "icon-location"/>
-        </div>
-
-    </div>
-
-
-<h2>Type</h2>
-<div id="bin-details-type"> {{ bin_type }}</div>
-
-<h2>Images</h2>
-<div id="bin-details-images">Images go here</div>
-<h2>Feedback</h2>
-<div id="bin-details-vote">
-    <button>Upvote</button> <button>Downvote</button>
-</div>
-<div id="bin-details-upload">
-    <button>Upload image</button>
 </div>
 
 {% endblock %}

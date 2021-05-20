@@ -2,7 +2,7 @@ from flask import Flask
 from flask_session import Session
 from routes import routes
 import pyrebase_auth
-# from firebase import initialize
+from firebase import initialize
 
 # Init application
 app = Flask(__name__)
@@ -11,10 +11,10 @@ app = Flask(__name__)
 auth = pyrebase_auth.init().auth()
 
 # Init firebase
-# db = initialize()
+db = initialize()
 
 # Setup routes
-routes.initialize(app, {}, auth)
+routes.initialize(app, db, auth)
 
 # Session
 app.secret_key = 'super secret key'
