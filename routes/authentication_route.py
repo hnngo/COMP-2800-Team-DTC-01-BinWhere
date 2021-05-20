@@ -1,6 +1,7 @@
 from flask import request, render_template, session, jsonify, redirect
 import requests
 import json
+from . import constants
 
 
 def init(app, db, auth):
@@ -50,9 +51,19 @@ def init(app, db, auth):
 
         try:
             user = auth.create_user_with_email_and_password(email, password)
-            auth.get_account_info(user['idToken'])
-            return "Thank you for signup"
+            session_id = user['idToken']
+            db.collection("users").add({
+                "name": "Name",
+                "uploaded_bin": [],
+                "email": email,
+                "avatar": constants.getDefaultAvatar()
+            })
+            user_ref = db.collection("users").where("email", '==', email).get()[0]
 
-        except requests.exceptions.HTTPError as error:
+            session['session_id'] = session_id
+            session['user_id'] = user_ref.id
+            return jsonify({'error': 0, 'session_id': session_id, 'user_id': user_ref.id})
+
+        except (requests.HTTPError, requests.exceptions.HTTPError) as error:
             error_dict = json.loads(error.strerror)
-            return error_dict["error"]["message"]
+            return jsonify({'error': error_dict["error"]["message"]})
