@@ -43,10 +43,9 @@ def init(app, db):
         waste_type = doc.get("type")
 
         closest_bin = get_closest_bin(lat, long)  # Need to account for filter!
-        print(closest_bin)
 
         return render_template("search-results.html", title=name, description=description, image=image,
-                               not_include=not_include, waste_type=waste_type)
+                               not_include=not_include, waste_type=waste_type, closest_bin=closest_bin)
 
     def get_closest_bin(lat: str, long: str) -> str:
         """Get the id of the closest bin to the user's current location."""
