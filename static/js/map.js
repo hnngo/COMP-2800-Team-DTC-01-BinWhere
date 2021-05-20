@@ -36,7 +36,7 @@ function initMap() {
         // Show all icons if there is no filter.
         // If there is a filter, match any array that has at least one element of the query array.
         if (urlParams.get("filter") === null ||
-            urlParams.get("filter").split(',').some(r=> data[bin].type.includes(r))) {
+            urlParams.get("filter").split(',').some(item => data[bin].type.includes(item))) {
             let coords = new google.maps.LatLng(data[bin].lat, data[bin].long);
             let pin = new google.maps.Marker({
                 position: coords,
