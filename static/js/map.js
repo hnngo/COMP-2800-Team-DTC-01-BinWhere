@@ -60,8 +60,16 @@ function initMap() {
     locationButton.style.transform = "translateX(15px)";
     locationButton.addEventListener("click", geoLocate);
 
-    // Automatically center the map on your location when first loading the page.
-    geoLocate();
+    // Automatically center the map on your location when first loading the page and no focus is set.
+    if (urlParams.get("focus") === null) {
+        geoLocate();
+    } else {
+        const pos = {
+            lat: Number(urlParams.get("focus").split(",")[0]),
+            lng: Number(urlParams.get("focus").split(",")[1])
+        };
+        map.setCenter(pos);
+    }
 }
 
 function geoLocate() {
