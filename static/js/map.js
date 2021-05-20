@@ -59,6 +59,9 @@ function initMap() {
     locationButton.style.width = "60px";
     locationButton.style.transform = "translateX(15px)";
     locationButton.addEventListener("click", geoLocate);
+
+    // Automatically center the map on your location when first loading the page.
+    geoLocate();
 }
 
 function geoLocate() {
