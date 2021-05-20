@@ -17,6 +17,10 @@ body {
     padding: 0;
 }
 
+.d-none {
+    display: none;
+}
+
 
 /*Profile*/
 main {
@@ -172,7 +176,7 @@ section img {
 .modal {
     display: none;
     width: 87%;
-    background-color: rgba(250, 250, 250);
+    background-color: rgb(250, 250, 250);
     color: black;
     padding: 18px;
     position: absolute;
