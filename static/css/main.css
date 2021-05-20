@@ -68,3 +68,67 @@ html, body {
     transform: translate(24px, 0);
   }
 }
+
+/* Popup */
+.popup--success-container,
+.popup--error-container,
+.popup--warning-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.popup--success-content,
+.popup--error-content,
+.popup--warning-content {
+    background-color: var(--primary-black);
+    width: 90vw;
+    max-width: 400px;
+    border-radius: 20px;
+    border: 3px solid var(--primary-yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0;
+    color: var(--primary-yellow);
+    position: relative;
+}
+
+.popup--error-content {
+    border: 3px solid #FF0000;
+    color: #FF0000;
+}
+.popup--success-content {
+    border: 3px solid var(--primary-green);
+    color: var(--primary-green);
+}
+
+.popup--success-icon-success,
+.popup--error-icon-error,
+.popup--warning-icon-warning {
+    width: 40px;
+}
+
+.popup--success-icon-close,
+.popup--error-icon-close,
+.popup--warning-icon-close {
+    width: 16px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.popup--success-message,
+.popup--error-message,
+.popup--warning-message {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 30px;
+}
+

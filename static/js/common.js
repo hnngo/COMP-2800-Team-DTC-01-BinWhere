@@ -38,3 +38,106 @@ function getCurrentUserId() {
         })
     });
 }
+
+function showWarningPopup(message, onClose) {
+    const body = document.querySelector("body");
+    const popup = document.createElement("div");
+    popup.setAttribute('class', "popup--warning-container");
+
+    popup.innerHTML = `
+        <div class="popup--warning-content">
+            <img
+                class="popup--warning-icon-warning"
+                src="static/assets/icons/icon-warning.png"
+                alt="warning"
+            />
+            <img
+                class="popup--warning-icon-close"
+                src="static/assets/icons/icon-close.png"
+                alt="close"
+            />
+            <div class="popup--warning-message">${message}</div>
+        </div>
+    `;
+    body.append(popup);
+
+
+    const closePopupElem = document.querySelector(".popup--warning-icon-close");
+    if (closePopupElem) {
+        closePopupElem.addEventListener('click', () => {
+            if (onClose && typeof onClose === 'function') {
+                onClose();
+            }
+            popup.remove();
+        })
+    }
+}
+
+function showErrorPopup(message, onClose) {
+    const body = document.querySelector("body");
+    const popup = document.createElement("div");
+    popup.setAttribute('class', "popup--error-container");
+
+    popup.innerHTML = `
+        <div class="popup--error-content">
+            <img
+                class="popup--error-icon-error"
+                src="static/assets/icons/icon-error.png"
+                alt="warning"
+            />
+            <img
+                class="popup--error-icon-close"
+                src="static/assets/icons/icon-close-error.png"
+                alt="close"
+            />
+            <div class="popup--error-message">${message}</div>
+        </div>
+    `;
+    body.append(popup);
+
+
+    const closePopupElem = document.querySelector(".popup--error-icon-close");
+    if (closePopupElem) {
+        closePopupElem.addEventListener('click', () => {
+            if (onClose && typeof onClose === 'function') {
+                onClose();
+            }
+            popup.remove();
+        })
+    }
+}
+
+
+function showSuccessPopup(message, onClose) {
+    const body = document.querySelector("body");
+    const popup = document.createElement("div");
+    popup.setAttribute('class', "popup--success-container");
+
+    popup.innerHTML = `
+        <div class="popup--success-content">
+            <img
+                class="popup--success-icon-success"
+                src="static/assets/icons/icon-success.png"
+                alt="warning"
+            />
+            <img
+                class="popup--success-icon-close"
+                src="static/assets/icons/icon-close-success.png"
+                alt="close"
+            />
+            <div class="popup--success-message">${message}</div>
+        </div>
+    `;
+    body.append(popup);
+
+
+    const closePopupElem = document.querySelector(".popup--success-icon-close");
+    if (closePopupElem) {
+        closePopupElem.addEventListener('click', () => {
+            if (onClose && typeof onClose === 'function') {
+                onClose();
+            }
+            popup.remove();
+        })
+    }
+}
