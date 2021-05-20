@@ -40,17 +40,18 @@ def init(app, db):
         image = doc.get("image")
         name = doc.get("name")
         not_include = doc.get("not_include")
-        waste_type = doc.get("type")
+        waste_type = doc.get("type").lower()
 
-        closest_bin = get_closest_bin(lat, long)  # Need to account for filter!
+        closest_bin = get_closest_bin(lat, long, waste_type)
 
         return render_template("search-results.html", title=name, description=description, image=image,
                                not_include=not_include, waste_type=waste_type, closest_bin=closest_bin)
 
-    def get_closest_bin(lat: str, long: str) -> dict:
+    def get_closest_bin(lat: str, long: str, waste_type: str) -> dict:
         """Get the id of the closest bin to the user's current location."""
         user_coords = (float(lat), float(long))
-        bin_coords = {doc.id: (doc.get('lat'), doc.get('long')) for doc in db.collection("bins").stream()}
+        docs = db.collection("bins").stream()
+        bin_coords = {doc.id: (doc.get('lat'), doc.get('long')) for doc in docs if waste_type in doc.get('type')}
         distances = {bin_id: euclidean_distance(user_coords, bin_location) for
                      bin_id, bin_location in bin_coords.items()}
         bin_id = min(distances, key=distances.get)
