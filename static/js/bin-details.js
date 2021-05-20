@@ -26,7 +26,7 @@ upvote.addEventListener('click', function() {
         }),
         contentType: "application/json",
         success: function(response) {
-            if (response.error === 0) {
+            if (!response.error) {
                 alert("Success!")
             } else {
                 alert("Error!")
