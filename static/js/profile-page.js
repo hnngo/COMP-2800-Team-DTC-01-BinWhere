@@ -1,3 +1,6 @@
+
+
+
 // Delete the picture uploaded from the user account
 function deletePicture() {
     let delete_confirm = document.getElementById("delete-button-modal");
@@ -39,16 +42,9 @@ function editUsername() {
     });
 
     submit_username.addEventListener("click", function(event) {
-        let new_name = input_username.value;
-        username.textContent = new_name;
         username.style.display = "block";
         input_username.style.display = "none";
         submit_username.style.display = "none";
     })
 }
 editUsername();
-
-
-
-
-
