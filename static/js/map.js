@@ -33,7 +33,10 @@ function initMap() {
     $.each(bins, function (key, data) {
         let bin = Object.keys(data)[0];
 
-        if (urlParams.get("filter") === null || urlParams.get("filter").split(',').some(r=> data[bin].type.includes(r))) {
+        // Show all icons if there is no filter.
+        // If there is a filter, match any array that has at least one element of the query array.
+        if (urlParams.get("filter") === null ||
+            urlParams.get("filter").split(',').some(r=> data[bin].type.includes(r))) {
             let coords = new google.maps.LatLng(data[bin].lat, data[bin].long);
             let pin = new google.maps.Marker({
                 position: coords,
