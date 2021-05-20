@@ -62,6 +62,7 @@ function initMap() {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude,
                     };
+                    localStorage.setItem('currentPos', JSON.stringify(pos));
                     infoWindow.setPosition(pos);
                     infoWindow.setContent("Location found.");
                     infoWindow.open(map);
