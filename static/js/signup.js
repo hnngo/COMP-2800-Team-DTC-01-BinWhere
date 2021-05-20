@@ -35,14 +35,16 @@ window.onload = () => {
                 clearSpinner();
 
                 if (!response.error) {
-                    window.location.href = "/";
+                    showSuccessPopup("Registered Successfully", () => {
+                        window.location.href = "/";
+                    })
                 } else {
                     switch (response.error) {
                         case "EMAIL_EXISTS":
-                            showError("Email existed, please try another email");
+                            showWarningPopup("Email existed, please try another email");
                             break;
                         default:
-                            showError("Something is wrong, please try again!");
+                            showWarningPopup("Something is wrong, please try again!");
                             break;
                     }
                     passwordElem.value = "";
@@ -50,12 +52,8 @@ window.onload = () => {
             },
             fail: (err) => {
                 clearSpinner();
-                showError("Something is wrong, please try again!");
+                showWarningPopup("Something is wrong, please try again!");
             }
         })
     });
-
-    function showError(msg) {
-        showWarningPopup(msg);
-    }
 }

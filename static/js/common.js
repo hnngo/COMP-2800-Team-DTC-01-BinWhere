@@ -106,3 +106,38 @@ function showErrorPopup(message, onClose) {
         })
     }
 }
+
+
+function showSuccessPopup(message, onClose) {
+    const body = document.querySelector("body");
+    const popup = document.createElement("div");
+    popup.setAttribute('class', "popup--success-container");
+
+    popup.innerHTML = `
+        <div class="popup--success-content">
+            <img
+                class="popup--success-icon-success"
+                src="static/assets/icons/icon-success.png"
+                alt="warning"
+            />
+            <img
+                class="popup--success-icon-close"
+                src="static/assets/icons/icon-close-success.png"
+                alt="close"
+            />
+            <div class="popup--success-message">${message}</div>
+        </div>
+    `;
+    body.append(popup);
+
+
+    const closePopupElem = document.querySelector(".popup--success-icon-close");
+    if (closePopupElem) {
+        closePopupElem.addEventListener('click', () => {
+            if (onClose && typeof onClose === 'function') {
+                onClose();
+            }
+            popup.remove();
+        })
+    }
+}
