@@ -2,11 +2,12 @@
 
 {% block head %}
     <title>Profile Page</title>
+    <script src={{ "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" }}></script>
     <link rel="stylesheet" href="{{ url_for('static', filename="css/profile-page.css") }}">
 {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container d-none">
     {% with show_back=show_back %}
         {% include "includes/heading.html" %}
     {% endwith %}
@@ -14,7 +15,7 @@
             <div class="profile-img">
                 <div class="profile-avatar">
                     <img id="user-img" src="data:image/png;base64,{{ data.avatar }}" alt="avatar">
-                    <input type="file" id="edit" name="avatar">
+                    <input type="file" name="avatar">
                 </div>
             </div>
             <div class="username">
@@ -64,5 +65,10 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block bottom %}
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
     <script src="{{ url_for('static', filename='js/profile-page.js') }}"></script>
+
 {% endblock %}
