@@ -13,20 +13,20 @@
         <main>
             <div class="profile-img">
                 <div class="profile-avatar">
-                    <img id="user-img" src="{{ url_for('static', filename="assets/images/nhan.png") }}" alt="avatar">
-                    <div id="edit">Edit</div>
+                    <img id="user-img" src="data:image/png;base64,{{ data.avatar }}" alt="avatar">
+                    <input type="file" id="edit" name="avatar">
                 </div>
             </div>
             <div class="username">
-                <div id="user-name">Huynh Nhan</div>
-                <div class="new-name">
-                    <input type="text" id="change-username">
+                <div id="user-name">{{ data.name }}</div>
+                <form class="new-name" method="POST">
+                    <input type="text" id="change-username" name="name">
                     <input type="submit" id="submit-new-username">
-                </div>
+                </form>
                 <i class="fas fa-pen" id="edit-name-btn"></i>
             </div>
             <div class="useremail">
-                <div id="user-email">nhanH@binwhere.ca</div>
+                <div id="user-email">{{ data.email }}</div>
             </div>
         </main>
 
@@ -36,15 +36,7 @@
                     Pictures you posted
                 </div>
 
-                <section id="picture1">
-                    <div class="bin-photo">
-                        <img id="photo-1" src="https://images.dailyhive.com/20170717155920/vancouver-west-end-garbage-bins.jpg" alt="garbage bin in Vancouver">
-                    </div>
-                    <div class="photo-info">
-                        <p id="reliability">Reliability: 50%</p>
-                        <p id="date">Date Posted: 2021-05-10</p>
-                        <button id="delete-btn">Delete</button>
-                    </div>
+                <section>
                 </section>
             </div>
         </article>
