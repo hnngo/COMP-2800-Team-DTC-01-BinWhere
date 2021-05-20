@@ -58,9 +58,7 @@ function initMap() {
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(locationButton);
     locationButton.style.width = "60px";
     locationButton.style.transform = "translateX(15px)";
-    locationButton.addEventListener("click", () => {
-        geoLocate();
-    });
+    locationButton.addEventListener("click", geoLocate);
 }
 
 function geoLocate() {
