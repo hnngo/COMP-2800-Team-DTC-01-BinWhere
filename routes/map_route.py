@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, redirect
 
 
 def init(app, db):
@@ -16,6 +16,13 @@ def init(app, db):
         long = doc.get("long")
         bin_type = doc.get("type")
         return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type)
+
+    @app.route("/search", methods=["POST"])
+    def search_query():
+        query = request.form["keyword"]
+        docs = db.collection("items").where("name", "==", query)
+        result = [doc.id for doc in docs.stream()]
+        return redirect(f"/search?id={result[0]}")
 
     @app.route("/search", methods=["GET"])
     def get_search_results():
