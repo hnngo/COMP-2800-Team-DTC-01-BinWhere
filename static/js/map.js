@@ -69,6 +69,7 @@ function initMap() {
             lng: Number(urlParams.get("focus").split(",")[1])
         };
         map.setCenter(pos);
+        map.setZoom(18);
     }
 }
 
