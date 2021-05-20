@@ -56,6 +56,6 @@ def init(app, db):
         bin_id = min(distances, key=distances.get)
         return {"id": bin_id, "coords": bin_coords[bin_id]}
 
-    def euclidean_distance(user_coords: tuple, bin_coords: tuple):
+    def euclidean_distance(user_coords: tuple, bin_coords: tuple) -> float:
         """Calculate euclidean distance between two coordinates. I know the Earth is a sphere, shut up."""
         return ((user_coords[0] - bin_coords[0]) ** 2 + (user_coords[1] - bin_coords[1]) ** 2) ** 0.5
