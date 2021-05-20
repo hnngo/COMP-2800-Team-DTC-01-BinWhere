@@ -22,7 +22,10 @@ def init(app, db):
         query = request.form["keyword"]
         docs = db.collection("items").where("name", "==", query)
         result = [doc.id for doc in docs.stream()]
-        return redirect(f"/search?id={result[0]}")
+        if result:
+            return redirect(f"/search?id={result[0]}")
+        else:
+            return redirect("/")
 
     @app.route("/search", methods=["GET"])
     def get_search_results():
