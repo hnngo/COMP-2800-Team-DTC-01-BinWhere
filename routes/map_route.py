@@ -26,5 +26,5 @@ def init(app, db):
         name = doc.get("name")
         not_include = doc.get("not_include")
         waste_type = doc.get("type")
-        return render_template("bin-details.html", title=name, description=description, image=image,
+        return render_template("search-results.html", title=name, description=description, image=image,
                                not_include=not_include, waste_type=waste_type)
