@@ -156,6 +156,10 @@ section {
     padding: 6px;
 }
 
+.bin-photo img {
+    width: 100%;
+}
+
 .photo-info * {
     margin: 0;
 }
@@ -165,10 +169,6 @@ section {
     background-color: var(--primary-yellow);
     padding: 3px 15px;
     margin-top: 7px;
-}
-
-section img {
-    width: 100%;
 }
 
 

@@ -14,12 +14,12 @@
         <main>
             <div class="profile-img">
                 <div class="profile-avatar">
-                    <img id="user-img" src="data:image/png;base64,{{ data.avatar }}" alt="avatar">
+                    <img id="user-img" src="data:image/png;base64,{{ profile_data.avatar }}" alt="avatar">
                     <input type="file" name="avatar">
                 </div>
             </div>
             <div class="username">
-                <div id="user-name">{{ data.name }}</div>
+                <div id="user-name">{{ profile_data.name }}</div>
                 <form class="new-name" method="POST">
                     <input type="text" id="change-username" name="name">
                     <input type="submit" id="submit-new-username">
@@ -27,7 +27,7 @@
                 <i class="fas fa-pen" id="edit-name-btn"></i>
             </div>
             <div class="useremail">
-                <div id="user-email">{{ data.email }}</div>
+                <div id="user-email">{{ profile_data.email }}</div>
             </div>
         </main>
 
@@ -38,9 +38,16 @@
                 </div>
 
                 <section>
-{#                    {% for number in range(10) %}#}
-
-{#                    {%  endfor %}#}
+                    {% for i in range(postedbin_data|length) %}
+                        <div class="bin-photo">
+                            <img src="data:image/png;base64,{{ postedbin_data[i].image }}" alt="garbage bin">
+                        </div>
+                        <div class="photo-info">
+                            <p id="reliability">Reliability: {{ postedbin_data[i].reliability }} %</p>
+                            <p id="date">Date Posted: {{ postedbin_data[i].date_created }}</p>
+                            <button id="delete-btn">Delete</button>
+                        </div>
+                    {%  endfor %}
                 </section>
             </div>
         </article>
