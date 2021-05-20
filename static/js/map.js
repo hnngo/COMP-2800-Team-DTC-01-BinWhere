@@ -49,10 +49,12 @@ function initMap() {
 
     // Place location button
     infoWindow = new google.maps.InfoWindow();
-    const locationButton = document.createElement("button");
-    locationButton.textContent = "Pan to Current Location";
+    const locationButton = document.createElement("img");
+    locationButton.src = "/static/assets/icons/icon-current-location.png";
     locationButton.classList.add("custom-map-control-button");
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(locationButton);
+    locationButton.style.width = "60px";
+    locationButton.style.transform = "translateX(15px)";
     locationButton.addEventListener("click", () => {
         // Try HTML5 geolocation.
         if (navigator.geolocation) {

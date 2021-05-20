@@ -107,7 +107,6 @@ function showErrorPopup(message, onClose) {
     }
 }
 
-
 function showSuccessPopup(message, onClose) {
     const body = document.querySelector("body");
     const popup = document.createElement("div");
