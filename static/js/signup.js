@@ -7,13 +7,28 @@ window.onload = () => {
 
     signupButton.addEventListener('click', (event) => {
         event.preventDefault();
+
+        if (!nameElem.value ||
+            !passwordElem.value ||
+            !emailElem.value ||
+            !confirmPasswordElem.value) {
+            showError("Please fill in all the fields!");
+            return;
+        }
+
+        if (passwordElem.value !== confirmPasswordElem.value) {
+            showError("Your password and confirmation password do not match");
+            return;
+        }
+
         showSpinner()
 
         $.ajax({
             url: "/signup",
             method: "POST",
             data: {
-                name: emailElem.value,
+                name: nameElem.value,
+                email: emailElem.value,
                 pass: passwordElem.value
             },
             success: (response) => {
@@ -41,6 +56,6 @@ window.onload = () => {
     });
 
     function showError(msg) {
-        alert(msg);
+        showWarningPopup(msg);
     }
 }
