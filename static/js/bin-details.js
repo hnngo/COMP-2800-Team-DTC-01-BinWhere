@@ -27,9 +27,9 @@ upvote.addEventListener('click', function() {
         contentType: "application/json",
         success: function(response) {
             if (!response.error) {
-                alert("Success!")
+                upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up-filled.png");
             } else {
-                alert("Error!")
+                showWarningPopup(response.error);
             }
         }
     })
@@ -46,9 +46,9 @@ downvote.addEventListener('click', function() {
         contentType: "application/json",
         success: function(response) {
             if (response.error === 0) {
-                alert("Success!")
+                downvote.setAttribute("src", "/static/assets/icons/icon-thumb-down-filled.png")
             } else {
-                alert("Error!")
+                showWarningPopup(response.error);
             }
         }
     })
