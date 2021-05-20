@@ -18,20 +18,18 @@ window.onload = () => {
                 clearSpinner();
 
                 if (!response.error) {
-                    localStorage.setItem('session_id', response.sessionId);
-                    localStorage.setItem('user_id', response.sessionId);
                     window.location.href = "/";
                 } else {
                     switch (response.error) {
                         case "MISSING_PASSWORD":
                         case "INVALID_PASSWORD":
-                            showError("Wrong password");
+                            showWarningPopup("Wrong password");
                             break;
                         case "EMAIL_NOT_FOUND":
-                            showError("Email not found");
+                            showWarningPopup("Email not found");
                             break;
                         default:
-                            showError("Something is wrong, please try again!");
+                            showWarningPopup("Something is wrong, please try again!");
                             break;
                     }
                     passwordElem.value = "";
@@ -39,12 +37,8 @@ window.onload = () => {
             },
             fail: (err) => {
                 clearSpinner();
-                showError("Something is wrong, please try again!");
+                showWarningPopup("Something is wrong, please try again!");
             }
         })
     });
-
-    function showError(msg) {
-        alert(msg);
-    }
 }

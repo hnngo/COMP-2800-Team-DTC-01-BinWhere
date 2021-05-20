@@ -33,7 +33,10 @@ function initMap() {
     $.each(bins, function (key, data) {
         let bin = Object.keys(data)[0];
 
-        if (urlParams.get("filter") === null || urlParams.get("filter") === data[bin].type) {
+        // Show all icons if there is no filter.
+        // If there is a filter, match any array that has at least one element of the query array.
+        if (urlParams.get("filter") === null ||
+            urlParams.get("filter").split(',').some(item => data[bin].type.includes(item))) {
             let coords = new google.maps.LatLng(data[bin].lat, data[bin].long);
             let pin = new google.maps.Marker({
                 position: coords,
@@ -49,10 +52,12 @@ function initMap() {
 
     // Place location button
     infoWindow = new google.maps.InfoWindow();
-    const locationButton = document.createElement("button");
-    locationButton.textContent = "Pan to Current Location";
+    const locationButton = document.createElement("img");
+    locationButton.src = "/static/assets/icons/icon-current-location.png";
     locationButton.classList.add("custom-map-control-button");
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(locationButton);
+    locationButton.style.width = "60px";
+    locationButton.style.transform = "translateX(15px)";
     locationButton.addEventListener("click", () => {
         // Try HTML5 geolocation.
         if (navigator.geolocation) {

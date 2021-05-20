@@ -69,7 +69,7 @@ form {
 
 .login_button_container button{
     background-color: var(--primary-green);
-    height: 10vh;
+    height: 60px;
     width: 350px;
     border-radius: 2.5rem;
     font-size: 1.5em;
