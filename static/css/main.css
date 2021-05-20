@@ -70,7 +70,7 @@ html, body {
 }
 
 /* Popup */
-
+.popup--success-container,
 .popup--error-container,
 .popup--warning-container {
     position: absolute;
@@ -84,6 +84,7 @@ html, body {
     background-color: rgba(255, 255, 255, 0.12);
 }
 
+.popup--success-content,
 .popup--error-content,
 .popup--warning-content {
     background-color: var(--primary-black);
@@ -104,13 +105,18 @@ html, body {
     border: 3px solid #FF0000;
     color: #FF0000;
 }
+.popup--success-content {
+    border: 3px solid var(--primary-green);
+    color: var(--primary-green);
+}
 
+.popup--success-icon-success,
 .popup--error-icon-error,
 .popup--warning-icon-warning {
     width: 40px;
 }
 
-
+.popup--success-icon-close,
 .popup--error-icon-close,
 .popup--warning-icon-close {
     width: 16px;
@@ -119,6 +125,7 @@ html, body {
     top: 15px;
 }
 
+.popup--success-message,
 .popup--error-message,
 .popup--warning-message {
     font-family: 'Montserrat', sans-serif;

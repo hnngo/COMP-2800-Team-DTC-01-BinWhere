@@ -23,13 +23,13 @@ window.onload = () => {
                     switch (response.error) {
                         case "MISSING_PASSWORD":
                         case "INVALID_PASSWORD":
-                            showError("Wrong password");
+                            showWarningPopup("Wrong password");
                             break;
                         case "EMAIL_NOT_FOUND":
-                            showError("Email not found");
+                            showWarningPopup("Email not found");
                             break;
                         default:
-                            showError("Something is wrong, please try again!");
+                            showWarningPopup("Something is wrong, please try again!");
                             break;
                     }
                     passwordElem.value = "";
@@ -37,12 +37,8 @@ window.onload = () => {
             },
             fail: (err) => {
                 clearSpinner();
-                showError("Something is wrong, please try again!");
+                showWarningPopup("Something is wrong, please try again!");
             }
         })
     });
-
-    function showError(msg) {
-        showWarningPopup(msg);
-    }
 }
