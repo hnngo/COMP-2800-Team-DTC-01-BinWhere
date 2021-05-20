@@ -39,6 +39,7 @@ window.onload = () => {
 
     // Submit search form
     function submitSearch() {
+        document.getElementById("search-coords").value = localStorage.getItem("currentPos");
         document.getElementById("search-form").submit();
     }
 
