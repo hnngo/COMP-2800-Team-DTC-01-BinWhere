@@ -20,6 +20,8 @@ def init(app, db):
     @app.route("/search", methods=["POST"])
     def search_query():
         query = request.form["keyword"]
+        current_coords = request.form["coords"]
+        print(current_coords)
         docs = db.collection("items").where("name", "==", query)
         result = [doc.id for doc in docs.stream()]
         if result:
