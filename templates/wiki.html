@@ -1,0 +1,85 @@
+{% extends "includes/base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/wiki.css') }}">
+<title>Waste Wiki</title>
+{% endblock %}
+
+{% block body %}
+
+{% include "includes/heading.html" %}
+<div class="wiki-container">
+    <div class="wiki-search-container">
+        <input class="wiki-search-input" placeholder="Search for item..." type="text" />
+        <img class="wiki-search-icon" src="{{ url_for("static", filename='assets/icons/icon-search-white.png') }}" />
+    </div>
+
+    <div class="wiki-common-search-container">
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="{{ url_for("static",
+                    filename='assets/icons/icon-search.png') }}"
+                />
+            </div>
+            <div class="wiki-common-title">Bottle & Can</div>
+        </div>
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="{{ url_for("static",
+                    filename='assets/icons/icon-search.png') }}"
+                />
+            </div>
+            <div class="wiki-common-title">Bottle & Can</div>
+        </div>
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="{{ url_for("static",
+                    filename='assets/icons/icon-search.png') }}"
+                />
+            </div>
+            <div class="wiki-common-title">Bottle & Can</div>
+        </div>
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="{{ url_for("static",
+                    filename='assets/icons/icon-search.png') }}"
+                />
+            </div>
+            <div class="wiki-common-title">Bottle & Can</div>
+        </div>
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="{{ url_for("static",
+                    filename='assets/icons/icon-search.png') }}"
+                />
+            </div>
+            <div class="wiki-common-title">Bottle & Can</div>
+        </div>
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="{{ url_for("static",
+                    filename='assets/icons/icon-search.png') }}"
+                />
+            </div>
+            <div class="wiki-common-title">Bottle & Can</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block bottom %}
+
+{% endblock %}
