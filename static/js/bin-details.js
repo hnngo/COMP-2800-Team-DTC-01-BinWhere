@@ -1,17 +1,12 @@
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
+let bin_address;
+let geoAPIStart = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
+let geoAPIEnd = '&key=AIzaSyCCHFhbJQACuCA70fcban9dr2GS8PuUiO8&result_type=street_address';
 
-let lat, long, type;
-
-$.getJSON('/static/json/test-coords.json', function (data) {
-    $.each(data.records, function (key, data) {
-        if (data.id === urlParams.get("id")) {
-            lat = data.lat;
-            long = data.long;
-            type = data.type
-        }
+function reverseGeoCode() {
+    $.getJSON(geoAPIStart + lat + ',' + long + geoAPIEnd, function (geoData) {
+        bin_address = geoData.results[0].formatted_address;
+        console.log("Address:" + bin_address);
+    }).then(function () {
+        $('#bin-details-location').append(bin_address);
     });
-}).then(function () {
-    $('#bin-details-type').append(type);
-    $('#bin-details-location').append('(' + lat + ' ' + long + ')');
-});
+}

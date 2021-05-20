@@ -5,6 +5,7 @@ __pycache__/
 .idea
 output.json
 .DS_Store
+flask_session
 
 # C extensions
 *.so

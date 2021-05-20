@@ -3,9 +3,9 @@ window.onload = () => {
     const navbarElement = document.querySelector("#navbar-icon");
 
     // Simulate loading
-    setTimeout(() => {
-        clearLoadingScreen();
-    }, 2000)
+    // setTimeout(() => {
+    //     clearLoadingScreen();
+    // }, 2000)
 
     // Handle open hamburger menu
     if (navbarElement) {
@@ -32,8 +32,23 @@ window.onload = () => {
 
     window.addEventListener('click', (event) => {
         closeSideBar();
-    })
+    });
     window.addEventListener('touchstart', (event) => {
         closeSideBar();
-    })
+    });
+
+    // Submit search form
+    function submitSearch() {
+        document.getElementById("search-form").submit();
+    }
+
+    // Event listeners for clicking search icon
+    let searchIcon = document.getElementById('search-submit')
+    searchIcon.addEventListener('click', (event) => {
+        submitSearch();
+    });
+    searchIcon.addEventListener('touchstart', (event) => {
+        submitSearch();
+    });
+
 }
