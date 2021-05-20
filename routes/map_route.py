@@ -20,7 +20,7 @@ def init(app, db):
     @app.route("/search", methods=["GET"])
     def get_search_results():
         item_id = request.args.get("id")
-        doc = db.collection("bins").document(item_id).get()
+        doc = db.collection("items").document(item_id).get()
         description = doc.get("description")
         image = doc.get("image")
         name = doc.get("name")
