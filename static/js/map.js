@@ -33,7 +33,7 @@ function initMap() {
     $.each(bins, function (key, data) {
         let bin = Object.keys(data)[0];
 
-        if (urlParams.get("filter") === null || urlParams.get("filter") === data[bin].type) {
+        if (urlParams.get("filter") === null || urlParams.get("filter").split(',').some(r=> data[bin].type.includes(r))) {
             let coords = new google.maps.LatLng(data[bin].lat, data[bin].long);
             let pin = new google.maps.Marker({
                 position: coords,
