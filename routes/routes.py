@@ -10,5 +10,5 @@ def initialize(app, db, auth):
     """
     authentication_route.init(app, db, auth)
     user_route.init(app, db, auth)
-    other_routes.init(app)
+    other_routes.init(app, db)
     map_route.init(app, db)
