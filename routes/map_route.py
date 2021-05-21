@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 import json
 
 
@@ -16,7 +16,11 @@ def init(app, db):
         lat = doc.get("lat")
         long = doc.get("long")
         bin_type = doc.get("type")
-        return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type)
+        who_upvote = doc.get("who_upvote")
+        who_downvote = doc.get("who_downvote")
+        user_id = session.get("user_id")
+        return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type,
+                               who_upvote=who_upvote, who_downvote=who_downvote, user_id=user_id, show_back=True)
 
     @app.route("/search", methods=["POST"])
     def search_query():

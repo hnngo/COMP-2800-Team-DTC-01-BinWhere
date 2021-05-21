@@ -41,10 +41,22 @@
                 <h4 class = "reliability">Reliability</h4>
             </div>
             <div class ="thumbsUpDown">
-                <img src= "{{ url_for('static', filename="assets/icons/icon-thumb-up.png") }}"
-                            alt = "icon-thumb-up"/> <h4 class = "percentage">10%</h4>
-                 <img src= "{{ url_for('static', filename="assets/icons/icon-thumb-down.png") }}"
+                {% if user_id in who_upvote %}
+                    <img id="thumbs-up" src= "{{ url_for('static', filename="assets/icons/icon-thumb-up-filled.png") }}"
+                                alt = "icon-thumb-up"/>
+                {% else %}
+                    <img id="thumbs-up" src= "{{ url_for('static', filename="assets/icons/icon-thumb-up.png") }}"
+                                alt = "icon-thumb-up"/>
+                {% endif %}
+
+                <h4 class = "percentage">10%</h4>
+                {% if user_id in who_downvote %}
+                    <img id="thumbs-down" src= "{{ url_for('static', filename="assets/icons/icon-thumb-down-filled.png") }}"
                             alt = "icon-thumb-down"/>
+                {% else %}
+                    <img id="thumbs-down" src= "{{ url_for('static', filename="assets/icons/icon-thumb-down.png") }}"
+                            alt = "icon-thumb-down"/>
+                {% endif %}
             </div>
         </div>
 
@@ -75,6 +87,7 @@
 
 
 {% block bottom %}
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
 <script src="/static/js/bin-details.js"></script>
 <script type="text/javascript">
     const lat = {{ lat }};
