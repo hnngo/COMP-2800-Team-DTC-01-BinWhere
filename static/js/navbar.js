@@ -39,16 +39,26 @@ window.onload = () => {
 
     // Submit search form
     function submitSearch() {
+        document.getElementById("search-coords").value = localStorage.getItem("currentPos");
         document.getElementById("search-form").submit();
     }
 
     // Event listeners for clicking search icon
     let searchIcon = document.getElementById('search-submit')
+    let searchInput = document.getElementById('search-input')
     searchIcon.addEventListener('click', (event) => {
+        event.stopPropagation();
         submitSearch();
     });
     searchIcon.addEventListener('touchstart', (event) => {
+        event.stopPropagation();
         submitSearch();
+    });
+    searchInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.stopPropagation();
+            submitSearch();
+        }
     });
 
 }

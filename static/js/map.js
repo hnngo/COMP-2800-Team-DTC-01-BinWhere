@@ -10,7 +10,7 @@ function initMap() {
     // Display the map
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 49.2827, lng: -123.1207 },
-        zoom: 12,
+        zoom: 15,
         fullscreenControl: false,
         mapTypeControl: false
     });
@@ -58,30 +58,59 @@ function initMap() {
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(locationButton);
     locationButton.style.width = "60px";
     locationButton.style.transform = "translateX(15px)";
-    locationButton.addEventListener("click", () => {
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                    };
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent("Location found.");
-                    infoWindow.open(map);
-                    map.setCenter(pos);
-                    map.setZoom(18);
-                },
-                () => {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                }
-            );
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
-    });
+    locationButton.addEventListener("click", geoLocate);
+
+    // Automatically center the map on your location when first loading the page and no focus is set.
+    if (urlParams.get("focus") === null) {
+        geoLocate();
+    } else {
+        const pos = {
+            lat: Number(urlParams.get("focus").split(",")[0]),
+            lng: Number(urlParams.get("focus").split(",")[1])
+        };
+        map.setCenter(pos);
+        map.setZoom(18);
+    }
+
+    // Hmm I wonder what this is for...
+    if (urlParams.get("filter") === "muppet") {
+        let coords = new google.maps.LatLng(49.130527980885006, -121.9536234401931);
+            let pin = new google.maps.Marker({
+            position: coords,
+            map,
+            title: "Oscar",
+            icon: "/static/assets/icons/grouch-icon.png"
+        });
+        google.maps.event.addListener(pin, 'click', function () {
+            showErrorPopup("Your favicon is trash! -2 marks.");
+        });
+    }
+}
+
+function geoLocate() {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+                localStorage.setItem('currentPos', JSON.stringify(pos));
+                infoWindow.setPosition(pos);
+                infoWindow.setContent("Location found.");
+                infoWindow.open(map);
+                map.setCenter(pos);
+                map.setZoom(15);
+            },
+            () => {
+                handleLocationError(true, infoWindow, map.getCenter());
+            }
+        );
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
 }
 
 // Handle errors for when location button doesn't work
