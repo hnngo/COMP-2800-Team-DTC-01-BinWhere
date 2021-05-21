@@ -16,10 +16,11 @@
 
 
 {% block bottom %}
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
 <script>
     bins = {{ bins|tojson }};
 </script>
-<script src="/static/js/map.js"></script>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCHFhbJQACuCA70fcban9dr2GS8PuUiO8&callback=initMap" type="text/javascript"></script>
 
 {% endblock %}
