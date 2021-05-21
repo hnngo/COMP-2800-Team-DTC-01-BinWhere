@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, session
 import json
+from . import utils
 
 
 def init(app, db):
@@ -26,10 +27,11 @@ def init(app, db):
     def search_query():
         query = request.form["keyword"]
         current_coords = json.loads(request.form["coords"])
-        docs = db.collection("items").where("name", "==", query)
-        result = [doc.id for doc in docs.stream()]
-        if result:
-            return redirect(f"/search?id={result[0]}&lat={current_coords['lat']}&long={current_coords['lng']}")
+
+        result = utils.search_item(db, keyword=query)
+        if len(result) > 0:
+            first_match_id = result[0]["id"]
+            return redirect(f"/search?id={first_match_id}&lat={current_coords['lat']}&long={current_coords['lng']}")
         else:
             return redirect("/")
 
