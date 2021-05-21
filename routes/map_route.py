@@ -31,9 +31,13 @@ def init(app, db):
     @app.route("/search", methods=["POST"])
     def search_query():
         query = request.form["keyword"]
-        get_json_only = request.form["jsonOnly"]
-        result = utils.search_item(db, keyword=query)
 
+        try:
+            get_json_only = request.form["jsonOnly"]
+        except KeyError:
+            get_json_only = None
+
+        result = utils.search_item(db, keyword=query)
         if len(result) > 0:
             if get_json_only:
                 return jsonify({"error": 0, "data": result})
