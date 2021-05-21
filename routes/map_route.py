@@ -6,9 +6,14 @@ from . import utils
 def init(app, db):
     @app.route("/", methods=["GET"])
     def get_map():
+        user_id = session.get("user_id")
         map_data = db.collection("bins")
         all_bins = [{doc.id: doc.to_dict()} for doc in map_data.stream()]
-        return render_template("map.html", title="Map", bins=all_bins)
+
+        if user_id is not None:
+            return render_template("map.html", title="Map", bins=all_bins, is_login=True)
+        else:
+            return render_template("map.html", title="Map", bins=all_bins, is_login=False)
 
     @app.route("/bin", methods=["GET"])
     def get_bin_details():
