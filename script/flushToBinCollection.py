@@ -1,6 +1,6 @@
 import json
 import firebase_admin
-
+from . import mock_image
 
 def run(db):
     # auth = firebase.auth()
@@ -13,7 +13,7 @@ def run(db):
             db.collection("bins").add({
                 "downvote": 0,
                 "upvote": 0,
-                "image": "",
+                "image": mock_image.mock_image(),
                 "lat": record["lat"],
                 "long": record["long"],
                 "type": record["type"],
