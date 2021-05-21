@@ -10,13 +10,9 @@
     <div class="sidebar-content">
         <div class="sidebar-header">
             <div class="profile">
-                {% if data %}
-                    <img
-                        class="profile-avatar"
-                        src="data:image/png;base64,{{ data.avatar }}"
-                        alt="user avatar"
-                    />
-                    <div class="profile-name">{{ data.name }}</div>
+                {% if username %}
+                    <img class="profile-avatar" src="data:image/png;base64,{{ user_image }}" alt="user avatar" />
+                    <div class="profile-name">{{ username }}</div>
                 {% else %}
                     <img alt="logo" class="profile-avatar" src="{{ url_for("static", filename="assets/images/logo-v1.png")}}"/>
                     <div class="profile-name">Welcome</div>
@@ -25,7 +21,7 @@
         </div>
 
         <div class="sidebar-menu">
-            {% if data %}
+            {% if username %}
                 <a class="sidebar-menu-item" href={{ "/profile" }}>Profile</a>
             {% else %}
                 <a class="sidebar-menu-item" href={{ "/login" }}>Login</a>

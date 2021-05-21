@@ -9,8 +9,9 @@ def init(app, db):
     @app.route("/sidebar", methods=["GET"])
     def get_sidebar():
         user = db.collection("users").document(session.get("user_id")).get().to_dict()
-
-        return render_template("includes/sidebar.html", data=user)
+        username = user["name"]
+        user_image = user["avatar"]
+        return render_template("includes/sidebar.html", username=username, user_avatar=user_image)
 
     @app.route("/nav", methods=["GET"])
     def get_nav():
