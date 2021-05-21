@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, jsonify
 import json
 from . import utils
 
@@ -26,12 +26,16 @@ def init(app, db):
     @app.route("/search", methods=["POST"])
     def search_query():
         query = request.form["keyword"]
-        current_coords = json.loads(request.form["coords"])
-
+        get_json_only = request.form["jsonOnly"]
         result = utils.search_item(db, keyword=query)
+
         if len(result) > 0:
-            first_match_id = result[0]["id"]
-            return redirect(f"/search?id={first_match_id}&lat={current_coords['lat']}&long={current_coords['lng']}")
+            if get_json_only:
+                return jsonify({"error": 0, "data": result})
+            else:
+                current_coords = json.loads(request.form["coords"])
+                first_match_id = result[0]["id"]
+                return redirect(f"/search?id={first_match_id}&lat={current_coords['lat']}&long={current_coords['lng']}")
         else:
             return redirect("/")
 

@@ -7,73 +7,78 @@
 
 {% block body %}
 
-{% include "includes/heading.html" %}
 <div class="wiki-container">
-    <div class="wiki-search-container">
-        <input class="wiki-search-input" placeholder="Search for item..." type="text" />
-        <img class="wiki-search-icon" src="{{ url_for("static", filename='assets/icons/icon-search-white.png') }}" />
-    </div>
+    {% include "includes/heading.html" %}
+    <div class="wiki-content-container">
+        <div class="wiki-search-container">
+            <input class="wiki-search-input" placeholder="Search for item..." type="text" />
+            <img class="wiki-search-icon" src="{{ url_for("static", filename='assets/icons/icon-search-white.png') }}" />
+        </div>
 
-    <div class="wiki-common-search-container">
-        <div class="wiki-common-item">
-            <div class="wiki-common-box">
-                <img
-                    class="wiki-common-icon"
-                    src="{{ url_for("static",
-                    filename='assets/icons/icon-search.png') }}"
-                />
+        <div class="wiki-common-search-headline"></div>
+        <div class="wiki-common-search-result"></div>
+
+        <div class="wiki-common-search-container">
+            <div class="wiki-common-item">
+                <div class="wiki-common-box">
+                    <img
+                        class="wiki-common-icon"
+                        src="{{ url_for("static",
+                        filename='assets/icons/icon-search.png') }}"
+                    />
+                </div>
+                <div class="wiki-common-title">Bottle</div>
             </div>
-            <div class="wiki-common-title">Bottle</div>
-        </div>
-        <div class="wiki-common-item">
-            <div class="wiki-common-box">
-                <img
-                    class="wiki-common-icon"
-                    src="{{ url_for("static",
-                    filename='assets/icons/icon-search.png') }}"
-                />
+            <div class="wiki-common-item">
+                <div class="wiki-common-box">
+                    <img
+                        class="wiki-common-icon"
+                        src="{{ url_for("static",
+                        filename='assets/icons/icon-search.png') }}"
+                    />
+                </div>
+                <div class="wiki-common-title">Can</div>
             </div>
-            <div class="wiki-common-title">Can</div>
-        </div>
-        <div class="wiki-common-item">
-            <div class="wiki-common-box">
-                <img
-                    class="wiki-common-icon"
-                    src="{{ url_for("static",
-                    filename='assets/icons/icon-search.png') }}"
-                />
+            <div class="wiki-common-item">
+                <div class="wiki-common-box">
+                    <img
+                        class="wiki-common-icon"
+                        src="{{ url_for("static",
+                        filename='assets/icons/icon-search.png') }}"
+                    />
+                </div>
+                <div class="wiki-common-title">Card box</div>
             </div>
-            <div class="wiki-common-title">Card box</div>
-        </div>
-        <div class="wiki-common-item">
-            <div class="wiki-common-box">
-                <img
-                    class="wiki-common-icon"
-                    src="{{ url_for("static",
-                    filename='assets/icons/icon-search.png') }}"
-                />
+            <div class="wiki-common-item">
+                <div class="wiki-common-box">
+                    <img
+                        class="wiki-common-icon"
+                        src="{{ url_for("static",
+                        filename='assets/icons/icon-search.png') }}"
+                    />
+                </div>
+                <div class="wiki-common-title">Glass</div>
             </div>
-            <div class="wiki-common-title">Glass</div>
-        </div>
-        <div class="wiki-common-item">
-            <div class="wiki-common-box">
-                <img
-                    class="wiki-common-icon"
-                    src="{{ url_for("static",
-                    filename='assets/icons/icon-search.png') }}"
-                />
+            <div class="wiki-common-item">
+                <div class="wiki-common-box">
+                    <img
+                        class="wiki-common-icon"
+                        src="{{ url_for("static",
+                        filename='assets/icons/icon-search.png') }}"
+                    />
+                </div>
+                <div class="wiki-common-title">Container</div>
             </div>
-            <div class="wiki-common-title">Container</div>
-        </div>
-        <div class="wiki-common-item">
-            <div class="wiki-common-box">
-                <img
-                    class="wiki-common-icon"
-                    src="{{ url_for("static",
-                    filename='assets/icons/icon-search.png') }}"
-                />
+            <div class="wiki-common-item">
+                <div class="wiki-common-box">
+                    <img
+                        class="wiki-common-icon"
+                        src="{{ url_for("static",
+                        filename='assets/icons/icon-search.png') }}"
+                    />
+                </div>
+                <div class="wiki-common-title">Bag</div>
             </div>
-            <div class="wiki-common-title">Bag</div>
         </div>
     </div>
 </div>
