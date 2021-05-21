@@ -27,7 +27,11 @@ upvote.addEventListener('click', function() {
         contentType: "application/json",
         success: function(response) {
             if (!response.error) {
-                upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up-filled.png");
+                if (response.type === "NEW") {
+                    upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up-filled.png");
+                } else {
+                    upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up.png");
+                }
             } else {
                 showWarningPopup(response.error);
             }
@@ -46,7 +50,11 @@ downvote.addEventListener('click', function() {
         contentType: "application/json",
         success: function(response) {
             if (response.error === 0) {
-                downvote.setAttribute("src", "/static/assets/icons/icon-thumb-down-filled.png")
+                if (response.type === "NEW") {
+                    downvote.setAttribute("src", "/static/assets/icons/icon-thumb-down-filled.png");
+                } else {
+                    downvote.setAttribute("src", "/static/assets/icons/icon-thumb-down.png");
+                }
             } else {
                 showWarningPopup(response.error);
             }

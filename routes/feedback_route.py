@@ -25,12 +25,13 @@ def init(app, db):
                     'upvote': bin_data.to_dict()['upvote'] - 1,
                     'who_upvote': current_who_upvote
                 })
+                return jsonify({"error": 0, "type": "RESET"})
             else:
                 bin_ref.update({
                     'upvote': bin_data.to_dict()['upvote'] + 1,
                     'who_upvote': bin_data.to_dict()['who_upvote'] + [user_id]
                 })
-            return jsonify({"error": 0})
+                return jsonify({"error": 0, "type": "NEW"})
         else:
             return jsonify({"error": "There's no such bin existed!"})
 
@@ -52,11 +53,12 @@ def init(app, db):
                     'downvote': bin_data.to_dict()['downvote'] - 1,
                     'who_downvote': current_who_downvote
                 })
+                return jsonify({"error": 0, "type": "RESET"})
             else:
                 bin_ref.update({
                     'downvote': bin_data.to_dict()['downvote'] + 1,
                     'who_downvote': bin_data.to_dict()['who_downvote'] + [user_id]
                 })
-            return jsonify({"error": 0})
+                return jsonify({"error": 0, "type": "NEW"})
         else:
             return jsonify({"error": "There is no such bin"})
