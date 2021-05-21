@@ -29,8 +29,11 @@ upvote.addEventListener('click', function() {
             if (!response.error) {
                 if (response.type === "NEW") {
                     upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up-filled.png");
-                } else {
+                } else if (response.type === "RESET") {
                     upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up.png");
+                } else {
+                    upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up-filled.png");
+                    downvote.setAttribute("src", "/static/assets/icons/icon-thumb-down.png");
                 }
             } else {
                 showWarningPopup(response.error);
@@ -52,8 +55,11 @@ downvote.addEventListener('click', function() {
             if (response.error === 0) {
                 if (response.type === "NEW") {
                     downvote.setAttribute("src", "/static/assets/icons/icon-thumb-down-filled.png");
-                } else {
+                } else if (response.type === "RESET") {
                     downvote.setAttribute("src", "/static/assets/icons/icon-thumb-down.png");
+                } else {
+                    downvote.setAttribute("src", "/static/assets/icons/icon-thumb-down-filled.png");
+                    upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up.png");
                 }
             } else {
                 showWarningPopup(response.error);
