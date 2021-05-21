@@ -71,6 +71,20 @@ function initMap() {
         map.setCenter(pos);
         map.setZoom(18);
     }
+
+    // Hmm I wonder what this is for...
+    if (urlParams.get("filter") === "muppet") {
+        let coords = new google.maps.LatLng(49.130527980885006, -121.9536234401931);
+            let pin = new google.maps.Marker({
+            position: coords,
+            map,
+            title: "Oscar",
+            icon: "/static/assets/icons/grouch-icon.png"
+        });
+        google.maps.event.addListener(pin, 'click', function () {
+            showErrorPopup("Your favicon is trash! -2 marks.");
+        });
+    }
 }
 
 function geoLocate() {

@@ -25,7 +25,8 @@
 
     <h2>Nearest bin</h2>
     <a href="/?filter={{ waste_type }}&focus={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}">
-        <div id="map_preview">{{ closest_bin }}</div>
+        <img id="map-search-preview"
+             src="https://maps.googleapis.com/maps/api/staticmap?center={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}&zoom=17&size=225x225&markers={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}&key=AIzaSyCCHFhbJQACuCA70fcban9dr2GS8PuUiO8">
     </a>
 
     <h2>Description</h2>
