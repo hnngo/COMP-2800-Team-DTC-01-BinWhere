@@ -65,6 +65,15 @@ main {
     color: transparent;
 }
 
+#select {
+    position: absolute;
+    top: 208px;
+    right: 62px;
+    border-radius: 30px;
+    padding: 4px 8px;
+    display: none;
+}
+
 .username::after {
     content: "";
     display: block;
@@ -135,7 +144,7 @@ article {
     border-bottom: 1px solid white;
 }
 
-section {
+.bin {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-areas:
@@ -164,7 +173,7 @@ section {
     margin: 0;
 }
 
-#delete-btn {
+.photo-info button {
     font-size: 16px;
     background-color: var(--primary-yellow);
     padding: 3px 15px;

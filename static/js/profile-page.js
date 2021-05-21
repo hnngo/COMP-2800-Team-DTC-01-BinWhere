@@ -1,7 +1,6 @@
-showSpinner();
-let user_id = undefined;
-
 window.onload = async () => {
+    showSpinner();
+    let user_id = undefined;
 
     user_id = await getCurrentUserId();
     console.log(user_id);
@@ -12,73 +11,129 @@ window.onload = async () => {
     }
 
     $(".container")[0].classList.remove("d-none");
+
+    editUsername();
+    editUserAvatar();
+    deletePicture();
 }
 
-// // Delete the picture uploaded from the user account
-// function deletePicture() {
-//
-//     if ($("#delete-button-modal") !== null) {
-//         // Click delete button to open the confirmation modal
-//         $("#delete-btn").addEventListener("click", event => {
-//             $("#delete-button-modal").style.display = "block";
-//         })
-//         // Close the modal by pressing X
-//         $("#btn-close").addEventListener("click", function(event) {
-//             $("#delete-button-modal").style.display = "none";
-//         });
-//
-//         // Close the modal by pressing Close
-//         $("#close-btn").addEventListener("click", function(event) {
-//             $("#delete-button-modal").style.display = "none";
-//         });
-//
-//         // Delete the picture from the screen
-//         $("#confirm-delete").addEventListener("click", function(event) {
-//             $("#picture1").remove();
-//             $("#delete-button-modal").style.display = "none";
-//         });
-//     }
-// }
+
+// Edit User Name
+function editUsername() {
+    const edit_name_btn = document.querySelector("#edit-name-btn");
+    const user_name = document.querySelector("#user-name");
+    const change_username = document.querySelector('input[name="name"]');
+    const submit_new_username = document.querySelector("#submit-new-username");
+
+    // Show the text box to input new user name
+    edit_name_btn.addEventListener("click", function(event) {
+        user_name.style.display = "none";
+        change_username.style.display = "block";
+        submit_new_username.style.display = "block";
+    });
+
+    // Submit new user name
+    submit_new_username.addEventListener("click", function(event) {
+        change_username.style.display = "none";
+        submit_new_username.style.display = "none";
+
+        event.preventDefault();
+        showSpinner()
+
+        $.ajax({
+            url: "/profile/name",
+            method: "POST",
+            data: {
+                name: change_username.value
+            },
+            success: (response) => {
+                clearSpinner();
+                user_name.style.display = "block";
+                showSuccessPopup("User name is updated successfully!")
+            },
+            fail: (err) => {
+                clearSpinner();
+                showWarningPopup("Something is wrong, please try again!")
+            }
+        })
+    });
+}
 
 
+// Edit user avatar
+function editUserAvatar() {
+    const new_avatar = document.querySelector('input[name="avatar"]');
+    const select_btn = document.querySelector("#select");
 
-// function deletePicture() {
-//     let delete_confirm = document.getElementById("delete-button-modal");
-//
-//     document.getElementById("delete-btn").addEventListener("click", function (event) {
-//     delete_confirm.style.display = "block";
-//     // });
+    new_avatar.addEventListener("click", (event) => {
+        event.preventDefault();
+        select_btn.style.display = "block"
+    });
 
-//     // Close the modal by pressing X
-//     document.getElementById("btn-close").addEventListener("click", function(event) {
-//         delete_confirm.style.display = "none";
-//     });
-//
-//     // Close the modal by pressing Close
-//     document.getElementById("close-btn").addEventListener("click", function(event) {
-//         delete_confirm.style.display = "none";
-//     });
-//
-//     // Delete the picture from the screen
-//     document.getElementById("confirm-delete").addEventListener("click", function(event) {
-//    let garbage_pic = document.getElementById("picture1")
-//     garbage_pic.remove();
-//    delete_confirm.style.display = "none";
-//     });
-// }
+    select_btn.addEventListener("click", (event) => {
+        $.ajax({
+            url:"/profile/avatar",
+            method: "POST",
+            data: {
+                avatar: new_avatar
+            },
+            success: (response) => {
+                clearSpinner();
+                if (!response.error) {
+                    showSuccessPopup("User avatar is updated successfully!")
+                }
+            },
+            fail: (err) => {
+                clearSpinner();
+                showWarningPopup("Something is wrong, please try again!")
+            }
+        })
+    })
+}
 
 
-// // Edit the user name
-// function editUsername() {
-//     $("#edit-name-btn").addEventListener("click", function(event) {
-//         $("#user-name").style.display = "none";
-//         $("#change-username").style.display = "block";
-//         $("#submit-new-username").style.display = "block";
-//     });
-//
-//     $("#submit-new-username").addEventListener("click", function(event) {
-//         $("#user-name").style.display = "block";
-//         $("#change-username").style.display = "none";
-//         $("#submit-new-username").style.display = "none";
-//     })
-// }
+// Delete the picture uploaded from the user account
+function deletePicture() {
+    const delete_button_modal = document.querySelector("#delete-button-modal");
+    const delete_btn = document.querySelector("#delete-btn");
+    const btn_close = document.querySelector("#btn-close");
+    const close_btn = document.querySelector("#close_btn");
+    const confirm_delete = document.querySelector("#confirm-delete");
+
+    if (delete_btn !== null) {
+        // Click delete button to open the confirmation modal
+        delete_btn.addEventListener("click", event => {
+            delete_button_modal.style.display = "block";
+        })
+        // Close the modal by pressing X
+        btn_close.addEventListener("click", function(event) {
+            delete_button_modal.style.display = "none";
+        });
+
+        // Close the modal by pressing Close
+       close_btn.addEventListener("click", function(event) {
+            delete_button_modal.style.display = "none";
+        });
+
+        // Delete the picture from the screen
+        confirm_delete.addEventListener("click", function(event) {
+            let bin = delete_btn.getAttribute("id")
+
+            $.ajax({
+                url:"/profile/bin",
+                method: "DELETE",
+                data: {
+                    "bin_id": bin.slice(10,)
+                },
+                success: (response) => {
+                    event.target.parentElement.parentElement.remove();
+                    delete_button_modal.style.display = "none";
+                    showSuccessPopup("Deleted Successfully!")
+                },
+                fail: (err) => {
+                    showWarningPopup("Something is wrong, please try again!");
+                }
+            })
+        });
+    }
+}
