@@ -1,4 +1,8 @@
+let search_result = [];
+
 window.onload = () => {
+    showCategory();
+
     const searchInput = document.querySelector(".wiki-search-input");
     const searchIcon = document.querySelector(".wiki-search-icon");
 
@@ -18,6 +22,7 @@ window.onload = () => {
 
 function search(keyword) {
     showSpinner();
+    hideAllCurrentResultCard();
     $.ajax({
         url: "/search",
         method: "POST",
@@ -30,6 +35,8 @@ function search(keyword) {
             if (response.error) {
                 showWarningPopup("There is something wrong, please try again!");
             } else {
+                search_result = [...response.data];
+                console.log(search_result.map(e => e.id))
                 hideCategory();
                 setTimeout(() => {
                     renderCardResult(response.data);
@@ -41,16 +48,90 @@ function search(keyword) {
 
 function hideCategory() {
     const categoryContainer = document.querySelector(".wiki-common-search-container");
-    categoryContainer.classList.add("animate__animated");
-    categoryContainer.classList.add("animate__fadeOutLeft");
-    categoryContainer.classList.remove("animate__fadeInLeft");
+    if (categoryContainer) {
+        categoryContainer.classList.add("animate__animated");
+        categoryContainer.classList.add("animate__fadeOutLeft");
+        categoryContainer.classList.remove("animate__fadeInLeft");
+        setTimeout(() => {
+            categoryContainer.remove();
+        }, 600);
+    }
 }
 
 function showCategory() {
-    const categoryContainer = document.querySelector(".wiki-common-search-container");
-    categoryContainer.classList.add("animate__animated");
-    categoryContainer.classList.add("animate__fadeInLeft");
-    categoryContainer.classList.remove("animate__fadeOutLeft");
+    const wikiContainer = document.querySelector('.wiki-container');
+    const categoryContainer = document.createElement('div');
+    categoryContainer.classList.add("wiki-common-search-container");
+    categoryContainer.innerHTML = `
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="/static/assets/icons/icon-search.png"
+                />
+            </div>
+            <div class="wiki-common-title">Bottle</div>
+        </div>
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="/static/assets/icons/icon-search.png"
+                />
+            </div>
+            <div class="wiki-common-title">Can</div>
+        </div>
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="/static/assets/icons/icon-search.png"
+                />
+            </div>
+            <div class="wiki-common-title">Card box</div>
+        </div>
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="/static/assets/icons/icon-search.png"
+                />
+            </div>
+            <div class="wiki-common-title">Glass</div>
+        </div>
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="/static/assets/icons/icon-search.png"
+                />
+            </div>
+            <div class="wiki-common-title">Container</div>
+        </div>
+        <div class="wiki-common-item">
+            <div class="wiki-common-box">
+                <img
+                    class="wiki-common-icon"
+                    src="/static/assets/icons/icon-search.png"
+                />
+            </div>
+            <div class="wiki-common-title">Bag</div>
+        </div>
+    `
+    wikiContainer.appendChild(categoryContainer);
+}
+
+function hideAllCurrentResultCard() {
+    $(".wiki-common-search-result-card").remove()
+    // const cardResults = document.querySelector(".wiki-common-search-result-card");
+    // if (cardResults && cardResults.length) {
+    //     console.log("here")
+    //     cardResults.forEach((card) => {
+    //         card.classList.remove("animate__fadeInLeft");
+    //         card.classList.remove("animate__fadeInRight");
+    //         card.add("animate__animated", "animate__fadeOutLeft");
+    //     });
+    // }
 }
 
 function renderCardResult(items) {
@@ -68,6 +149,11 @@ function renderCardResult(items) {
         `
 
         resultContainer.appendChild(cardContainer);
+
+        cardContainer.addEventListener('click', () => {
+            hideAllCurrentResultCard();
+            showResultDetail(item);
+        })
     })
 
 }
@@ -77,4 +163,67 @@ function shortContent(text) {
         return text.substr(0, 50) + "...";
     }
     return text;
+}
+
+function clearResultData() {
+    const wikiContent = document.querySelector(".wiki-content-container");
+    if (wikiContent) {
+        wikiContent.innerHTML = "";
+    }
+}
+
+function showResultDetail(item) {
+    const otherItems = [...search_result].filter((res) => res.id !== item.id);
+    const wikiContainer = document.querySelector('.wiki-content-container');
+    const cardDetailContainer = document.createElement('div');
+    cardDetailContainer.classList.add("wiki-detail-container");
+
+    cardDetailContainer.innerHTML = `
+        <div class="wiki-detail-header">
+            <img class="wiki-detail-image" src="${item.image}" />
+            <div class="wiki-detail-meta">
+                <div class="wiki-detail-name">${item.name}</div>
+                <div class="wiki-detail-type">${item.type}</div>
+            </div>
+        </div>
+        <div class="wiki-detail-body">
+            <div class="wiki-detail-description">
+                <span class="wiki-detail-description-label">Description: </span>
+                ${item.description}
+            </div>
+            <div class="wiki-detail-not-include">
+                <span class="wiki-detail-not-include-label">NOT INCLUDE: </span>
+                ${item.type}
+            </div>
+        </div>
+    `
+
+    if (otherItems.length) {
+        let similar_html = "";
+        otherItems.forEach(i => {
+            similar_html += `
+                <div class="wiki-similar-container">
+                    <img class="wiki-similar-image" src="${i.image}" />
+                    <div class="wiki-similar-name">${i.name}</div>
+                </div>
+            `;
+        })
+        cardDetailContainer.innerHTML += `
+            <div class="wiki-detail-similar-title">Similar items:</div>
+            <div class="wiki-detail-similar">
+                ${similar_html}
+            </div>
+        `
+
+        const similarItems = document.querySelectorAll(".wiki-similar-container");
+        similarItems.forEach((elem, index) => {
+            elem.addEventListener('click', () => {
+                clearResultData();
+                showResultDetail(otherItems[index]);
+            });
+        });
+    }
+
+    wikiContainer.appendChild(cardDetailContainer);
+
 }
