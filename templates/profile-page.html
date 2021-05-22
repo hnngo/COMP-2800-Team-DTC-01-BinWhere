@@ -17,7 +17,7 @@
                     <img id="user-img" src="data:image/png;base64,{{ profile_data.avatar }}" alt="avatar">
                     <input type="file" name="avatar" id="edit" enctype="multipart/form-data">
                 </div>
-                <input type="submit" value="Select" id="select">
+{#                <input type="submit" value="Select" id="select">#}
 
             </div>
             <div class="username">
@@ -43,12 +43,12 @@
                     {% for i in range(postedbin_data|length) %}
                         <div class="bin" id="{{ postedbin_data[i]["bin_id"] }}">
                             <div class="bin-photo">
-                                <img src="data:image/png;base64,{{ postedbin_data[i].image }}" alt="garbage bin">
+                                <img src="{{ postedbin_data[i].image }}" alt="garbage bin">
                             </div>
                             <div class="photo-info">
                                 <p id="reliability">Reliability: {{ postedbin_data[i].reliability }} %</p>
                                 <p id="date">Date Posted: {{ postedbin_data[i].date_created }}</p>
-                                <button id="delete-btn-{{ postedbin_data[i]["bin_id"] }}">Delete</button>
+                                <button data-id="{{ postedbin_data[i]["bin_id"] }}" id="delete-btn">Delete</button>
                             </div>
                         </div>
                     {%  endfor %}
