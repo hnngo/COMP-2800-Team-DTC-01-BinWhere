@@ -1,38 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "includes/base.html" %}
 
-{#    font-awesome#}
-{#    <script src="https://kit.fontawesome.com/8ec9a3f1e7.js" crossorigin="anonymous"></script>#}
-
-{#    CSS#}
-    <link rel="stylesheet" href="{{ url_for('static', filename="css/profile-page.css") }}">
-
+{% block head %}
     <title>Profile Page</title>
-</head>
-<body>
-    <div class="container">
-        {%  include "includes/heading.html" %}
+    <script src={{ "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" }}></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/profile-page.css") }}">
+{% endblock %}
 
+{% block body %}
+    <div class="container d-none">
+    {% with show_back=show_back %}
+        {% include "includes/heading.html" %}
+    {% endwith %}
         <main>
             <div class="profile-img">
                 <div class="profile-avatar">
-                    <img id="user-img" src="{{ url_for('static', filename="assets/images/nhan.png") }}" alt="avatar">
-                    <div id="edit">Edit</div>
+                    <img id="user-img" src="data:image/png;base64,{{ profile_data.avatar }}" alt="avatar">
+                    <input type="file" name="avatar" id="edit" enctype="multipart/form-data">
                 </div>
+{#                <input type="submit" value="Select" id="select">#}
+
             </div>
             <div class="username">
-                <div id="user-name">Huynh Nhan</div>
-                <div class="new-name">
-                    <input type="text" id="change-username">
+                <div id="user-name">{{ profile_data.name }}</div>
+                <form class="new-name">
+                    <input type="text" id="change-username" name="name">
                     <input type="submit" id="submit-new-username">
-                </div>
+                </form>
                 <i class="fas fa-pen" id="edit-name-btn"></i>
             </div>
             <div class="useremail">
-                <div id="user-email">nhanH@binwhere.ca</div>
+                <div id="user-email">{{ profile_data.email }}</div>
             </div>
         </main>
 
@@ -42,15 +39,19 @@
                     Pictures you posted
                 </div>
 
-                <section id="picture1">
-                    <div class="bin-photo">
-                        <img id="photo-1" src="https://images.dailyhive.com/20170717155920/vancouver-west-end-garbage-bins.jpg" alt="garbage bin in Vancouver">
-                    </div>
-                    <div class="photo-info">
-                        <p id="reliability">Reliability: 50%</p>
-                        <p id="date">Date Posted: 2021-05-10</p>
-                        <button id="delete-btn">Delete</button>
-                    </div>
+                <section>
+                    {% for i in range(postedbin_data|length) %}
+                        <div class="bin" id="{{ postedbin_data[i]["bin_id"] }}">
+                            <div class="bin-photo">
+                                <img src="{{ postedbin_data[i].image }}" alt="garbage bin">
+                            </div>
+                            <div class="photo-info">
+                                <p id="reliability">Reliability: {{ postedbin_data[i].reliability }} %</p>
+                                <p id="date">Date Posted: {{ postedbin_data[i].date_created }}</p>
+                                <button data-id="{{ postedbin_data[i]["bin_id"] }}" id="delete-btn">Delete</button>
+                            </div>
+                        </div>
+                    {%  endfor %}
                 </section>
             </div>
         </article>
@@ -78,6 +79,10 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block bottom %}
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
     <script src="{{ url_for('static', filename='js/profile-page.js') }}"></script>
-</body>
-</html>
+
+{% endblock %}

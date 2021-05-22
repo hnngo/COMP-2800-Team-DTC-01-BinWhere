@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "includes/base.html" %}
 
+{% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename="css/signup.css") }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/heading.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
@@ -9,8 +8,9 @@
     {% include "includes/source.html" %}
     <title>Signup</title>
     <script src={{ "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" }}></script>
-</head>
-<body>
+{% endblock %}
+
+{% block body %}
     <form>
         <div class = "logo_name">
             <img src= "{{ url_for('static', filename="assets/images/temp_logo_name.png") }}"
@@ -76,10 +76,9 @@
             <p>ALREADY HAVE AN ACCOUNT?</p>
         </div>
         <div>
-            <button class="login"><U>LOG IN</U></button>
+            <a href="/login" class="login"><U>LOG IN</U></a>
         </div>
     </form>
     <script src="{{ url_for('static', filename='js/common.js') }}"></script>
     <script src="{{ url_for('static', filename='js/signup.js') }}"></script>
-</body>
-</html>
+{% endblock %}
