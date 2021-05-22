@@ -1,0 +1,28 @@
+{% extends "includes/base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/wiki.css') }}">
+<title>Waste Wiki</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="wiki-container">
+    {% include "includes/heading.html" %}
+    <div class="wiki-content-container">
+        <div class="wiki-search-container">
+            <input class="wiki-search-input" placeholder="Search for item..." type="text" />
+            <img class="wiki-search-icon" src="{{ url_for("static", filename='assets/icons/icon-search-white.png') }}" />
+        </div>
+
+        <div class="wiki-common-search-headline"></div>
+        <div class="wiki-common-search-result"></div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block bottom %}
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+<script src="{{ url_for('static', filename='js/wiki.js') }}"></script>
+{% endblock %}

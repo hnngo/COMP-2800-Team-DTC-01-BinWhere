@@ -1,0 +1,45 @@
+{% extends 'includes/base.html' %}
+
+{% block head %}
+
+    <title>Search: {{ title }}</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+    {% include "includes/navbar.html" %}
+    <br><br><br>
+
+    <h1>Search results</h1>
+    <hr>
+    <h2>Item name</h2>
+    <div>{{ title }}</div>
+
+    <h2>Image</h2>
+    <div><img src="{{ image }}" alt="{{ title }}"></div>
+
+    <h2>Bin type</h2>
+    <div>{{ waste_type }}</div>
+
+    <h2>Nearest bin</h2>
+    <a href="/?filter={{ waste_type }}&focus={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}">
+        <img id="map-search-preview"
+             src="https://maps.googleapis.com/maps/api/staticmap?center={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}&zoom=17&size=225x225&markers={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}&key=AIzaSyCCHFhbJQACuCA70fcban9dr2GS8PuUiO8">
+    </a>
+
+    <h2>Description</h2>
+    <div>{{ description }}</div>
+
+    <h2>Does not include:</h2>
+    <div>{{ not_include }}</div>
+
+
+{% endblock %}
+
+<script src="/static/js/search-map-preview.js"></script>
+
+{% block bottom %}
+
+{% endblock %}

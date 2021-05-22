@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.d-none {
+    display: none;
+}
+
+.wiki-container {
+    background-color: var(--primary-black);
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    overflow-y: hidden;
+}
+
+.wiki-content-container {
+    padding: 20px;
+}
+
+.wiki-search-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.wiki-search-input {
+    width: 100%;
+    background: none;
+    border: 1px solid white;
+    padding: 10px 45px 10px 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+.wiki-search-icon {
+    position: absolute;
+    right: 32px;
+}
+
+.wiki-common-search-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-row-gap: 20px;
+    margin-top: 30px;
+}
+
+.wiki-common-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.wiki-common-box {
+    width: 100px;
+    height: 100px;
+    background-color: var(--primary-yellow);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wiki-common-icon {
+    width: 40px;
+}
+
+.wiki-common-title {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    margin-top: 10px;
+}
+
+.wiki-common-search-result-card {
+    width: 100%;
+    background-color: var(--primary-green);
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    margin: 15px 0;
+}
+
+.wiki-search-result-image {
+    width: 100px;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.wiki-search-result-text {
+    margin-left: 20px;
+}
+
+.wiki-search-result-name {
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    word-break: break-word;
+    text-transform: capitalize;
+}
+
+.wiki-search-result-description {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;=
+}
+
+.wiki-detail-container {
+    border: 1px solid var(--primary-green);
+    background-color: var(--primary-green);
+    border-radius: 20px;
+    width: 100%;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.wiki-detail-header {
+    display: flex;
+}
+
+.wiki-detail-image {
+    width: 100px;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.wiki-detail-meta {
+    margin-left: 10px;
+}
+
+.wiki-detail-name {
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    word-break: break-word;
+    text-transform: capitalize;
+}
+
+.wiki-detail-body {
+    margin: 20px 0;
+}
+
+.wiki-detail-description {
+    margin: 10px 0;
+}
+
+.wiki-detail-description-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+.wiki-detail-not-include {
+    margin: 10px 0;
+}
+
+.wiki-detail-not-include-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.wiki-detail-similar-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+.wiki-detail-similar {
+    display: flex;
+    overflow-y: scroll;
+}
+
+.wiki-similar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    margin: 0 10px;
+}
+
+.wiki-similar-image {
+    width: 100px;
+    border-radius: 20px;
+}
+
+.wiki-similar-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    word-break: break-all;
+}

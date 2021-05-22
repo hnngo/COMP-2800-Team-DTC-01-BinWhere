@@ -9,14 +9,18 @@
             alt="menu-icon"
         />
     </div>
-    <div class="search-container">
-        <input class="search-input" type="text" name="keyword"/>
+
+    <form action="/search" method="post" id="search-form" class="search-container">
+        <input id="search-input" class="search-input" type="text" name="keyword"/>
+        <input type="hidden" id="search-coords" name="coords">
         <img
+            id="search-submit"
             class="search-menu-icon"
             src="{{ url_for('static', filename='assets/icons/icon-search.png') }}"
             alt="menu-icon"
         />
-    </div>
+    </form>
+
 </div>
 
 {% include "includes/sidebar.html" %}

@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+form {
+    background-color: var(--primary-black);
+    height: 100vh;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-wrap: nowrap;
+    /*justify-content: center;*/
+    align-items: center;
+}
+
+.locationContainer{
+    padding:30px 0 30px 0;
+
+}
+.locationHeader{
+    color: var(--primary-yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 7px;
+}
+
+#bin-details-location{
+    color: whitesmoke;
+}
+
+.bin-image-container{
+    background-color: #C4C4C4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 30px 0 ;
+    width: 280px;
+    height: 200px;
+    border-radius: 2rem;
+    text-align: center;
+    justify-items: center;
+}
+.wasteTypeHeader{
+    color: var(--primary-green);
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-wasteType{
+    padding-right: 8px;
+}
+.add-waste-type{
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 27px;
+}
+
+#bin-details-type {
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 15px;
+}
+#types{
+    width: 280px;
+    height: 30px;
+    border-radius: 2rem;
+    padding: 0 10px;
+}
+
+.addIcon{
+    padding-right: 10px;
+}
+label{
+    color: whitesmoke;
+    font-size: smaller;
+}
+.save-btn-container{
+        margin: 25px 0 25px 0;
+}
+.saveButton{
+    background-color: var(--primary-green);
+    height: 60px;
+    width: 280px;
+    border-radius: 2.5rem;
+    font-size: 1.5em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600
+}

@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "includes/base.html" %}
 
+{% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename="css/login.css") }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/heading.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% include "includes/source.html" %}
     <title>Login</title>
+    <script src={{ "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" }}></script>
+{% endblock %}
 
-</head>
-<body>
-    <form action="/login" method="post">
-{#        <input type="name" name="name">#}
-{#        <input type="password" name="pass">#}
-{#        <input type="submit" name="submit">#}
-
+{% block body %}
+    <form>
         <div class = "logo_name">
             <img src= "{{ url_for('static', filename="assets/images/temp_logo_name.png") }}"
                  alt = "logo_name">
@@ -48,17 +45,16 @@
                 </div>
             </div>
             <div class = "login_button_container">
-                <button type = "submit" name ="submit">LOGIN IN</button>
+                <button id="login-button">LOGIN</button>
             </div>
         </div>
         <div class = "no_account">
             <p>DON'T HAVE AN ACCOUNT YET?</p>
         </div>
-        <div class = "signup">
-            <p><U>SIGN UP</U></p>
+        <div>
+            <a href="{{"/signup"}}" class="signup"><U>SIGN UP</U></a>
         </div>
-
     </form>
-
-</body>
-</html>
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}

@@ -9,8 +9,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
     position: absolute;
+    z-index: 100;
 }
 
 .nav-menu-icon {
@@ -29,8 +30,8 @@
 
 .search-input {
     width: 100%;
-    font-size: 20px;
-    padding: 10px 50px 10px 10px;
+    font-size: 18px;
+    padding: 8px 50px 8px 20px;
     border-radius: 20px;
     border: 1px solid var(--primary-black);
     outline: none;

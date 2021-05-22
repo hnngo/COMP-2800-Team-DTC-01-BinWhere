@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src={{ "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" }}></script>
+</head>
+<body>
+    <button id="thumbs-up">Thumbs up</button>
+    <button id="thumbs-down">Thumbs down</button>
+
+    <script>
+        const upvote = document.getElementById("thumbs-up");
+        const downvote = document.getElementById("thumbs-down");
+
+        upvote.addEventListener('click', function() {
+            $.ajax({
+                url: "/upvote",
+                method: "POST",
+                data: JSON.stringify({
+                    user_id: "user_id_1",
+                    bin_id: "09kWMU41KSQeE4h5L9iy"
+                }),
+                contentType: "application/json",
+                success: function(response) {
+                    if (response.error === 0) {
+                        alert("Success!")
+                    } else {
+                        alert("Error!")
+                    }
+                }
+            })
+        })
+
+
+        downvote.addEventListener('click', function() {
+            $.ajax({
+                url: "/downvote",
+                method: "POST",
+                data: JSON.stringify({
+                    user_id: "user_id_1",
+                    bin_id: "09kWMU41KSQeE4h5L9iy"
+                }),
+                contentType: "application/json",
+                success: function(response) {
+                    if (response.error === 0) {
+                        alert("Success!")
+                    } else {
+                        alert("Error!")
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+</html>
