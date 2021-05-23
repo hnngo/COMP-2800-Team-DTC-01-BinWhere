@@ -1,3 +1,5 @@
+import base64
+
 
 def search_item(db, keyword):
     """Search for a particular item
