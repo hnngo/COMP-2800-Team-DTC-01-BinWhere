@@ -156,10 +156,11 @@
 .wiki-detail-description-label {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
+    text-decoration: underline;
 }
 
 .wiki-detail-not-include {
-    margin: 10px 0;
+    margin: 20px 0;
 }
 
 .wiki-detail-not-include-label {
@@ -171,6 +172,8 @@
 .wiki-detail-similar-title {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 10px;
 }
 
 .wiki-detail-similar {
@@ -184,7 +187,10 @@
     justify-content: center;
     align-items: center;
     width: 120px;
-    margin: 0 10px;
+    margin-right: 10px;
+    background-color: var(--primary-yellow);
+    border-radius: 20px;
+    padding: 10px;
 }
 
 .wiki-similar-image {
@@ -196,4 +202,7 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     word-break: break-all;
+    text-transform: capitalize;
+    margin-top: 10px;
+    font-size: 14px;
 }

@@ -23,6 +23,7 @@ window.onload = () => {
 function search(keyword) {
     showSpinner();
     hideAllCurrentResultCard();
+    hideResultData();
     $.ajax({
         url: "/search",
         method: "POST",
@@ -36,7 +37,6 @@ function search(keyword) {
                 showWarningPopup("There is something wrong, please try again!");
             } else {
                 search_result = [...response.data];
-                console.log(search_result.map(e => e.id))
                 hideCategory();
                 setTimeout(() => {
                     renderCardResult(response.data);
@@ -165,10 +165,10 @@ function shortContent(text) {
     return text;
 }
 
-function clearResultData() {
-    const wikiContent = document.querySelector(".wiki-content-container");
+function hideResultData() {
+    const wikiContent = document.querySelector(".wiki-detail-container");
     if (wikiContent) {
-        wikiContent.innerHTML = "";
+        wikiContent.remove();
     }
 }
 
@@ -177,6 +177,8 @@ function showResultDetail(item) {
     const wikiContainer = document.querySelector('.wiki-content-container');
     const cardDetailContainer = document.createElement('div');
     cardDetailContainer.classList.add("wiki-detail-container");
+    cardDetailContainer.classList.add("animate__animated");
+    cardDetailContainer.classList.add("animate__fadeInRight");
 
     cardDetailContainer.innerHTML = `
         <div class="wiki-detail-header">
@@ -215,15 +217,19 @@ function showResultDetail(item) {
             </div>
         `
 
-        const similarItems = document.querySelectorAll(".wiki-similar-container");
-        similarItems.forEach((elem, index) => {
-            elem.addEventListener('click', () => {
-                clearResultData();
-                showResultDetail(otherItems[index]);
-            });
-        });
     }
 
     wikiContainer.appendChild(cardDetailContainer);
+    addClickEventToSimilar(otherItems);
 
+}
+
+function addClickEventToSimilar(otherItems) {
+    const similarItems = document.querySelectorAll(".wiki-similar-container");
+    similarItems.forEach((elem, index) => {
+        elem.addEventListener('click', () => {
+            hideResultData();
+            showResultDetail(otherItems[index]);
+        });
+    });
 }
