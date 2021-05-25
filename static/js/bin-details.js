@@ -16,6 +16,7 @@ const upvote = document.getElementById("thumbs-up");
 const downvote = document.getElementById("thumbs-down");
 const urlParams = new URLSearchParams(window.location.search);
 const binId = urlParams.get('id');
+const percentage = document.getElementById("percentage")
 
 upvote.addEventListener('click', function() {
     $.ajax({
@@ -26,6 +27,7 @@ upvote.addEventListener('click', function() {
         }),
         contentType: "application/json",
         success: function(response) {
+            console.log(response)
             if (!response.error) {
                 if (response.type === "NEW") {
                     upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up-filled.png");
@@ -35,6 +37,7 @@ upvote.addEventListener('click', function() {
                     upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up-filled.png");
                     downvote.setAttribute("src", "/static/assets/icons/icon-thumb-down.png");
                 }
+                percentage.textContent = response.reliability
             } else {
                 showWarningPopup(response.error);
             }
