@@ -14,9 +14,11 @@ window.onload = async () => {
 
     editUsername();
     editUserAvatar();
-    deletePicture();
+    console.log(!!document.getElementById("delete-btn"));
+    if (!!document.getElementById("delete-btn")) {
+            deletePicture();
+    }
 }
-
 
 // Edit User Name
 function editUsername() {
@@ -47,9 +49,14 @@ function editUsername() {
                 name: change_username.value
             },
             success: (response) => {
-                clearSpinner();
-                user_name.style.display = "block";
-                showSuccessPopup("User name is updated successfully!")
+                if (!response.error) {
+                    clearSpinner();
+                    user_name.style.display = "block";
+                    user_name.textContent = change_username.value;
+                    showSuccessPopup("User name is updated successfully!")
+                } else {
+                    showWarningPopup("Something is wrong, please try again!");
+                }
             },
             fail: (err) => {
                 clearSpinner();
@@ -63,48 +70,51 @@ function editUsername() {
 // Edit user avatar
 function editUserAvatar() {
     const new_avatar = document.querySelector('input[name="avatar"]');
-    const select_btn = document.querySelector("#select");
 
-    new_avatar.addEventListener("click", (event) => {
-        event.preventDefault();
-        select_btn.style.display = "block"
-    });
+    new_avatar.addEventListener('change', (event) => {
+        if (event.target.files && event.target.files.length <= 0) {
+            return;
+        }
 
-    select_btn.addEventListener("click", (event) => {
-        $.ajax({
-            url:"/profile/avatar",
-            method: "POST",
-            data: {
-                avatar: new_avatar
-            },
-            success: (response) => {
-                clearSpinner();
-                if (!response.error) {
-                    showSuccessPopup("User avatar is updated successfully!")
+        const reader = new FileReader();
+        reader.onload = () => {
+            const dataURL = reader.result;
+            $.ajax({
+                url: '/profile/avatar',
+                method: "POST",
+                data: {
+                   avatar: dataURL
+                },
+                success: (response) => {
+                    if (!response.error) {
+                        document.querySelector("#user-img").setAttribute("src", "data:image/png;base64," + response.updated_img);
+                    } else {
+                        showWarningPopup("Something is wrong, please try again!");
+                    }
                 }
-            },
-            fail: (err) => {
-                clearSpinner();
-                showWarningPopup("Something is wrong, please try again!")
-            }
-        })
-    })
+            })
+        }
+
+        // Read in the image file as a data URL.
+        reader.readAsDataURL(event.target.files[0]);
+    });
 }
 
 
 // Delete the picture uploaded from the user account
 function deletePicture() {
-    const delete_button_modal = document.querySelector("#delete-button-modal");
-    const delete_btn = document.querySelector("#delete-btn");
-    const btn_close = document.querySelector("#btn-close");
-    const close_btn = document.querySelector("#close_btn");
-    const confirm_delete = document.querySelector("#confirm-delete");
+    const delete_button_modal = document.getElementById("delete-button-modal");
+    const btn_close = document.getElementById("btn-close");
+    const close_btn = document.getElementById("close-btn");
+    const confirm_delete = document.getElementById("confirm-delete");
 
-    if (delete_btn !== null) {
-        // Click delete button to open the confirmation modal
-        delete_btn.addEventListener("click", event => {
-            delete_button_modal.style.display = "block";
-        })
+    const delete_btn = document.getElementById("delete-btn");
+    let bin_id = delete_btn.getAttribute("data-id");
+
+    // Click delete button to open the confirmation modal
+    delete_btn.addEventListener("click", function(event) {
+        delete_button_modal.style.display = "block";
+
         // Close the modal by pressing X
         btn_close.addEventListener("click", function(event) {
             delete_button_modal.style.display = "none";
@@ -117,23 +127,33 @@ function deletePicture() {
 
         // Delete the picture from the screen
         confirm_delete.addEventListener("click", function(event) {
-            let bin = delete_btn.getAttribute("id")
+            event.preventDefault();
+            showSpinner()
 
             $.ajax({
                 url:"/profile/bin",
                 method: "DELETE",
                 data: {
-                    "bin_id": bin.slice(10,)
+                    "bin_id": bin_id
                 },
                 success: (response) => {
-                    event.target.parentElement.parentElement.remove();
-                    delete_button_modal.style.display = "none";
+                    if (!response.error) {
+                        clearSpinner();
+                        delete_button_modal.style.display = "none";
+                        if (delete_btn.getAttribute("data-id") === bin_id) {
+                            document.getElementById(bin_id).remove();
+                        }
                     showSuccessPopup("Deleted Successfully!")
+                    } else {
+                        showWarningPopup("Something is wrong, please try again!");
+                    }
+
                 },
                 fail: (err) => {
+                    clearSpinner();
                     showWarningPopup("Something is wrong, please try again!");
                 }
             })
         });
-    }
+    })
 }

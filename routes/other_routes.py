@@ -20,3 +20,7 @@ def init(app, db):
     @app.route("/loading", methods=["GET"])
     def get_loading():
         return render_template("includes/loading-screen.html")
+
+    @app.errorhandler(404)
+    def get_404(_):
+        return render_template("404.html", title="Not Found")

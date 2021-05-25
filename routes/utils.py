@@ -1,3 +1,5 @@
+import base64
+
 
 def search_item(db, keyword):
     """Search for a particular item
@@ -28,3 +30,33 @@ def search_item(db, keyword):
             break
 
     return formatted_result
+
+
+def bin_data_array(db, uploaded_bin: list) -> list:
+    """Create a list of dicts of bin data
+    """
+    result = []
+    for bin_id in uploaded_bin:
+        bin_data = db.collection("bins").document(bin_id).get().to_dict()
+        bin_data["bin_id"] = bin_id
+        try:
+            bin_data["reliability"] = calculate_reliability(bin_data["upvote"], bin_data["downvote"])
+            bin_data["date_created"] = bin_data["date_created"].strftime("%Y-%m-%d")
+            result.append(bin_data)
+        except ZeroDivisionError:
+            bin_data["reliability"] = "-"
+            bin_data["date_created"] = bin_data["date_created"].strftime("%Y-%m-%d")
+            result.append(bin_data)
+    return result
+
+
+def calculate_reliability(upvote: int, downvote: int) -> float:
+    """Calculate the reliability of bin
+    """
+    return round(upvote / (upvote + downvote) * 100)
+
+
+def encoding(photo_object):
+    """Encoding Uploaded image file
+    """
+    return str(base64.b64encode(photo_object.read()))[2:-1]

@@ -6,7 +6,6 @@
 
 .pageContainer {
     background-color: var(--primary-black);
-    height: 100%;
     min-height: 100vh;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
@@ -152,16 +151,17 @@
 }
 
 .commentInput-container {
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    max-width: 350px;
+    margin: 20px auto;
 }
 
 .commentInput {
     background-color: whitesmoke;
-    height: 6.5vh;
+    height: 3rem;
     width: 350px;
     border-radius: 2.5rem;
     font-size: 1em;
