@@ -93,7 +93,8 @@ def init(app, db):
         upvote = bin_data.to_dict()["upvote"]
         downvote = bin_data.to_dict()["downvote"]
         if upvote+downvote <= 2:
-            return None
+            reliability = "Not enough vote"
+            return reliability
         else:
             reliability = str(upvote/(upvote+downvote) * 100) + "%"
             return reliability

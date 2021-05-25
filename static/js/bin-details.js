@@ -65,6 +65,8 @@ downvote.addEventListener('click', function() {
                     downvote.setAttribute("src", "/static/assets/icons/icon-thumb-down-filled.png");
                     upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up.png");
                 }
+                percentage.textContent = response.reliability;
+                percentage.style.color = "white";
             } else {
                 showWarningPopup(response.error);
             }
