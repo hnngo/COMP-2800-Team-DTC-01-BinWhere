@@ -10,17 +10,18 @@
     <div class="sidebar-content">
         <div class="sidebar-header">
             <div class="profile">
-                <img
-                    class="profile-avatar"
-                    src="{{ url_for('static', filename='assets/images/nhan.png') }}"
-                    alt="sidebar-wave"
-                />
-                <div class="profile-name">Huynh Nhan</div>
+                {% if username %}
+                    <img class="profile-avatar" src="data:image/png;base64,{{ user_image }}" alt="user avatar" />
+                    <div class="profile-name">{{ username }}</div>
+                {% else %}
+                    <img alt="logo" class="profile-avatar" src="{{ url_for("static", filename="assets/images/logo-v1.png")}}"/>
+                    <div class="profile-name">Welcome</div>
+                {% endif %}
             </div>
         </div>
 
         <div class="sidebar-menu">
-            {% if is_login %}
+            {% if username %}
                 <a class="sidebar-menu-item" href={{ "/profile" }}>Profile</a>
             {% else %}
                 <a class="sidebar-menu-item" href={{ "/login" }}>Login</a>
