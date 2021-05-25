@@ -16,7 +16,7 @@
         </div>
 
         <div class="sidebar-menu">
-            {% if username %}
+            {% if is_login %}
                 <a class="sidebar-menu-item" href={{ "/profile" }}>Profile</a>
             {% else %}
                 <a class="sidebar-menu-item" href={{ "/login" }}>Login</a>
@@ -26,7 +26,7 @@
             <a class="sidebar-menu-item" href={{ "/about-us" }}>About Us</a>
 
             {% if is_login %}
-                <a class="sidebar-menu-item logout-menu" href="/logout">Logout</a>
+                <a class="sidebar-menu-item logout-menu" href={{ "/logout" }}>Logout</a>
             {% endif %}
         </div>
 
