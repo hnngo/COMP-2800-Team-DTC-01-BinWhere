@@ -1,6 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 form {
     background-color: var(--primary-black);
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
     display: flex;
@@ -26,7 +33,6 @@ form {
 
 .input_container{
     background-color: var(--primary-yellow);
-    width: 350px;
     border-radius: 2.5rem;
     padding: 2em 1.5em;
     margin-top: 30px;
@@ -37,12 +43,12 @@ form {
 }
 
 .email_address{
-    padding-bottom: 2em;
+    padding-bottom: 1em;
 }
 
 
 .password {
-    padding-bottom: 2em;
+    padding-bottom: 1em;
 }
 
 .get_email,

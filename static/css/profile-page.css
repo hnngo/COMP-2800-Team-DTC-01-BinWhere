@@ -17,6 +17,10 @@ body {
     padding: 0;
 }
 
+.d-none {
+    display: none;
+}
+
 
 /*Profile*/
 main {
@@ -46,14 +50,28 @@ main {
     border: 2px solid var(--primary-green);
 }
 
+#edit::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
 #edit {
     position: absolute;
     bottom: 0;
-    background-color: rgba(85, 85, 85, 0.6);
     width: 150px;
+    height: 150px;
     text-align: center;
     font-size: 14px;
     padding: 5px 0;
+    color: transparent;
+}
+
+#select {
+    position: absolute;
+    top: 208px;
+    right: 62px;
+    border-radius: 30px;
+    padding: 4px 8px;
+    display: none;
 }
 
 .username::after {
@@ -126,7 +144,7 @@ article {
     border-bottom: 1px solid white;
 }
 
-section {
+.bin {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-areas:
@@ -147,19 +165,19 @@ section {
     padding: 6px;
 }
 
+.bin-photo img {
+    width: 100%;
+}
+
 .photo-info * {
     margin: 0;
 }
 
-#delete-btn {
+.photo-info button {
     font-size: 16px;
     background-color: var(--primary-yellow);
     padding: 3px 15px;
     margin-top: 7px;
-}
-
-section img {
-    width: 100%;
 }
 
 
@@ -167,7 +185,7 @@ section img {
 .modal {
     display: none;
     width: 87%;
-    background-color: rgba(250, 250, 250);
+    background-color: rgb(250, 250, 250);
     color: black;
     padding: 18px;
     position: absolute;

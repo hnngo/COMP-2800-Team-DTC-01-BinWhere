@@ -7,13 +7,15 @@ def init(app, db):
     @app.route("/", methods=["GET"])
     def get_map():
         user_id = session.get("user_id")
+        user = db.collection("users").document(user_id).get().to_dict()
+
         map_data = db.collection("bins")
         all_bins = [{doc.id: doc.to_dict()} for doc in map_data.stream()]
 
         if user_id is not None:
-            return render_template("map.html", title="Map", bins=all_bins, is_login=True)
+            return render_template("map.html", title="Map", user_name=user["name"], user_avatar="data:image/png;base64,"+user["avatar"], bins=all_bins, is_login=True)
         else:
-            return render_template("map.html", title="Map", bins=all_bins, is_login=False)
+            return render_template("map.html", title="Map", user_name=utils.sidebar_default()["name"], user_avatar=utils.sidebar_default()["avatar"], bins=all_bins, is_login=False)
 
     @app.route("/bin", methods=["GET"])
     def get_bin_details():
@@ -31,9 +33,13 @@ def init(app, db):
     @app.route("/search", methods=["POST"])
     def search_query():
         query = request.form["keyword"]
-        get_json_only = request.form["jsonOnly"]
-        result = utils.search_item(db, keyword=query)
 
+        try:
+            get_json_only = request.form["jsonOnly"]
+        except KeyError:
+            get_json_only = None
+
+        result = utils.search_item(db, keyword=query)
         if len(result) > 0:
             if get_json_only:
                 return jsonify({"error": 0, "data": result})

@@ -9,8 +9,8 @@ def initialize(app, db, auth):
     :param auth: Pyrebase Auth object
     """
     authentication_route.init(app, db, auth)
-    user_route.init(app)
-    other_routes.init(app)
+    user_route.init(app, db, auth)
     map_route.init(app, db)
     feedback_route.init(app, db)
     wiki_route.init(app)
+    other_routes.init(app, db)
