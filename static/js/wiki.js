@@ -21,8 +21,11 @@ window.onload = () => {
 
 
 function search(keyword) {
+    if (!keyword) return;
+
     showSpinner();
     hideAllCurrentResultCard();
+    hideResultData();
     $.ajax({
         url: "/search",
         method: "POST",
@@ -36,7 +39,6 @@ function search(keyword) {
                 showWarningPopup("There is something wrong, please try again!");
             } else {
                 search_result = [...response.data];
-                console.log(search_result.map(e => e.id))
                 hideCategory();
                 setTimeout(() => {
                     renderCardResult(response.data);
@@ -67,7 +69,7 @@ function showCategory() {
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
-                    src="/static/assets/icons/icon-search.png"
+                    src="/static/assets/icons/icon-bottle.png"
                 />
             </div>
             <div class="wiki-common-title">Bottle</div>
@@ -76,7 +78,7 @@ function showCategory() {
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
-                    src="/static/assets/icons/icon-search.png"
+                    src="/static/assets/icons/icon-can.png"
                 />
             </div>
             <div class="wiki-common-title">Can</div>
@@ -85,7 +87,7 @@ function showCategory() {
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
-                    src="/static/assets/icons/icon-search.png"
+                    src="/static/assets/icons/icon-card-box.png"
                 />
             </div>
             <div class="wiki-common-title">Card box</div>
@@ -94,7 +96,7 @@ function showCategory() {
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
-                    src="/static/assets/icons/icon-search.png"
+                    src="/static/assets/icons/icon-glass.png"
                 />
             </div>
             <div class="wiki-common-title">Glass</div>
@@ -103,7 +105,7 @@ function showCategory() {
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
-                    src="/static/assets/icons/icon-search.png"
+                    src="/static/assets/icons/icon-container.png"
                 />
             </div>
             <div class="wiki-common-title">Container</div>
@@ -112,26 +114,29 @@ function showCategory() {
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
-                    src="/static/assets/icons/icon-search.png"
+                    src="/static/assets/icons/icon-bag.png"
                 />
             </div>
             <div class="wiki-common-title">Bag</div>
         </div>
     `
     wikiContainer.appendChild(categoryContainer);
+    addEventClickCategory();
+}
+
+function addEventClickCategory() {
+    const commonItems = document.querySelectorAll(".wiki-common-item");
+    commonItems.forEach(elem => {
+        elem.addEventListener('click', () => {
+            const value = elem.querySelector('.wiki-common-title').textContent.toLowerCase();
+            document.querySelector(".wiki-search-input").value = value;
+            search(value);
+        })
+    })
 }
 
 function hideAllCurrentResultCard() {
     $(".wiki-common-search-result-card").remove()
-    // const cardResults = document.querySelector(".wiki-common-search-result-card");
-    // if (cardResults && cardResults.length) {
-    //     console.log("here")
-    //     cardResults.forEach((card) => {
-    //         card.classList.remove("animate__fadeInLeft");
-    //         card.classList.remove("animate__fadeInRight");
-    //         card.add("animate__animated", "animate__fadeOutLeft");
-    //     });
-    // }
 }
 
 function renderCardResult(items) {
@@ -165,10 +170,10 @@ function shortContent(text) {
     return text;
 }
 
-function clearResultData() {
-    const wikiContent = document.querySelector(".wiki-content-container");
+function hideResultData() {
+    const wikiContent = document.querySelector(".wiki-detail-container");
     if (wikiContent) {
-        wikiContent.innerHTML = "";
+        wikiContent.remove();
     }
 }
 
@@ -177,6 +182,8 @@ function showResultDetail(item) {
     const wikiContainer = document.querySelector('.wiki-content-container');
     const cardDetailContainer = document.createElement('div');
     cardDetailContainer.classList.add("wiki-detail-container");
+    cardDetailContainer.classList.add("animate__animated");
+    cardDetailContainer.classList.add("animate__fadeInRight");
 
     cardDetailContainer.innerHTML = `
         <div class="wiki-detail-header">
@@ -215,15 +222,19 @@ function showResultDetail(item) {
             </div>
         `
 
-        const similarItems = document.querySelectorAll(".wiki-similar-container");
-        similarItems.forEach((elem, index) => {
-            elem.addEventListener('click', () => {
-                clearResultData();
-                showResultDetail(otherItems[index]);
-            });
-        });
     }
 
     wikiContainer.appendChild(cardDetailContainer);
+    addClickEventToSimilar(otherItems);
 
+}
+
+function addClickEventToSimilar(otherItems) {
+    const similarItems = document.querySelectorAll(".wiki-similar-container");
+    similarItems.forEach((elem, index) => {
+        elem.addEventListener('click', () => {
+            hideResultData();
+            showResultDetail(otherItems[index]);
+        });
+    });
 }

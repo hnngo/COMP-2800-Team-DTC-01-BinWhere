@@ -10,12 +10,8 @@
     <div class="sidebar-content">
         <div class="sidebar-header">
             <div class="profile">
-                <img
-                    class="profile-avatar"
-                    src="{{ url_for('static', filename='assets/images/nhan.png') }}"
-                    alt="sidebar-wave"
-                />
-                <div class="profile-name">Huynh Nhan</div>
+                <img class="profile-avatar" src="{{ user_avatar }}" alt="user avatar" />
+                <div class="profile-name">{{ user_name }}</div>
             </div>
         </div>
 
@@ -26,12 +22,11 @@
                 <a class="sidebar-menu-item" href={{ "/login" }}>Login</a>
             {% endif %}
 
-            <a class="sidebar-menu-item" href={{ "/bookmark" }}>Bookmarks</a>
             <a class="sidebar-menu-item" href={{ "/wiki" }}>Waste Wiki</a>
             <a class="sidebar-menu-item" href={{ "/about-us" }}>About Us</a>
 
             {% if is_login %}
-                <a class="sidebar-menu-item logout-menu" href="/logout">Logout</a>
+                <a class="sidebar-menu-item logout-menu" href={{ "/logout" }}>Logout</a>
             {% endif %}
         </div>
 

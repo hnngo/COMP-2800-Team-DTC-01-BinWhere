@@ -1,13 +1,8 @@
 {% extends "includes/base.html" %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename="css/login.css") }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/heading.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% include "includes/source.html" %}
-    <title>Login</title>
-    <script src={{ "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" }}></script>
+<link rel="stylesheet" href="{{ url_for('static', filename="css/login.css") }}">
+<title>Login</title>
 {% endblock %}
 
 {% block body %}
