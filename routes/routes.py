@@ -13,4 +13,4 @@ def initialize(app, db, auth):
     map_route.init(app, db)
     feedback_route.init(app, db)
     wiki_route.init(app)
-    other_routes.init(app)
+    other_routes.init(app, db)
