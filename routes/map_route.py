@@ -81,3 +81,7 @@ def init(app, db):
     def euclidean_distance(user_coords: tuple, bin_coords: tuple) -> float:
         """Calculate euclidean distance between two coordinates. I know the Earth is a sphere, shut up."""
         return ((user_coords[0] - bin_coords[0]) ** 2 + (user_coords[1] - bin_coords[1]) ** 2) ** 0.5
+
+    @app.route("/add", methods=["GET"])
+    def get_add_new_location_page():
+        return render_template("add-location.html")
