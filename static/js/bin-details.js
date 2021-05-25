@@ -37,7 +37,8 @@ upvote.addEventListener('click', function() {
                     upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up-filled.png");
                     downvote.setAttribute("src", "/static/assets/icons/icon-thumb-down.png");
                 }
-                percentage.textContent = response.reliability
+                percentage.textContent = response.reliability;
+                percentage.style.color = "white";
             } else {
                 showWarningPopup(response.error);
             }
