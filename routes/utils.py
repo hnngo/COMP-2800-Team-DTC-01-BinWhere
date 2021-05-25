@@ -1,4 +1,9 @@
 import base64
+from flask import url_for
+
+
+def sidebar_default():
+    return {"name": "Welcome", "avatar": url_for("static", filename="assets/images/logo-v1.png")}
 
 
 def search_item(db, keyword):
