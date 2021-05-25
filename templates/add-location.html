@@ -15,7 +15,7 @@
                             alt = "icon-location"/>
                 <h4 class = "location"> Location </h4>
             </div>
-            <div id="bin-details-location">location goes here {{ location }}</div>
+            <div id="bin-details-location"></div>
         </div>
 
         <div class="bin-image-container">
@@ -50,5 +50,16 @@
             <button type="submit" value = "SAVE" class = "saveButton">SAVE</button>
         </div>
     </form>
+{% endblock %}
+
+{% block bottom %}
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+<script src="/static/js/bin-details.js"></script>
+<script type="text/javascript">
+    const lat = {{ location.lat }};
+    const long = {{ location.lng }};
+    reverseGeoCode();
+</script>
+
 {% endblock %}
 
