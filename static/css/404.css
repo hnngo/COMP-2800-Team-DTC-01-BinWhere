@@ -1,0 +1,109 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    height: 100%;
+    min-height: 100vh;
+    background-color: var(--primary-black);
+}
+
+.center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 100px 0;
+}
+
+.icon-wrapper {
+    height: 100px;
+}
+
+.icon-4-green,
+.icon-4-yellow,
+.icon-o {
+    width: 60px;
+}
+
+.icon-o {
+    transform: translateY(10px);
+    /*margin: 0 10px;*/
+}
+
+.icon-4-green {
+    animation: moveUp infinite alternate ease-in-out 2s;
+}
+
+.icon-4-yellow {
+    animation: moveDown infinite alternate ease-in-out 2s;
+}
+
+@keyframes moveDown {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(20px);
+    }
+    /*0% {*/
+    /*    transform: translateY(0px) translateX(0px);*/
+    /*}*/
+    /*25% {*/
+    /*    transform: translateY(70px) translateX(-70px);*/
+    /*}*/
+    /*50% {*/
+    /*    transform: translateY(0px) translateX(-140px);*/
+    /*}*/
+    /*75% {*/
+    /*    transform: translateY(-70px) translateX(-70px);*/
+    /*}*/
+    /*100% {*/
+    /*    transform: translateY(0px) translateX(0px);*/
+    /*}*/
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+    /*0% {*/
+    /*    transform: translateY(0px) translateX(0px);*/
+    /*}*/
+    /*25% {*/
+    /*    transform: translateY(-70px) translateX(70px);*/
+    /*}*/
+    /*50% {*/
+    /*    transform: translateY(0px) translateX(140px);*/
+    /*}*/
+    /*75% {*/
+    /*    transform: translateY(70px) translateX(70px);*/
+    /*}*/
+    /*100% {*/
+    /*    transform: translateY(0px) translateX(0px);*/
+    /*}*/
+}
+
+.back-homepage-link {
+    margin: 20px 0;
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    text-decoration: none;
+}
+
+.footer{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.footer-logo {
+    width: 140px;
+    padding-bottom: 80px;
+}

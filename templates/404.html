@@ -1,11 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename="css/404.css") }}" />
-</head>
-<body>
+{% extends "includes/base.html" %}
 
-</body>
-</html>
+{% block head %}
+<title>404 Not Found</title>
+<link rel="stylesheet" href="{{ url_for('static', filename="css/404.css") }}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% include "includes/heading.html" %}
+
+    <div class="center">
+        <div class="icon-wrapper">
+            <img
+                class="icon-4-green"
+                src="{{ url_for('static', filename="assets/icons/icon-4-green.png") }}"
+                alt="icon-4-green"
+            >
+            <img
+                class="icon-o"
+                src="{{ url_for('static', filename="assets/icons/icon-o-recycle.png") }}"
+                alt="icon-o-recycle"
+            >
+            <img
+                class="icon-4-yellow"
+                src="{{ url_for('static', filename="assets/icons/icon-4-yellow.png") }}"
+                alt="icon-4-yellow"
+            >
+        </div>
+        <a href="/" class="back-homepage-link">Back to homepage</a>
+    </div>
+
+
+    <div class="footer">
+        <img
+            class="footer-logo"
+            src="{{ url_for('static', filename='assets/images/logo-v1.png') }}"
+            alt="sidebar-wave"
+        />
+    </div>
+</div>
+{% endblock %}
