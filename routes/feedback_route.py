@@ -107,3 +107,44 @@ def init(app, db):
         else:
             reliability = str(upvote/(upvote+downvote) * 100) + "%"
             return reliability
+
+    @app.route('/comment', methods=['POST'])
+    def post_comment():
+        content = request.form["content"]
+        current_user_id = session.get("user_id")
+        bin_id = request.form["bin_id"]
+
+        if not current_user_id:
+            return {"error": "You need to login first!"}
+
+        bin_ref = db.collection('bins').document(bin_id)
+        bin_data = bin_ref.get().to_dict()
+        new_comments = bin_data['comments']
+        new_comments.append({
+            "userId": current_user_id,
+            "content": content
+        })
+        bin_ref.update({
+            "comments": new_comments
+        })
+
+        current_user_data = db.collection('users').document(current_user_id).get().to_dict()
+
+        return {"error": 0,
+                "name": current_user_data.get("name"),
+                "avatar": current_user_data.get("avatar")}
+
+    @app.route('/comment', methods=['DELETE'])
+    def delete_comment():
+        comment_index = int(request.form["comment_index"])
+        bin_id = request.form["bin_id"]
+
+        bin_ref = db.collection('bins').document(bin_id)
+        bin_data = bin_ref.get().to_dict()
+        new_comments = bin_data['comments']
+        new_comments.pop(comment_index)
+        bin_ref.update({
+            "comments": new_comments
+        })
+
+        return {"error": 0}

@@ -12,6 +12,24 @@ def MAX_SIZE():
     return 1048487
 
 
+def ICONS():
+    icon_path = "/static/assets/icons/map/"
+    return {
+        "container": icon_path + "icon-container.png",
+        "paper": icon_path + "icon-paper.png",
+        "hazardous": icon_path + "icon-hazardous.png",
+        "garbage":  icon_path + "icon-garbage.png",
+        "glass": icon_path + "icon-glass.png",
+        "food": icon_path + "icon-food.png",
+        "multiple": icon_path + "icon-multiple.png"
+    }
+
+
+def get_icons(bin_types: list) -> list:
+    """Convert list of bin types to list of icon paths for those types."""
+    return [ICONS()[bin_type] for bin_type in bin_types]
+
+
 def chunk_list(encoded_string: str) -> list:
     chunk_size = int(MAX_SIZE() / 3)
     chunks = [encoded_string[i:i + chunk_size] for i in range(0, len(encoded_string), chunk_size)]
