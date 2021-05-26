@@ -21,7 +21,9 @@
     <div><img src="{{ image }}" alt="{{ title }}"></div>
 
     <h2>Bin type</h2>
-    <div>{{ waste_type }}</div>
+    <div>
+        <img src="{{ waste_type }}" alt="bin type">
+    </div>
 
     <h2>Nearest bin</h2>
     <a href="/?filter={{ waste_type }}&focus={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}">
