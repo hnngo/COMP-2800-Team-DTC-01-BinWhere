@@ -173,3 +173,7 @@
     position: absolute;
     right: 20px;
 }
+
+#bin-details-type img {
+    filter: brightness(0) invert(1);
+}
