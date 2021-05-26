@@ -10,7 +10,7 @@
     {% with show_back=show_back %}
         {% include "includes/heading.html" %}
     {% endwith %}
-    <form class="container d-none" method="POST">
+    <form class="container d-none">
         <div class="locationContainer">
             <div class="locationHeader">
                 <img src= "{{ url_for('static', filename="assets/icons/icon-location.png") }}"
@@ -48,7 +48,7 @@
         </div>
 
         <div class = "save-btn-container">
-            <button type="submit" value="SAVE" id="saveButton">SAVE</button>
+            <button value="SAVE" id="saveButton">SAVE</button>
         </div>
     </form>
 {% endblock %}

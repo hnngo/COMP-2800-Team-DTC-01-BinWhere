@@ -52,7 +52,7 @@ function initMap() {
         }
     });
 
-    // Place location button
+    // Current location button
     infoWindow = new google.maps.InfoWindow();
     const locationButton = document.createElement("img");
     locationButton.src = "/static/assets/icons/icon-current-location.png";
@@ -66,18 +66,18 @@ function initMap() {
     const addLocationButton = document.createElement("img");
     addLocationButton.src = "/static/assets/icons/icon-add-location.png";
     addLocationButton.setAttribute("id", "add-new-location-btn");
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(addLocationButton);
     addLocationButton.style.width = "60px";
     addLocationButton.style.transform = "translateX(-11px) translateY(-11px)";
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(addLocationButton);
 
     // Place pin icon on the center of the map
     const pinIcon = document.createElement("img");
     pinIcon.src = "/static/assets/icons/icon-pin-location.png";
     pinIcon.setAttribute("id", "pin-location")
-    map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(pinIcon);
     pinIcon.style.width = "30px";
     pinIcon.style.transform = "translateX(-172px)";
-    pinIcon.style.display = 'none';
+    // pinIcon.style.display = 'none';
+    // map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(pinIcon);
 
     // Instruction of adding new location
     const instruction_msg = document.createElement("div");
@@ -91,22 +91,15 @@ function initMap() {
     instruction_msg.style.padding = "20px 10px";
     instruction_msg.style.border = "5px solid var(--primary-green)";
     instruction_msg.style.fontSize = "20px";
-    instruction_msg.style.display = "none";
-    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(instruction_msg);
+    // instruction_msg.style.display = "none";
+    // map.controls[google.maps.ControlPosition.RIGHT_TOP].push(instruction_msg);
 
-    // Show and move the pin icon
-     addLocationButton.addEventListener("click",function() {
-        addLocationButton.style.display = "none";
-        pinIcon.style.display = "block";
-        instruction_msg.style.display = "block";
-        buttonGroup.style.display = "block";
-    })
 
     // Create two buttons: cancel and add
     const buttonGroup = document.createElement("div");
     buttonGroup.classList.add("button-group");
-    buttonGroup.style.display = "none";
-    buttonGroup.style.transform = "translate(-3px, 54px)";
+    // buttonGroup.style.display = "none";
+    // buttonGroup.style.transform = "translate(-3px, 54px)";
 
     const cancelButton = document.createElement("input");
     cancelButton.type = "button";
@@ -132,14 +125,21 @@ function initMap() {
     addButton.style.borderRadius = "10px";
     addButton.style.margin = "10px";
     buttonGroup.appendChild(addButton);
+    // map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(buttonGroup);
 
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(buttonGroup);
+    // Show and move the pin icon
+     addLocationButton.addEventListener("click",function() {
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].pop(addLocationButton);
+        map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(pinIcon);
+        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(instruction_msg);
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(buttonGroup);
+    });
 
     cancelButton.addEventListener("click", function() {
-        addLocationButton.style.display = "block";
-        pinIcon.style.display = "none";
-        instruction_msg.style.display = "none";
-        buttonGroup.style.display = "none";
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(addLocationButton);
+        map.controls[google.maps.ControlPosition.RIGHT_CENTER].pop(pinIcon);
+        map.controls[google.maps.ControlPosition.RIGHT_TOP].pop(instruction_msg);
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].pop(buttonGroup);
     })
 
     addButton.addEventListener("click", function() {

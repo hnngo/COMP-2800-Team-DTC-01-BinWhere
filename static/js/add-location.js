@@ -1,3 +1,5 @@
+let uploadedImage = undefined;
+
 window.onload = async() => {
     showSpinner();
     let user_id = undefined;
@@ -14,9 +16,7 @@ window.onload = async() => {
 
     selectWasteType();
 
-    let imgURL = displaySelectedImg();
-    console.log(imgURL);
-    submitNewData(imgURL);
+    displaySelectedImg();
 }
 
 function reverseGeoCode() {
@@ -83,37 +83,41 @@ function displaySelectedImg() {
         }
         const reader = new FileReader();
         reader.onload = () => {
-            const dataURL = reader.result;
-            document.querySelector(".bin-image-container img").src = dataURL;
+            uploadedImage = reader.result;
+            document.querySelector(".bin-image-container img").src = reader.result;
             selectedFile.value = "";
-            return dataURL
+            submitNewData(reader.result);
         }
         reader.readAsDataURL(event.target.files[0]);
     })
 }
 
 // Submit new bin data
-function submitNewData(imgURL) {
+function submitNewData(imageData) {
     const submitBtn = document.getElementById("saveButton");
 
     submitBtn.addEventListener("click", (event) => {
+        event.preventDefault();
         const selectedType = document.querySelector(".tag-chosen").getAttribute("data-chosen");
-        const selectedTypeList = selectedType.substr(1,).split(",");
-
+        const selectedTypeList = selectedType.substr(1,)
         showSpinner();
+
         $.ajax({
             url: '/add/save',
             method: "POST",
-            data: JSON.stringify({
-                image: imgURL,
+            data: {
+                image: imageData,
                 type: selectedTypeList,
                 lat: new_lat,
                 long: new_long
-            }),
+            },
             success: (response) => {
                 if (!response.error) {
                     clearSpinner();
-                    showSuccessPopup("New location is successfully saved!");
+                    showSuccessPopup("New location is successfully saved!", () => {
+                        window.location.href = "/";
+                    });
+
                 } else {
                     clearSpinner();
                     showWarningPopup("The image file is too big!");
