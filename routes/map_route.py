@@ -26,14 +26,29 @@ def init(app, db):
         bin_type = doc.get("type")
         who_upvote = doc.get("who_upvote")
         who_downvote = doc.get("who_downvote")
-        user_id = session.get("user_id")
         upvote = doc.get("upvote")
         downvote = doc.get("downvote")
         reliability = utils.calculate_reliability(upvote, downvote)
         bin_type_icons = utils.get_icons(bin_type)
+        comments = doc.get("comments")
+        current_user_id = session.get("user_id")
+
+        formatted_comments = []
+        for comment in comments:
+            comment_author_id = comment['userId']
+            user_doc = db.collection("users").document(comment_author_id).get()
+            formatted_comments.append({
+                "content": comment['content'],
+                "name": user_doc.get("name"),
+                "avatar": user_doc.get("avatar"),
+                "user_id": comment_author_id
+            })
+        formatted_comments.reverse()
+
         return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type_icons,
-                               who_upvote=who_upvote, who_downvote=who_downvote, user_id=user_id, show_back=True,
-                               reliability=reliability)
+                               who_upvote=who_upvote, who_downvote=who_downvote, user_id=current_user_id, show_back=True,
+                               comments=formatted_comments, reliability=reliability)
+
 
     @app.route("/search", methods=["POST"])
     def search_query():
