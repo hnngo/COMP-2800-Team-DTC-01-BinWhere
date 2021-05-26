@@ -169,3 +169,32 @@ function updateDataIndex() {
         element.setAttribute("data-index", index + 1);
     });
 }
+
+
+// Delete bin
+const iconDeleteGarbage = document.querySelector(".deleteButton");
+if (iconDeleteGarbage) {
+    iconDeleteGarbage.addEventListener('click', () => {
+        $.ajax({
+            url: "/bin",
+            method: "DELETE",
+            data: {
+                bin_id: binId
+            },
+            success: (response) => {
+                clearSpinner();
+                if (response.error) {
+                    showErrorPopup('Something is wrong, please try again');
+                } else {
+                    showSuccessPopup('Deleted successfully', () => {
+                        window.location.href = "/";
+                    })
+                }
+            },
+            fail: (error) => {
+                clearSpinner();
+                showErrorPopup('Something is wrong, please try again');
+            }
+        })
+    })
+}

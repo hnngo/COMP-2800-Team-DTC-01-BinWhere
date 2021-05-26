@@ -21,18 +21,21 @@
         </div>
 
         <div class="bin-image-container">
-            <div id="bin-details-images"></div>
+            <img id="bin-details-images" src= "{{ bin_image }}"
+                            alt = "icon-location"/>
         </div>
         <div class = "modificationContainer">
             <div class ="lastModified">
-                <p>Last Modified</p>
-                <p>DD/MM/YYYY</p>
+                <p>Posted at</p>
+                <p>{{ bin_date }}</p>
             </div>
-            <div class ="deleteButton">
-                <img src= "{{ url_for('static', filename="assets/icons/icon-delete.png") }}"
-                            alt = "icon-delete"/>
-                <h6 class ="delete">Delete </h6>
-            </div>
+            {% if user_id == bin_creator_id %}
+                <div class ="deleteButton">
+                    <img src= "{{ url_for('static', filename="assets/icons/icon-delete.png") }}"
+                                alt = "icon-delete"/>
+                    <h6 class ="delete">Delete </h6>
+                </div>
+            {% endif %}
         </div>
         <div id="bin-details-vote">
             <div class ="reliabilityHeader">
