@@ -49,7 +49,13 @@
                                 <p id="date">Date Posted: {{ postedbin_data[i].date_created }}</p>
                                 <button data-id="{{ postedbin_data[i]["bin_id"] }}" id="delete-btn">Delete</button>
                             </div>
-                            div.p
+                            <div class="bin-location">
+                                <a href="/?filter={{ postedbin_data[i]["type"] }}&focus={{ postedbin_data[i]["lat"] }},{{ postedbin_data[i]["long"] }}">
+
+                                <img id="map-search-preview"
+                         src="https://maps.googleapis.com/maps/api/staticmap?center={{ postedbin_data[i]["lat"] }},{{ postedbin_data[i]["long"] }}&zoom=17&size=225x225&markers={{ postedbin_data[i]["lat"] }},{{ postedbin_data[i]["long"] }}&key=AIzaSyCCHFhbJQACuCA70fcban9dr2GS8PuUiO8">
+                </a>
+                            </div>
                         </div>
                     {%  endfor %}
                 </section>

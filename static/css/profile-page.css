@@ -9,7 +9,7 @@ body {
     width: 100vw;
     background-color: var(--primary-black);
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: Montserrat, sans-serif;
 }
 
 .container {
@@ -138,21 +138,24 @@ article {
 }
 
 .picture-title {
+    color: var(--primary-yellow);
     padding-bottom: 10px;
     margin-bottom: 10px;
     font-size: 20px;
-    border-bottom: 1px solid white;
+    font-weight: bold;
+    border-bottom: 1px solid var(--primary-yellow);
 }
 
 .bin {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-areas:
-    "picture information"
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid whitesmoke;
 }
 
 .bin-photo {
     grid-area: picture;
+    width: 100px;
     padding: 2px;
     display: flex;
     flex-direction: column;
@@ -160,6 +163,7 @@ article {
 }
 
 .bin-info {
+    width: 230px;
     grid-area: information;
     font-size: 16px;
     padding: 6px;
@@ -167,6 +171,17 @@ article {
 
 .bin-photo img {
     width: 100%;
+}
+
+.bin-location {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 3px auto 16px;
+}
+
+#map-search-preview {
+    width: 160px;
 }
 
 .bin-info * {
