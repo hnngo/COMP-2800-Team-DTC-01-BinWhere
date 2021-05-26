@@ -66,7 +66,11 @@
                     <img src= "{{ url_for('static', filename="assets/icons/icon-waste-type.png") }}"
                                 alt = "icon-wasteType"/> <h4 class = "wasteType"> Waste Type </h4>
                 </div>
-                <div id="bin-details-type">{{ bin_type }}</div>
+                <div id="bin-details-type">
+                    {% for url in bin_type %}
+                        <img src="{{ url }}" alt="bin type">
+                    {% endfor %}
+                </div>
             </div>
         <div class = "commentContainer">
             <div class ="commentHeader">
