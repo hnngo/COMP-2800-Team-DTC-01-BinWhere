@@ -49,7 +49,7 @@
                                 alt = "icon-thumb-up"/>
                 {% endif %}
 
-                <h4 class = "percentage">10%</h4>
+                <h4 class="percentage">{{ reliability }}%</h4>
                 {% if user_id in who_downvote %}
                     <img id="thumbs-down" src= "{{ url_for('static', filename="assets/icons/icon-thumb-down-filled.png") }}"
                             alt = "icon-thumb-down"/>
@@ -66,21 +66,42 @@
                     <img src= "{{ url_for('static', filename="assets/icons/icon-waste-type.png") }}"
                                 alt = "icon-wasteType"/> <h4 class = "wasteType"> Waste Type </h4>
                 </div>
-                <div id="bin-details-type">{{ bin_type }}</div>
+                <div id="bin-details-type">
+                    {% for url in bin_type %}
+                        <img src="{{ url }}" alt="bin type">
+                    {% endfor %}
+                </div>
             </div>
         <div class = "commentContainer">
             <div class ="commentHeader">
                 <img src= "{{ url_for('static', filename="assets/icons/icon-comment.png") }}"
                             alt = "icon-wasteType"/> <h4 class = "comment"> Comment </h4>
             </div>
-            <div class="commentList">{{ postedComment }}</div>
-            <div class="commentInput-container">
-                <input class ="commentInput" type="text" placeholder="Add a comment..." >
-                <img class = "sendIcon" src= "{{ url_for('static', filename="assets/icons/icon-send.png") }}"
-                            alt = "icon-send"/>
+
+            <div class="commentList">
+                {% for comment in comments %}
+                    <div class="comment-container" data-index="{{ loop.index }}">
+                        <img class="comment-avatar" alt="avatar" src="data:image/png;base64,{{ comment['avatar'] }}"/>
+                        <div class="comment-content-container">
+                            <strong class="comment-name">{{ comment['name'] }}:&nbsp;</strong>
+                            <span class="comment-content">{{ comment['content'] }}</span>
+                        </div>
+                        {% if user_id == comment['user_id'] %}
+                            <img class="comment-delete" alt="avatar" src="{{ url_for('static', filename="assets/icons/icon-delete-v2.png") }}"/>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
+
+    {% if user_id %}
+        <div class="commentInput-container">
+            <input class ="commentInput" type="text" placeholder="Add a comment..." >
+            <img class = "sendIcon" src= "{{ url_for('static', filename="assets/icons/icon-send.png") }}"
+                        alt = "icon-send"/>
+        </div>
+    {% endif %}
 </div>
 
 {% endblock %}

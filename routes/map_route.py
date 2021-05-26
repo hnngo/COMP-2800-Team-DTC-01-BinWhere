@@ -26,9 +26,29 @@ def init(app, db):
         bin_type = doc.get("type")
         who_upvote = doc.get("who_upvote")
         who_downvote = doc.get("who_downvote")
-        user_id = session.get("user_id")
-        return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type,
-                               who_upvote=who_upvote, who_downvote=who_downvote, user_id=user_id, show_back=True)
+        upvote = doc.get("upvote")
+        downvote = doc.get("downvote")
+        reliability = utils.calculate_reliability(upvote, downvote)
+        bin_type_icons = utils.get_icons(bin_type)
+        comments = doc.get("comments")
+        current_user_id = session.get("user_id")
+
+        formatted_comments = []
+        for comment in comments:
+            comment_author_id = comment['userId']
+            user_doc = db.collection("users").document(comment_author_id).get()
+            formatted_comments.append({
+                "content": comment['content'],
+                "name": user_doc.get("name"),
+                "avatar": user_doc.get("avatar"),
+                "user_id": comment_author_id
+            })
+        formatted_comments.reverse()
+
+        return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type_icons,
+                               who_upvote=who_upvote, who_downvote=who_downvote, user_id=current_user_id, show_back=True,
+                               comments=formatted_comments, reliability=reliability)
+
 
     @app.route("/search", methods=["POST"])
     def search_query():
@@ -48,6 +68,8 @@ def init(app, db):
                 first_match_id = result[0]["id"]
                 return redirect(f"/search?id={first_match_id}&lat={current_coords['lat']}&long={current_coords['lng']}")
         else:
+            if get_json_only:
+                return jsonify({"error": 0, "data": []})
             return redirect("/")
 
     @app.route("/search", methods=["GET"])
@@ -62,11 +84,12 @@ def init(app, db):
         name = doc.get("name")
         not_include = doc.get("not_include")
         waste_type = doc.get("type").lower()
+        waste_type_icon = utils.get_icons([waste_type])[0]
 
         closest_bin = get_closest_bin(lat, long, waste_type)
 
         return render_template("search-results.html", title=name, description=description, image=image,
-                               not_include=not_include, waste_type=waste_type, closest_bin=closest_bin)
+                               not_include=not_include, waste_type=waste_type_icon, closest_bin=closest_bin)
 
     def get_closest_bin(lat: str, long: str, waste_type: str) -> dict:
         """Get the id of the closest bin to the user's current location."""
