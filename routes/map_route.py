@@ -48,6 +48,8 @@ def init(app, db):
                 first_match_id = result[0]["id"]
                 return redirect(f"/search?id={first_match_id}&lat={current_coords['lat']}&long={current_coords['lng']}")
         else:
+            if get_json_only:
+                return jsonify({"error": 0, "data": []})
             return redirect("/")
 
     @app.route("/search", methods=["GET"])
