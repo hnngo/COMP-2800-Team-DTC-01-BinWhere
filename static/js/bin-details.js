@@ -67,3 +67,25 @@ downvote.addEventListener('click', function() {
         }
     })
 })
+
+// Commenting
+const commentInputElem = document.querySelector(".commentInput");
+const sendIconElem = document.querySelector(".sendIcon");
+
+if (commentInputElem) {
+    sendIconElem.addEventListener("click", () => {
+        const commentContent = commentInputElem.value;
+
+        $.ajax({
+            url: "/comment",
+            method: "POST",
+            data: {
+                content: commentContent,
+                bin_id: binId
+            },
+            success: (response) => {
+                console.log(response);
+            }
+        })
+    });
+}

@@ -83,3 +83,24 @@ def init(app, db):
                 return jsonify({"error": 0, "type": "NEW"})
         else:
             return jsonify({"error": "There is no such bin"})
+
+    @app.route('/comment', methods=['POST'])
+    def post_comment():
+        content = request.form["content"]
+        user_id = session.get("user_id")
+        bin_id = request.form["bin_id"]
+
+        if not user_id:
+            return {"error": "You need to login first!"}
+
+        bin_ref = db.collection('bins').document(bin_id)
+        bin_data = bin_ref.get().to_dict()
+        new_comments = bin_data['comments']
+        new_comments.append({
+            "userId": user_id,
+            "content": content
+        })
+        bin_ref.update({
+            "comments": new_comments
+        })
+        return {"error": 0}

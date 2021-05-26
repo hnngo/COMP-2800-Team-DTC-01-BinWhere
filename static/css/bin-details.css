@@ -6,7 +6,7 @@
 
 .pageContainer {
     background-color: var(--primary-black);
-    min-height: 100vh;
+    height: 100vh;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
     display: flex;
@@ -16,7 +16,9 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px 20px;
+    flex: 1;
+    overflow: scroll;
 }
 
 .locationContainer {
@@ -177,14 +179,13 @@
 }
 
 
-
 .commentInput-container {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     max-width: 350px;
-    margin: 20px auto;
+    margin: 5px auto;
 }
 
 .commentInput {

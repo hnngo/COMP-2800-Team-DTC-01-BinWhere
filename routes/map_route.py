@@ -27,7 +27,7 @@ def init(app, db):
         who_upvote = doc.get("who_upvote")
         who_downvote = doc.get("who_downvote")
         comments = doc.get("comments")
-        user_id = session.get("user_id")
+        current_user_id = session.get("user_id")
 
         formatted_comments = []
         for comment in comments:
@@ -40,7 +40,7 @@ def init(app, db):
             })
 
         return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type,
-                               who_upvote=who_upvote, who_downvote=who_downvote, user_id=user_id, show_back=True,
+                               who_upvote=who_upvote, who_downvote=who_downvote, user_id=current_user_id, show_back=True,
                                comments=formatted_comments)
 
     @app.route("/search", methods=["POST"])
