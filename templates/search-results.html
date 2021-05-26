@@ -14,31 +14,58 @@
     {% include "includes/navbar.html" %}
     <br><br><br>
 
-    <h1>Search results</h1>
-    <hr>
-    <h2>Item name</h2>
-    <div>{{ title }}</div>
+    <div class="pageContainer">
+        <div class="masterContainer">
+            <div class="itemNameContainer">
+                <h4 class="itemNameHeader">
+                    {{ title }}
+                </h4>
+            </div>
 
-    <h2>Image</h2>
-    <div><img src="{{ image }}" alt="{{ title }}"></div>
+            <div class="item-image-container">
+                <img src="{{ image }}" alt="{{ title }}">
+            </div>
 
-    <h2>Bin type</h2>
-    <div>
-        <img src="{{ waste_type }}" alt="bin type">
+            <div class="wasteTypeContainer">
+                <div class="wasteTypeHeader">
+                    <img src="{{ url_for('static', filename="assets/icons/icon-waste-type.png") }}"
+                         alt="icon-wasteType"/> <h4 class="wasteType"> Waste Type </h4>
+                </div>
+                <div id="bin-details-type">
+                    <img src="{{ waste_type }}" alt="bin type">
+                </div>
+            </div>
+
+
+            <div class="nearestBinContainer">
+                <div class="nearestBinHeader">
+                    <h4 class="nearestBin">Nearest bin</h4>
+                </div>
+                <a href="/?filter={{ waste_type }}&focus={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}">
+                    <img id="map-search-preview"
+                         src="https://maps.googleapis.com/maps/api/staticmap?center={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}&zoom=17&size=225x225&markers={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}&key=AIzaSyCCHFhbJQACuCA70fcban9dr2GS8PuUiO8">
+                </a>
+            </div>
+
+            <div class="descriptionContainer">
+                <div class="descriptionHeader">
+                    <h4>Description</h4>
+                </div>
+                <div class="description">
+                    {{ description }}
+                </div>
+            </div>
+
+            <div class="doesNotIncludeContainer">
+                <div class="doesNotIncludeHeader">
+                    <h4>Does not include:</h4>
+                </div>
+                <div class="doesNotInclude">
+                    {{ not_include }}
+                </div>
+            </div>
+        </div>
     </div>
-
-    <h2>Nearest bin</h2>
-    <a href="/?filter={{ waste_type }}&focus={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}">
-        <img id="map-search-preview"
-             src="https://maps.googleapis.com/maps/api/staticmap?center={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}&zoom=17&size=225x225&markers={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}&key=AIzaSyCCHFhbJQACuCA70fcban9dr2GS8PuUiO8">
-    </a>
-
-    <h2>Description</h2>
-    <div>{{ description }}</div>
-
-    <h2>Does not include:</h2>
-    <div>{{ not_include }}</div>
-
 
 {% endblock %}
 
