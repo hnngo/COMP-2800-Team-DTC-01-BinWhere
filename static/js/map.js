@@ -84,7 +84,13 @@ function initMap() {
 
     // Automatically center the map on your location when first loading the page and no focus is set.
     if (urlParams.get("focus") === null) {
-        geoLocate();
+        if (localStorage.getItem("currentPos") === null) {
+            geoLocate();
+        } else {
+            const pos = JSON.parse(localStorage.getItem("currentPos"));
+            map.setCenter(pos);
+            map.setZoom(15);
+        }
     } else {
         const pos = {
             lat: Number(urlParams.get("focus").split(",")[0]),
@@ -92,6 +98,7 @@ function initMap() {
         };
         map.setCenter(pos);
         map.setZoom(18);
+        localStorage.setItem('currentPos', JSON.stringify(pos));
     }
 
     // Hmm I wonder what this is for...
