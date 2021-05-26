@@ -10,6 +10,7 @@ def ICONS():
     icon_path = "/static/assets/icons/map/"
     return {
         "container": icon_path + "icon-container.png",
+        "recyclable": icon_path + "icon-container.png",
         "paper": icon_path + "icon-paper.png",
         "hazardous": icon_path + "icon-hazardous.png",
         "garbage":  icon_path + "icon-garbage.png",

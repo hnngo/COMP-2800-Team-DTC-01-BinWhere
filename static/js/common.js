@@ -48,12 +48,12 @@ function showWarningPopup(message, onClose) {
         <div class="popup--warning-content">
             <img
                 class="popup--warning-icon-warning"
-                src="static/assets/icons/icon-warning.png"
+                src="/static/assets/icons/icon-warning.png"
                 alt="warning"
             />
             <img
                 class="popup--warning-icon-close"
-                src="static/assets/icons/icon-close.png"
+                src="/static/assets/icons/icon-close.png"
                 alt="close"
             />
             <div class="popup--warning-message">${message}</div>
@@ -82,12 +82,12 @@ function showErrorPopup(message, onClose) {
         <div class="popup--error-content">
             <img
                 class="popup--error-icon-error"
-                src="static/assets/icons/icon-error.png"
+                src="/static/assets/icons/icon-error.png"
                 alt="warning"
             />
             <img
                 class="popup--error-icon-close"
-                src="static/assets/icons/icon-close-error.png"
+                src="/static/assets/icons/icon-close-error.png"
                 alt="close"
             />
             <div class="popup--error-message">${message}</div>
@@ -116,12 +116,12 @@ function showSuccessPopup(message, onClose) {
         <div class="popup--success-content">
             <img
                 class="popup--success-icon-success"
-                src="static/assets/icons/icon-success.png"
+                src="/static/assets/icons/icon-success.png"
                 alt="warning"
             />
             <img
                 class="popup--success-icon-close"
-                src="static/assets/icons/icon-close-success.png"
+                src="/static/assets/icons/icon-close-success.png"
                 alt="close"
             />
             <div class="popup--success-message">${message}</div>
