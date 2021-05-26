@@ -10,29 +10,23 @@
     <div class="sidebar-content">
         <div class="sidebar-header">
             <div class="profile">
-                {% if username %}
-                    <img class="profile-avatar" src="data:image/png;base64,{{ user_image }}" alt="user avatar" />
-                    <div class="profile-name">{{ username }}</div>
-                {% else %}
-                    <img alt="logo" class="profile-avatar" src="{{ url_for("static", filename="assets/images/logo-v1.png")}}"/>
-                    <div class="profile-name">Welcome</div>
-                {% endif %}
+                <img class="profile-avatar" src="{{ user_avatar }}" alt="user avatar" />
+                <div class="profile-name">{{ user_name }}</div>
             </div>
         </div>
 
         <div class="sidebar-menu">
-            {% if username %}
+            {% if is_login %}
                 <a class="sidebar-menu-item" href={{ "/profile" }}>Profile</a>
             {% else %}
                 <a class="sidebar-menu-item" href={{ "/login" }}>Login</a>
             {% endif %}
 
-            <a class="sidebar-menu-item" href={{ "/bookmark" }}>Bookmarks</a>
             <a class="sidebar-menu-item" href={{ "/wiki" }}>Waste Wiki</a>
             <a class="sidebar-menu-item" href={{ "/about-us" }}>About Us</a>
 
             {% if is_login %}
-                <a class="sidebar-menu-item logout-menu" href="/logout">Logout</a>
+                <a class="sidebar-menu-item logout-menu" href={{ "/logout" }}>Logout</a>
             {% endif %}
         </div>
 
