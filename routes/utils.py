@@ -68,10 +68,13 @@ def bin_data_array(db, uploaded_bin: list) -> list:
     return result
 
 
-def calculate_reliability(upvote: int, downvote: int) -> float:
+def calculate_reliability(upvote: int, downvote: int) -> int:
     """Calculate the reliability of bin
     """
-    return round(upvote / (upvote + downvote) * 100)
+    if upvote == 0 and downvote == 0:
+        return 50
+    else:
+        return round(upvote / (upvote + downvote) * 100)
 
 
 def encoding(photo_object):
