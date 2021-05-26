@@ -3,12 +3,17 @@ let geoAPIStart = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
 let geoAPIEnd = '&key=AIzaSyCCHFhbJQACuCA70fcban9dr2GS8PuUiO8&result_type=street_address';
 
 function reverseGeoCode() {
-    $.getJSON(geoAPIStart + lat + ',' + long + geoAPIEnd, function (geoData) {
-        bin_address = geoData.results[0].formatted_address;
-        console.log("Address:" + bin_address);
-    }).then(function () {
-        $('#bin-details-location').append(bin_address);
-    });
+    $.getJSON(geoAPIStart + lat + ',' + long + geoAPIEnd)
+        .done(function (geoData) {
+            if (geoData["status"] === "OK") {
+                console.log(geoData);
+                bin_address = geoData.results[0].formatted_address;
+                console.log("Address:" + bin_address);
+                $('#bin-details-location').append(bin_address);
+            } else {
+                $('#bin-details-location').append("Vancouver");
+            }
+        });
 }
 
 // VOTING
@@ -21,7 +26,7 @@ const percentage = document.querySelector(".percentage");
 /**
  * Add event click to upvote button
  */
-upvote.addEventListener('click', function() {
+upvote.addEventListener('click', function () {
     $.ajax({
         url: "/upvote",
         method: "POST",
@@ -29,7 +34,7 @@ upvote.addEventListener('click', function() {
             bin_id: binId
         }),
         contentType: "application/json",
-        success: function(response) {
+        success: function (response) {
             if (!response.error) {
                 if (response.type === "NEW") {
                     upvote.setAttribute("src", "/static/assets/icons/icon-thumb-up-filled.png");
@@ -48,7 +53,7 @@ upvote.addEventListener('click', function() {
 })
 
 
-downvote.addEventListener('click', function() {
+downvote.addEventListener('click', function () {
     $.ajax({
         url: "/downvote",
         method: "POST",
@@ -56,7 +61,7 @@ downvote.addEventListener('click', function() {
             bin_id: binId
         }),
         contentType: "application/json",
-        success: function(response) {
+        success: function (response) {
             console.log(response)
             if (!response.error) {
                 if (response.type === "NEW") {
