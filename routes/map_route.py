@@ -27,8 +27,12 @@ def init(app, db):
         who_upvote = doc.get("who_upvote")
         who_downvote = doc.get("who_downvote")
         user_id = session.get("user_id")
+        upvote = doc.get("upvote")
+        downvote = doc.get("downvote")
+        reliability = utils.calculate_reliability(upvote, downvote)
         return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type,
-                               who_upvote=who_upvote, who_downvote=who_downvote, user_id=user_id, show_back=True)
+                               who_upvote=who_upvote, who_downvote=who_downvote, user_id=user_id, show_back=True,
+                               reliability=reliability)
 
     @app.route("/search", methods=["POST"])
     def search_query():

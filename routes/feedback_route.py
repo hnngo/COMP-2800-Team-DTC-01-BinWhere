@@ -1,12 +1,8 @@
 from flask import request, render_template, jsonify, session
-import json
+from . import utils
 
 
 def init(app, db):
-    @app.route('/voting', methods=['GET'])
-    def get_voting():
-        return render_template("voting-example.html")
-
     @app.route('/upvote', methods=['POST'])
     def thumbs_up():
         bin_id = request.json['bin_id']
@@ -27,7 +23,8 @@ def init(app, db):
                     'upvote': bin_data.to_dict()['upvote'] - 1,
                     'who_upvote': current_who_upvote
                 })
-                reliability = calculate_reliability(bin_id)
+                reliability = utils.calculate_reliability(bin_data.to_dict()['upvote'] - 1,
+                                                          bin_data.to_dict()['downvote'])
                 return jsonify({"error": 0, "type": "RESET", "reliability": reliability})
             elif user_id in current_who_downvote:
                 current_who_downvote.remove(user_id)
@@ -37,14 +34,16 @@ def init(app, db):
                     'downvote': bin_data.to_dict()['downvote'] - 1,
                     'who_downvote': current_who_downvote
                 })
-                reliability = calculate_reliability(bin_id)
+                reliability = utils.calculate_reliability(bin_data.to_dict()['upvote'] + 1,
+                                                          bin_data.to_dict()['downvote'] - 1)
                 return jsonify({"error": 0, "type": "CHANGE", "reliability": reliability})
             else:
                 bin_ref.update({
                     'upvote': bin_data.to_dict()['upvote'] + 1,
                     'who_upvote': bin_data.to_dict()['who_upvote'] + [user_id],
                 })
-                reliability = calculate_reliability(bin_id)
+                reliability = utils.calculate_reliability(bin_data.to_dict()['upvote'] + 1,
+                                                          bin_data.to_dict()['downvote'])
                 return jsonify({"error": 0, "type": "NEW", "reliability": reliability})
         else:
             return jsonify({"error": "There's no such bin existed!"})
@@ -58,6 +57,7 @@ def init(app, db):
 
         bin_ref = db.collection('bins').document(bin_id)
         bin_data = bin_ref.get()
+
         current_who_downvote = bin_data.to_dict()["who_downvote"]
         current_who_upvote = bin_data.to_dict()["who_upvote"]
 
@@ -68,7 +68,9 @@ def init(app, db):
                     'downvote': bin_data.to_dict()['downvote'] - 1,
                     'who_downvote': current_who_downvote
                 })
-                return jsonify({"error": 0, "type": "RESET"})
+                reliability = utils.calculate_reliability(bin_data.to_dict()['upvote'],
+                                                          bin_data.to_dict()['downvote'] - 1)
+                return jsonify({"error": 0, "type": "RESET", "reliability": reliability})
             elif user_id in current_who_upvote:
                 current_who_upvote.remove(user_id)
                 bin_ref.update({
@@ -77,13 +79,17 @@ def init(app, db):
                     'downvote': bin_data.to_dict()['downvote'] + 1,
                     'who_downvote': current_who_downvote + [user_id]
                 })
-                return jsonify({"error": 0, "type": "CHANGE"})
+                reliability = utils.calculate_reliability(bin_data.to_dict()['upvote'] - 1,
+                                                          bin_data.to_dict()['downvote'] + 1)
+                return jsonify({"error": 0, "type": "CHANGE", "reliability": reliability})
             else:
                 bin_ref.update({
                     'downvote': bin_data.to_dict()['downvote'] + 1,
                     'who_downvote': bin_data.to_dict()['who_downvote'] + [user_id]
                 })
-                return jsonify({"error": 0, "type": "NEW"})
+                reliability = utils.calculate_reliability(bin_data.to_dict()['upvote'],
+                                                          bin_data.to_dict()['downvote'] + 1)
+                return jsonify({"error": 0, "type": "NEW", "reliability": reliability})
         else:
             return jsonify({"error": "There is no such bin"})
 
@@ -92,8 +98,11 @@ def init(app, db):
         bin_data = bin_ref.get()
         upvote = bin_data.to_dict()["upvote"]
         downvote = bin_data.to_dict()["downvote"]
-        if upvote+downvote <= 2:
-            reliability = "Not enough vote"
+        if upvote == 0 and downvote == 0:
+            reliability = str(50) + "%"
+            return reliability
+        elif upvote == 0:
+            reliability = str(0) + "%"
             return reliability
         else:
             reliability = str(upvote/(upvote+downvote) * 100) + "%"

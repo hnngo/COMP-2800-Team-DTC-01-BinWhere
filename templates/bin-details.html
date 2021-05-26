@@ -49,7 +49,7 @@
                                 alt = "icon-thumb-up"/>
                 {% endif %}
 
-                <h4 id = "percentage">0</h4>
+                <h4 class="percentage">{{ reliability }}%</h4>
                 {% if user_id in who_downvote %}
                     <img id="thumbs-down" src= "{{ url_for('static', filename="assets/icons/icon-thumb-down-filled.png") }}"
                             alt = "icon-thumb-down"/>
