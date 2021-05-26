@@ -1,8 +1,8 @@
 from flask import render_template, redirect, request, session, jsonify
 import requests
-import firebase
 import json
 from . import utils
+from google.api_core import exceptions
 
 
 def init(app, db, auth):
@@ -42,9 +42,8 @@ def init(app, db, auth):
             })
 
             return jsonify({"error": 0, "updated_img": str(avatar)})
-        except (requests.HTTPError, requests.exceptions.HTTPError) as error:
-            error_dict = json.loads(error.strerror)
-            return jsonify({"error": error_dict["error"]["message"]})
+        except exceptions.InvalidArgument as error:
+            return jsonify({"error": str(error)})
 
     @app.route("/profile/bin", methods=["DELETE"])
     def delete_bin():

@@ -79,6 +79,7 @@ function editUserAvatar() {
         const reader = new FileReader();
         reader.onload = () => {
             const dataURL = reader.result;
+            showSpinner();
             $.ajax({
                 url: '/profile/avatar',
                 method: "POST",
@@ -87,10 +88,16 @@ function editUserAvatar() {
                 },
                 success: (response) => {
                     if (!response.error) {
+                        clearSpinner();
                         document.querySelector("#user-img").setAttribute("src", "data:image/png;base64," + response.updated_img);
                     } else {
-                        showWarningPopup("Something is wrong, please try again!");
-                    }
+                        clearSpinner();
+                        showWarningPopup("The image file is too big!");
+                        }
+                },
+                fail: (err) => {
+                    clearSpinner();
+                    showWarningPopup("Something is wrong, please try again!");
                 }
             })
         }
