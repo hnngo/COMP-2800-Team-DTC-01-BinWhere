@@ -90,9 +90,12 @@ function editUserAvatar() {
                     if (!response.error) {
                         clearSpinner();
                         document.querySelector("#user-img").setAttribute("src", "data:image/png;base64," + response.updated_img);
+                        new_avatar.value = "";
+
                     } else {
                         clearSpinner();
                         showWarningPopup("The image file is too big!");
+                        new_avatar.value = "";
                         }
                 },
                 fail: (err) => {
@@ -150,7 +153,7 @@ function deletePicture() {
                         if (delete_btn.getAttribute("data-id") === bin_id) {
                             document.getElementById(bin_id).remove();
                         }
-                    showSuccessPopup("Deleted Successfully!")
+                        showSuccessPopup("Deleted Successfully!")
                     } else {
                         showWarningPopup("Something is wrong, please try again!");
                     }

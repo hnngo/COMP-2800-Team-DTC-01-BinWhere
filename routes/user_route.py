@@ -38,7 +38,7 @@ def init(app, db, auth):
             avatar = request.form.to_dict()['avatar'][22:]
 
             db.collection("users").document(session.get("user_id")).update({
-                "avatar": utils.chunk_list(str(avatar))
+                "avatar": str(avatar)
             })
 
             return jsonify({"error": 0, "updated_img": str(avatar)})
