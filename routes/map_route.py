@@ -26,9 +26,22 @@ def init(app, db):
         bin_type = doc.get("type")
         who_upvote = doc.get("who_upvote")
         who_downvote = doc.get("who_downvote")
+        comments = doc.get("comments")
         user_id = session.get("user_id")
+
+        formatted_comments = []
+        for comment in comments:
+            comment_author_id = comment['userId']
+            user_doc = db.collection("users").document(comment_author_id).get()
+            formatted_comments.append({
+                "content": comment['content'],
+                "name": user_doc.get("name"),
+                "avatar": user_doc.get("avatar")
+            })
+
         return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type,
-                               who_upvote=who_upvote, who_downvote=who_downvote, user_id=user_id, show_back=True)
+                               who_upvote=who_upvote, who_downvote=who_downvote, user_id=user_id, show_back=True,
+                               comments=formatted_comments)
 
     @app.route("/search", methods=["POST"])
     def search_query():
