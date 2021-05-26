@@ -10,3 +10,43 @@ function reverseGeoCode() {
         $('#bin-details-location').append(bin_address);
     });
 }
+
+
+// Select Waste Type
+const selectPostTag = document.querySelector("#types");
+const selectPostTagWrapper = document.querySelector(".tag-chosen");
+
+if (selectPostTag && selectPostTagWrapper) {
+  selectPostTag.addEventListener("change", (event) => {
+    const selectedValue = event.target.value;
+    const currentSelectedValue =
+      selectPostTagWrapper.getAttribute("data-chosen") || "";
+
+    if (currentSelectedValue.indexOf(selectedValue) >= 0) {
+      // Remove tag bubble
+      selectPostTagWrapper.querySelectorAll("span").forEach((elem) => {
+        if (elem.innerText === selectedValue) {
+          elem.remove();
+        }
+        const newDataChosen = currentSelectedValue
+          .split(",")
+          .filter((val) => !!val && val !== selectedValue)
+          .join(",");
+        selectPostTagWrapper.setAttribute("data-chosen", newDataChosen);
+      });
+    } else {
+      // Create tag bubble
+      const tagElem = document.createElement("span");
+      tagElem.setAttribute("class", "tag-bubble");
+      tagElem.innerText = ` ${selectedValue} `;
+      selectPostTagWrapper.appendChild(tagElem);
+      selectPostTagWrapper.setAttribute(
+        "data-chosen",
+        currentSelectedValue + `,${selectedValue}`
+      );
+    }
+
+    // Reset
+    event.target.value = "";
+  });
+}

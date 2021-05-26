@@ -66,9 +66,41 @@ form {
     color: whitesmoke;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     padding-bottom: 15px;
 }
+
+.tag-chosen {
+    line-height: 2em;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+.tag-select {
+    clear: both;
+    width: 100%;
+    border: 0;
+    background-color: white;
+    padding: 5px;
+    outline: none;
+}
+
+.tag-bubble {
+    padding: 0 5px;
+    background-color: #0466c8;
+    color: white;
+    border-radius: 5px;
+    margin: 2px;
+    display: inline-block;
+}
+
 #types{
     width: 280px;
     height: 30px;
