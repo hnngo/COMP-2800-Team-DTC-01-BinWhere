@@ -49,7 +49,6 @@ def init(app, db):
                                who_upvote=who_upvote, who_downvote=who_downvote, user_id=current_user_id, show_back=True,
                                comments=formatted_comments, reliability=reliability)
 
-
     @app.route("/search", methods=["POST"])
     def search_query():
         query = request.form["keyword"]
@@ -89,7 +88,8 @@ def init(app, db):
         closest_bin = get_closest_bin(lat, long, waste_type)
 
         return render_template("search-results.html", title=name, description=description, image=image,
-                               not_include=not_include, waste_type=waste_type_icon, closest_bin=closest_bin)
+                               not_include=not_include, waste_type_icon=waste_type_icon, waste_type=waste_type,
+                               closest_bin=closest_bin)
 
     def get_closest_bin(lat: str, long: str, waste_type: str) -> dict:
         """Get the id of the closest bin to the user's current location."""
