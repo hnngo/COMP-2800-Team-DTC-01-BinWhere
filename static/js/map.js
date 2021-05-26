@@ -17,16 +17,29 @@ function initMap() {
     console.log('Map loaded');
 
     // Define map icons for different bin types
-    const iconPath = "http://maps.google.com/mapfiles/ms/micons/";
+    // Icons downloaded from https://icons8.com/
+    const iconPath = "/static/assets/icons/map/";
     const icons = {
-        "recycling": {
-            icon: iconPath + "green-dot.png"
+        "container": {
+            icon: iconPath + "icon-container.png"
         },
-        "trash": {
-            icon: iconPath + "yellow-dot.png"
+        "paper": {
+            icon: iconPath + "icon-paper.png"
         },
-        "dog": {
-            icon: iconPath + "orange-dot.png"
+        "hazardous": {
+            icon: iconPath + "icon-hazardous.png"
+        },
+        "garbage": {
+            icon: iconPath + "icon-garbage.png"
+        },
+        "glass": {
+            icon: iconPath + "icon-glass.png"
+        },
+        "food": {
+            icon: iconPath + "icon-food.png"
+        },
+        "multiple": {
+            icon: iconPath + "icon-multiple.png"
         }
     };
 
@@ -38,11 +51,20 @@ function initMap() {
         if (urlParams.get("filter") === null ||
             urlParams.get("filter").split(',').some(item => data[bin].type.includes(item))) {
             let coords = new google.maps.LatLng(data[bin].lat, data[bin].long);
+            let binType = data[bin].type;
+            if (binType.length > 1) {
+                binType = "multiple";
+            } else {
+                binType = binType[0];
+            }
             let pin = new google.maps.Marker({
                 position: coords,
                 map,
                 title: bin,
-                //icon: icons[data[bin].type].icon
+                icon: {
+                    url: icons[binType].icon,
+                    scaledSize: new google.maps.Size(25, 25)
+                }
             });
             google.maps.event.addListener(pin, 'click', function () {
                     window.location.href = '/bin?id=' + bin;
