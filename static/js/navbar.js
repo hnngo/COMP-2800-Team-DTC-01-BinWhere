@@ -39,8 +39,12 @@ window.onload = () => {
 
     // Submit search form
     function submitSearch() {
-        document.getElementById("search-coords").value = localStorage.getItem("currentPos");
-        document.getElementById("search-form").submit();
+        if (localStorage.getItem("currentPos")) {
+            document.getElementById("search-coords").value = localStorage.getItem("currentPos");
+            document.getElementById("search-form").submit();
+        } else {
+            showErrorPopup("Search failed! Please enable geolocation.");
+        }
     }
 
     // Event listeners for clicking search icon
