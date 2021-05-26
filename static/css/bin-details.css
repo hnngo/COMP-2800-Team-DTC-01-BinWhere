@@ -23,6 +23,7 @@
 
 .locationContainer {
     text-align: center;
+    margin-top: 10px;
 }
 
 .locationHeader {
@@ -53,33 +54,35 @@
 #bin-details-images {
     background-color: var(--primary-green);
     width: 280px;
-    height: 200px;
+    /*height: 200px;*/
     border-radius: 2rem;
     text-align: center;
     justify-items: center;
 }
-.lastModified {
-    display:inline-block;
-}
+
 
 .modificationContainer {
     text-align: center;
-    padding-bottom: 0.3em;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin: 20px 0;
 }
+
 .lastModified {
     color: whitesmoke;
-    padding: 0 7em 0 0;
+    /*padding: 0 7em 0 0;*/
     font-size: 0.8em;
 }
+
 .deleteButton {
+    margin-left: 30px;
 }
+
 .delete{
-    color: #f21919;
+    color: rgb(243, 54,67);
 }
+
 #bin-details-vote{
     text-align: center;
     padding-bottom: 1em;
@@ -130,6 +133,10 @@
     color: whitesmoke;
     font-size: 14px;
     margin-top: 10px;
+}
+
+#bin-details-type img {
+    width: 30px;
 }
 
 .commentContainer {
@@ -211,4 +218,31 @@
 
 #bin-details-type img {
     filter: brightness(0) invert(1);
+}
+
+.twitter-icon {
+    position: absolute;
+    right: 15px;
+    top: 80px;
+}
+
+.fa {
+    padding: 5px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;
+}
+
+/* Facebook */
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
 }
