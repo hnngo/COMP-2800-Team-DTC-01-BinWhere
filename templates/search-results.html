@@ -12,7 +12,7 @@
 {% block body %}
 
     {% include "includes/navbar.html" %}
-    <br><br><br>
+    <br><br><br><br>
 
     <div class="pageContainer">
         <div class="masterContainer">
@@ -22,7 +22,7 @@
                 </h4>
             </div>
 
-            <div class="item-image-container">
+            <div class="itemImageContainer">
                 <img src="{{ image }}" alt="{{ title }}">
             </div>
 
@@ -41,6 +41,8 @@
                 <div class="nearestBinHeader">
                     <h4 class="nearestBin">Nearest bin</h4>
                 </div>
+            </div>
+            <div class="nearestBinImage">
                 <a href="/?filter={{ waste_type }}&focus={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}">
                     <img id="map-search-preview"
                          src="https://maps.googleapis.com/maps/api/staticmap?center={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}&zoom=17&size=225x225&markers={{ closest_bin['coords'][0] }},{{ closest_bin['coords'][1] }}&key=AIzaSyCCHFhbJQACuCA70fcban9dr2GS8PuUiO8">
