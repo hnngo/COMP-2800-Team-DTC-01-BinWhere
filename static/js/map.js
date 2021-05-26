@@ -12,7 +12,9 @@ function initMap() {
         center: { lat: 49.2827, lng: -123.1207 },
         zoom: 15,
         fullscreenControl: false,
-        mapTypeControl: false
+        mapTypeControl: false,
+        zoomControl: false,
+        streetViewControl: false
     });
     console.log('Map loaded');
 
@@ -59,6 +61,101 @@ function initMap() {
     locationButton.style.width = "60px";
     locationButton.style.transform = "translateX(15px)";
     locationButton.addEventListener("click", geoLocate);
+
+    // Place Add-new-location button
+    const addLocationButton = document.createElement("img");
+    addLocationButton.src = "/static/assets/icons/icon-add-location.png";
+    addLocationButton.setAttribute("id", "add-new-location-btn");
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(addLocationButton);
+    addLocationButton.style.width = "60px";
+    addLocationButton.style.transform = "translateX(-11px) translateY(-11px)";
+
+    // Place pin icon on the center of the map
+    const pinIcon = document.createElement("img");
+    pinIcon.src = "/static/assets/icons/icon-pin-location.png";
+    pinIcon.setAttribute("id", "pin-location")
+    map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(pinIcon);
+    pinIcon.style.width = "30px";
+    pinIcon.style.transform = "translateX(-172px)";
+    pinIcon.style.display = 'none';
+
+    // Instruction of adding new location
+    const instruction_msg = document.createElement("div");
+    instruction_msg.textContent = "Place the pin on the desired location"
+    instruction_msg.setAttribute("id", "instruction-message");
+    instruction_msg.style.transform = "translateX(-52px) translateY(74px)";
+    instruction_msg.style.width = "250px";
+    instruction_msg.style.backgroundColor = "var(--primary-black)";
+    instruction_msg.style.color = "white";
+    instruction_msg.style.textAlign = "center";
+    instruction_msg.style.padding = "20px 10px";
+    instruction_msg.style.border = "5px solid var(--primary-green)";
+    instruction_msg.style.fontSize = "20px";
+    instruction_msg.style.display = "none";
+    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(instruction_msg);
+
+
+    // Create two buttons: cancel and add
+    const buttonGroup = document.createElement("div");
+    buttonGroup.classList.add("button-group");
+    buttonGroup.style.display = "none";
+    buttonGroup.style.transform = "translate(-3px, 54px)";
+
+    const cancelButton = document.createElement("img");
+    cancelButton.src = "/static/assets/icons/icon-cancel-button.png";
+    cancelButton.setAttribute("id", "cancel-btn")
+    cancelButton.style.width = "100px";
+    buttonGroup.appendChild(cancelButton);
+
+    const addButton = document.createElement("img");
+    addButton.src = "/static/assets/icons/icon-add-button.png";
+    addButton.setAttribute("id", "add-btn")
+    addButton.style.width = "100px";
+    buttonGroup.appendChild(addButton);
+
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(buttonGroup);
+
+    // Show and move the pin icon
+     addLocationButton.addEventListener("click",function() {
+        addLocationButton.style.display = "none";
+        pinIcon.style.display = "block";
+        instruction_msg.style.display = "block";
+        buttonGroup.style.display = "block";
+    })
+
+    cancelButton.addEventListener("click", function() {
+        addLocationButton.style.display = "block";
+        pinIcon.style.display = "none";
+        instruction_msg.style.display = "none";
+        buttonGroup.style.display = "none";
+    })
+
+    addButton.addEventListener("click", function() {
+        showSpinner();
+
+        // $.ajax({
+        //     url: "/add",
+        //     method: "POST",
+        //     data: {
+        //         location: map.getCenter().toJSON()
+        //     },
+        //     success: (response) => {
+        //         if (!response.error) {
+        //             clearSpinner();
+        //             addLocationButton.style.display = "block";
+        //             pinIcon.style.display = "none";
+        //             instruction_msg.style.display = "none";
+        //             buttonGroup.style.display = "none";
+        //         } else {
+        //             showWarningPopup("Something is wrong, please try again!");
+        //         }
+        //     },
+        //     fail: (err) => {
+        //         clearSpinner();
+        //         showWarningPopup("Something is wrong, please try again!")
+        //     }
+        // })
+    });
 
     // Automatically center the map on your location when first loading the page and no focus is set.
     if (urlParams.get("focus") === null) {

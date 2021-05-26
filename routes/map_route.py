@@ -83,5 +83,7 @@ def init(app, db):
         return ((user_coords[0] - bin_coords[0]) ** 2 + (user_coords[1] - bin_coords[1]) ** 2) ** 0.5
 
     @app.route("/add", methods=["GET"])
-    def get_add_new_location_page():
-        return render_template("add-location.html")
+    def create_new_location():
+        """Create a new bin data"""
+        # center = request.form["location"]
+        return render_template("add-location.html", title="New Location")
