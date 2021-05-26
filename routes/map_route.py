@@ -1,6 +1,8 @@
 from flask import render_template, request, redirect, session, jsonify
 import json
+import requests
 from . import utils
+from datetime import datetime
 
 
 def init(app, db):
@@ -88,8 +90,44 @@ def init(app, db):
         """Calculate euclidean distance between two coordinates. I know the Earth is a sphere, shut up."""
         return ((user_coords[0] - bin_coords[0]) ** 2 + (user_coords[1] - bin_coords[1]) ** 2) ** 0.5
 
-    @app.route("/add", methods=["GET"])
-    def create_new_location():
-        """Create a new bin data"""
-        # center = request.form["location"]
-        return render_template("add-location.html", title="New Location")
+    @app.route("/add", methods=["POST"])
+    def get_new_location():
+        """Get a new bin location"""
+        lat = request.form["lat"]
+        lng = request.form["lng"]
+        return jsonify({"error": 0, "lat": lat, "lng": lng})
+
+    @app.route("/add/<lat>/<lng>", methods=["GET"])
+    def create_new_location(lat, lng):
+        """Create a new bin location"""
+        return render_template("add-location.html", title="New Location", lat=lat, lng=lng)
+
+    @app.route("/add/save", methods=['GET', 'POST'])
+    def submit_new_location():
+        """Submit newly written location form"""
+        user_id = session.get("user_id")
+        if user_id is None:
+            return jsonify({"error": "You must login first!"})
+        req = request.json
+
+        bin_data = {
+            "comments": [],
+            "date_created": datetime.now(),
+            "downvote": 0,
+            "upvote": 0,
+            "img": str(req["image"][22:]),
+            "lat": req["lat"],
+            "long": req["long"],
+            "type": req["type"],
+            "userID": session.get("user_id"),
+            "who_downvote": [],
+            "who_upvote": []
+        }
+        try:
+            db.collection("bins").doc().set(bin_data)
+            return redirect("/")
+
+        except (requests.HTTPError, requests.exceptions.HTTPError) as error:
+            error_dict = json.loads(error.strerror)
+            return jsonify({'error': error_dict["error"]["message"]})
+

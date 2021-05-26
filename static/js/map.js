@@ -94,27 +94,6 @@ function initMap() {
     instruction_msg.style.display = "none";
     map.controls[google.maps.ControlPosition.RIGHT_TOP].push(instruction_msg);
 
-
-    // Create two buttons: cancel and add
-    const buttonGroup = document.createElement("div");
-    buttonGroup.classList.add("button-group");
-    buttonGroup.style.display = "none";
-    buttonGroup.style.transform = "translate(-3px, 54px)";
-
-    const cancelButton = document.createElement("img");
-    cancelButton.src = "/static/assets/icons/icon-cancel-button.png";
-    cancelButton.setAttribute("id", "cancel-btn")
-    cancelButton.style.width = "100px";
-    buttonGroup.appendChild(cancelButton);
-
-    const addButton = document.createElement("img");
-    addButton.src = "/static/assets/icons/icon-add-button.png";
-    addButton.setAttribute("id", "add-btn")
-    addButton.style.width = "100px";
-    buttonGroup.appendChild(addButton);
-
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(buttonGroup);
-
     // Show and move the pin icon
      addLocationButton.addEventListener("click",function() {
         addLocationButton.style.display = "none";
@@ -122,6 +101,39 @@ function initMap() {
         instruction_msg.style.display = "block";
         buttonGroup.style.display = "block";
     })
+
+    // Create two buttons: cancel and add
+    const buttonGroup = document.createElement("div");
+    buttonGroup.classList.add("button-group");
+    buttonGroup.style.display = "none";
+    buttonGroup.style.transform = "translate(-3px, 54px)";
+
+    const cancelButton = document.createElement("input");
+    cancelButton.type = "button";
+    cancelButton.setAttribute("id", "cancel-btn")
+    cancelButton.style.width = "94px";
+    cancelButton.style.height = "56px";
+    cancelButton.value = "Cancel";
+    cancelButton.style.backgroundColor = "var(--primary-black)";
+    cancelButton.style.color = "white";
+    cancelButton.style.fontSize = "20px";
+    cancelButton.style.borderRadius = "10px";
+    buttonGroup.appendChild(cancelButton);
+
+    const addButton = document.createElement("input");
+    addButton.type = "submit";
+    addButton.setAttribute("id", "add-btn")
+    addButton.style.width = "94px";
+    addButton.style.height = "56px";
+    addButton.value = "Add";
+    addButton.style.backgroundColor = "var(--primary-black)";
+    addButton.style.color = "white";
+    addButton.style.fontSize = "20px";
+    addButton.style.borderRadius = "10px";
+    addButton.style.margin = "10px";
+    buttonGroup.appendChild(addButton);
+
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(buttonGroup);
 
     cancelButton.addEventListener("click", function() {
         addLocationButton.style.display = "block";
@@ -131,30 +143,13 @@ function initMap() {
     })
 
     addButton.addEventListener("click", function() {
+        console.log("clicked")
         showSpinner();
 
-        // $.ajax({
-        //     url: "/add",
-        //     method: "POST",
-        //     data: {
-        //         location: map.getCenter().toJSON()
-        //     },
-        //     success: (response) => {
-        //         if (!response.error) {
-        //             clearSpinner();
-        //             addLocationButton.style.display = "block";
-        //             pinIcon.style.display = "none";
-        //             instruction_msg.style.display = "none";
-        //             buttonGroup.style.display = "none";
-        //         } else {
-        //             showWarningPopup("Something is wrong, please try again!");
-        //         }
-        //     },
-        //     fail: (err) => {
-        //         clearSpinner();
-        //         showWarningPopup("Something is wrong, please try again!")
-        //     }
-        // })
+        let lat = map.getCenter().lat();
+        let lng = map.getCenter().lng();
+
+        window.location.href = "/add/"+lat+"/"+lng;
     });
 
     // Automatically center the map on your location when first loading the page and no focus is set.
