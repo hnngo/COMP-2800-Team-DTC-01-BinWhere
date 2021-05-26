@@ -74,7 +74,9 @@ const sendIconElem = document.querySelector(".sendIcon");
 
 if (commentInputElem) {
     sendIconElem.addEventListener("click", () => {
+        showSpinner();
         const commentContent = commentInputElem.value;
+        commentInputElem.value = "";
 
         $.ajax({
             url: "/comment",
@@ -84,8 +86,32 @@ if (commentInputElem) {
                 bin_id: binId
             },
             success: (response) => {
-                console.log(response);
+                clearSpinner();
+                if (response.error) {
+                    showErrorPopup('Something is wrong, please try again');
+                } else {
+                    addNewComment(commentContent, response.name, response.avatar);
+                }
+            },
+            fail: (error) => {
+                clearSpinner();
+                showErrorPopup('Something is wrong, please try again');
             }
         })
     });
+}
+
+function addNewComment(commentContent, name, avatar) {
+    const commentWrapper = document.createElement('div');
+    commentWrapper.setAttribute('class', 'comment-container');
+    commentWrapper.innerHTML = `
+        <img class="comment-avatar" alt="avatar" src="data:image/png;base64,${avatar}"/>
+        <div class="comment-content-container">
+            <strong class="comment-name">${name}:&nbsp;</strong>
+            <span class="comment-content">${commentContent}</span>
+        </div>
+    `
+
+    const commentList = document.querySelector('.commentList');
+    commentList.prepend(commentWrapper);
 }

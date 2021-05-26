@@ -38,6 +38,7 @@ def init(app, db):
                 "name": user_doc.get("name"),
                 "avatar": user_doc.get("avatar")
             })
+        formatted_comments.reverse()
 
         return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type,
                                who_upvote=who_upvote, who_downvote=who_downvote, user_id=current_user_id, show_back=True,
