@@ -25,6 +25,11 @@ def ICONS():
     }
 
 
+def get_icons(bin_types: list) -> list:
+    """Convert list of bin types to list of icon paths for those types."""
+    return [ICONS()[bin_type] for bin_type in bin_types]
+
+
 def chunk_list(encoded_string: str) -> list:
     chunk_size = int(MAX_SIZE() / 3)
     chunks = [encoded_string[i:i + chunk_size] for i in range(0, len(encoded_string), chunk_size)]

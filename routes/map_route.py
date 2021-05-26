@@ -30,7 +30,8 @@ def init(app, db):
         upvote = doc.get("upvote")
         downvote = doc.get("downvote")
         reliability = utils.calculate_reliability(upvote, downvote)
-        return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type,
+        bin_type_icons = utils.get_icons(bin_type)
+        return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type_icons,
                                who_upvote=who_upvote, who_downvote=who_downvote, user_id=user_id, show_back=True,
                                reliability=reliability)
 
