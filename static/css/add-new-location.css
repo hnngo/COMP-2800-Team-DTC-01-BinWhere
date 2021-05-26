@@ -15,6 +15,10 @@ form {
     align-items: center;
 }
 
+.d-none {
+    display: none;
+}
+
 .locationContainer{
     padding:30px 0 30px 0;
 
@@ -31,8 +35,7 @@ form {
     color: whitesmoke;
 }
 
-.bin-image-container{
-    background-color: #C4C4C4;
+.bin-image-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,9 +43,23 @@ form {
     width: 280px;
     height: 200px;
     border-radius: 2rem;
-    text-align: center;
-    justify-items: center;
+    object-fit: cover;
+    position: relative;
 }
+
+#bin-details-images::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+#bin-details-images {
+    position: absolute;
+    width: 280px;
+    height: 200px;
+    border-radius: 2rem;
+    padding: 5px 0;
+    color: transparent;
+}
+
 .wasteTypeHeader{
     color: var(--primary-green);
     padding-bottom: 10px;
@@ -118,7 +135,7 @@ label{
 .save-btn-container{
         margin: 25px 0 25px 0;
 }
-.saveButton{
+#saveButton{
     background-color: var(--primary-green);
     height: 60px;
     width: 280px;
