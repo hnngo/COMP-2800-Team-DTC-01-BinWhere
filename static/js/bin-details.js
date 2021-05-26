@@ -67,3 +67,10 @@ downvote.addEventListener('click', function() {
         }
     })
 })
+
+
+document.querySelector('#sharebutton').addEventListener('click', function(e){
+    e.preventDefault();
+    var href = $(this).attr('href');
+    window.open(href, "Twitter", "height=269,width=550,resizable=1");
+})
