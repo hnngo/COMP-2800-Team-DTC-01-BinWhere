@@ -94,8 +94,8 @@ form {
 
 .tag-bubble {
     padding: 0 5px;
-    background-color: #0466c8;
-    color: white;
+    background-color: var(--primary-yellow);
+    color: var(--primary-black);
     border-radius: 5px;
     margin: 2px;
     display: inline-block;
