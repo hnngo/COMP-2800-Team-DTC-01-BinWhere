@@ -10,7 +10,7 @@
     {% with show_back=show_back %}
         {% include "includes/heading.html" %}
     {% endwith %}
-    <form class="container" action="/" method="POST">
+    <form class="container d-none" method="POST">
         <div class="locationContainer">
             <div class="locationHeader">
                 <img src= "{{ url_for('static', filename="assets/icons/icon-location.png") }}"
@@ -19,10 +19,10 @@
             </div>
             <div id="bin-details-location"></div>
         </div>
-
         <div class="bin-image-container">
-                <div id="bin-details-images">Images goes here</div>
-            </div>
+            <img class="bin-add-image" src="{{ url_for("static", filename="assets/icons/icon-add-image.png") }}" alt="add to select image"/>
+            <input name="bin-img" type="file" id="bin-details-images"/>
+        </div>
 
         <div class = "wasteTypeContainer">
             <div class ="wasteTypeHeader">
@@ -33,7 +33,7 @@
             <div class="tag-wrapper" id="bin-details-type">
                 <div class="tag-chosen"></div>
                 <div class="break"></div>
-                <select id="types" name="types" class="tag-select" required>
+                <select id="types" name="types" class="tag-select">
                     <option value="placeholder" disabled selected hidden>Select type of waste</option>
                     <option value="Garbage">Garbage</option>
                     <option value="Recyclable">Recyclable</option>
@@ -48,7 +48,7 @@
         </div>
 
         <div class = "save-btn-container">
-            <button type="submit" value = "SAVE" class = "saveButton">SAVE</button>
+            <button type="submit" value="SAVE" id="saveButton">SAVE</button>
         </div>
     </form>
 {% endblock %}
@@ -57,10 +57,11 @@
 <script src="{{ url_for('static', filename='js/common.js') }}"></script>
 <script src="/static/js/add-location.js"></script>
 <script type="text/javascript">
-    {#const lat = {{ location.lat }};#}
-    {#const long = {{ location.lng }};#}
-    {#reverseGeoCode();#}
+    const new_lat = {{ lat }};
+    const new_long = {{ lng }};
+    reverseGeoCode();
 </script>
+
 
 {% endblock %}
 
