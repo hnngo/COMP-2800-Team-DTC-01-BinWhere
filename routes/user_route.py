@@ -15,9 +15,11 @@ def init(app, db, auth):
             user_avatar = "".join(profile_data["avatar"])
             uploaded_bin = profile_data["uploaded_bin"]
 
-            bin_data = utils.bin_data_array(db, uploaded_bin)  # a list of bin data in dict
+            bin_data = utils.bin_data_array(db, uploaded_bin)
+
         except KeyError:
-            return redirect("/login")
+            return {}
+            # return redirect("/login")
 
         return render_template("profile-page.html", title="My Account",  show_back=True, user_avatar=user_avatar, profile_data=profile_data, postedbin_data=bin_data)
 
