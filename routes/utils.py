@@ -6,12 +6,6 @@ def sidebar_default():
     return {"name": "Welcome", "avatar": url_for("static", filename="assets/images/logo-v1.png")}
 
 
-def MAX_SIZE():
-    """Maximum size of the uploading file
-    """
-    return 1048487
-
-
 def ICONS():
     icon_path = "/static/assets/icons/map/"
     return {
@@ -28,13 +22,6 @@ def ICONS():
 def get_icons(bin_types: list) -> list:
     """Convert list of bin types to list of icon paths for those types."""
     return [ICONS()[bin_type] for bin_type in bin_types]
-
-
-def chunk_list(encoded_string: str) -> list:
-    chunk_size = int(MAX_SIZE() / 3)
-    chunks = [encoded_string[i:i + chunk_size] for i in range(0, len(encoded_string), chunk_size)]
-    print(len(encoded_string))
-    return chunks
 
 
 def search_item(db, keyword):
@@ -75,14 +62,15 @@ def bin_data_array(db, uploaded_bin: list) -> list:
     for bin_id in uploaded_bin:
         bin_data = db.collection("bins").document(bin_id).get().to_dict()
         bin_data["bin_id"] = bin_id
-        try:
-            bin_data["reliability"] = calculate_reliability(bin_data["upvote"], bin_data["downvote"])
-            bin_data["date_created"] = bin_data["date_created"].strftime("%Y-%m-%d")
-            result.append(bin_data)
-        except ZeroDivisionError:
-            bin_data["reliability"] = "-"
-            bin_data["date_created"] = bin_data["date_created"].strftime("%Y-%m-%d")
-            result.append(bin_data)
+
+        # set the icon for mini map
+        bin_data["waste_type_icon"] = get_icons(bin_data["type"])[0]
+
+        # set the reliability
+        bin_data["reliability"] = calculate_reliability(bin_data["upvote"], bin_data["downvote"])
+        bin_data["date_created"] = bin_data["date_created"].strftime("%Y-%m-%d")
+        result.append(bin_data)
+
     return result
 
 
