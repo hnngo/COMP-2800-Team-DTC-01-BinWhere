@@ -6,9 +6,7 @@ function reverseGeoCode() {
     $.getJSON(geoAPIStart + lat + ',' + long + geoAPIEnd)
         .done(function (geoData) {
             if (geoData["status"] === "OK") {
-                console.log(geoData);
                 bin_address = geoData.results[0].formatted_address;
-                console.log("Address:" + bin_address);
                 $('#bin-details-location').append(bin_address);
             } else {
                 $('#bin-details-location').append("Vancouver");
@@ -198,3 +196,8 @@ if (iconDeleteGarbage) {
         })
     })
 }
+
+function shareOntwitter(){
+    const url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=Check%20this%20out!`;
+    window.open(url, 'TwitterWindow',"menubar=1,resizable=1,width=600,height=600");
+ }

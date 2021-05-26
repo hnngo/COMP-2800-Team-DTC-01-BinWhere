@@ -5,12 +5,21 @@
 <title>Bin details</title>
 <link rel="stylesheet" href="{{ url_for('static', filename="css/bin-details.css") }}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block body %}
 <div class = "pageContainer">
 {%  include "includes/heading.html" %}
     <div class="masterContainer">
+        <div class="twitter-icon">
+            <a
+                class="fa fa-twitter"
+                onclick="shareOntwitter()"
+                target="_blank"
+            >
+            </a>
+        </div>
         <div class="locationContainer">
             <div class="locationHeader">
                 <img src= "{{ url_for('static', filename="assets/icons/icon-location.png") }}"

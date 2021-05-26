@@ -23,6 +23,7 @@
 
 .locationContainer {
     text-align: center;
+    margin-top: 10px;
 }
 
 .locationHeader {
@@ -217,4 +218,31 @@
 
 #bin-details-type img {
     filter: brightness(0) invert(1);
+}
+
+.twitter-icon {
+    position: absolute;
+    right: 15px;
+    top: 80px;
+}
+
+.fa {
+    padding: 5px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;
+}
+
+/* Facebook */
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
 }
