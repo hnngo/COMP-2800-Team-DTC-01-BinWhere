@@ -100,7 +100,7 @@ def init(app, db):
     @app.route("/add/<lat>/<lng>", methods=["GET"])
     def create_new_location(lat, lng):
         """Create a new bin location"""
-        return render_template("add-location.html", title="New Location", lat=lat, lng=lng)
+        return render_template("add-location.html", title="New Location", show_back=True, lat=lat, lng=lng)
 
     @app.route("/add/save", methods=['GET', 'POST'])
     def submit_new_location():
@@ -108,17 +108,17 @@ def init(app, db):
         user_id = session.get("user_id")
         if user_id is None:
             return jsonify({"error": "You must login first!"})
-        req = request.json
+        req = request.form.to_dict()
 
         bin_data = {
             "comments": [],
             "date_created": datetime.now(),
             "downvote": 0,
             "upvote": 0,
-            "img": str(req["image"][22:]),
+            "img": req["image"],
             "lat": req["lat"],
             "long": req["long"],
-            "type": req["type"],
+            "type": req["type[]"],
             "userID": session.get("user_id"),
             "who_downvote": [],
             "who_upvote": []
