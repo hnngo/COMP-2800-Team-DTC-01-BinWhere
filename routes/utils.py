@@ -6,6 +6,19 @@ def sidebar_default():
     return {"name": "Welcome", "avatar": url_for("static", filename="assets/images/logo-v1.png")}
 
 
+def MAX_SIZE():
+    """Maximum size of the uploading file
+    """
+    return 1048487
+
+
+def chunk_list(encoded_string: str) -> list:
+    chunk_size = int(MAX_SIZE() / 3)
+    chunks = [encoded_string[i:i + chunk_size] for i in range(0, len(encoded_string), chunk_size)]
+    print(len(encoded_string))
+    return chunks
+
+
 def search_item(db, keyword):
     """Search for a particular item
     """
@@ -55,10 +68,13 @@ def bin_data_array(db, uploaded_bin: list) -> list:
     return result
 
 
-def calculate_reliability(upvote: int, downvote: int) -> float:
+def calculate_reliability(upvote: int, downvote: int) -> int:
     """Calculate the reliability of bin
     """
-    return round(upvote / (upvote + downvote) * 100)
+    if upvote == 0 and downvote == 0:
+        return 50
+    else:
+        return round(upvote / (upvote + downvote) * 100)
 
 
 def encoding(photo_object):
