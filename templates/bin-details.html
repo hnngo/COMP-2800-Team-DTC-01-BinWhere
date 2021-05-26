@@ -75,13 +75,16 @@
             </div>
 
             <div class="commentList">
-                {% for comment in comments  %}
-                    <div class="comment-container">
+                {% for comment in comments %}
+                    <div class="comment-container" data-index="{{ loop.index }}">
                         <img class="comment-avatar" alt="avatar" src="data:image/png;base64,{{ comment['avatar'] }}"/>
                         <div class="comment-content-container">
                             <strong class="comment-name">{{ comment['name'] }}:&nbsp;</strong>
                             <span class="comment-content">{{ comment['content'] }}</span>
                         </div>
+                        {% if user_id == comment['user_id'] %}
+                            <img class="comment-delete" alt="avatar" src="{{ url_for('static', filename="assets/icons/icon-delete-v2.png") }}"/>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>

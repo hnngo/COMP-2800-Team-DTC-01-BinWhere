@@ -109,3 +109,18 @@ def init(app, db):
         return {"error": 0,
                 "name": current_user_data.get("name"),
                 "avatar": current_user_data.get("avatar")}
+
+    @app.route('/comment', methods=['DELETE'])
+    def delete_comment():
+        comment_index = int(request.form["comment_index"])
+        bin_id = request.form["bin_id"]
+
+        bin_ref = db.collection('bins').document(bin_id)
+        bin_data = bin_ref.get().to_dict()
+        new_comments = bin_data['comments']
+        new_comments.pop(comment_index)
+        bin_ref.update({
+            "comments": new_comments
+        })
+
+        return {"error": 0}

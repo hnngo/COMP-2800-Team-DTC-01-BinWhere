@@ -36,7 +36,8 @@ def init(app, db):
             formatted_comments.append({
                 "content": comment['content'],
                 "name": user_doc.get("name"),
-                "avatar": user_doc.get("avatar")
+                "avatar": user_doc.get("avatar"),
+                "user_id": comment_author_id
             })
         formatted_comments.reverse()
 

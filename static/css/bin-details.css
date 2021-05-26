@@ -159,7 +159,7 @@
     justify-content: flex-start;
     align-items: center;
     margin: 5px 0;
-    background-color: #ffde599e;
+    background-color: #ffde59ba;
     border-radius: 15px;
     padding: 5px;
 }
@@ -172,12 +172,17 @@
 .comment-content-container {
     text-align: left;
     margin-left: 5px;
+    flex: 1;
 }
 
 .comment-name {
     color: var(--primary-black);
 }
 
+.comment-delete {
+    width: 16px;
+    margin-right: 10px;
+}
 
 .commentInput-container {
     display: flex;
