@@ -98,9 +98,9 @@ def init(app, db):
 
         closest_bin = get_closest_bin(lat, long, waste_type)
 
-        return render_template("search-results.html", title=name, description=description, image=image,
+        return render_template("search-results.html", title="Search Result", description=description, image=image,
                                not_include=not_include, waste_type_icon=waste_type_icon, waste_type=waste_type,
-                               closest_bin=closest_bin)
+                               closest_bin=closest_bin, show_back=True)
 
     def get_closest_bin(lat: str, long: str, waste_type: str) -> dict:
         """Get the id of the closest bin to the user's current location."""
