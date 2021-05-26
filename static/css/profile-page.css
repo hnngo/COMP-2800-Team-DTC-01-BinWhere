@@ -159,7 +159,7 @@ article {
     justify-content: center;
 }
 
-.photo-info {
+.bin-info {
     grid-area: information;
     font-size: 16px;
     padding: 6px;
@@ -169,11 +169,11 @@ article {
     width: 100%;
 }
 
-.photo-info * {
+.bin-info * {
     margin: 0;
 }
 
-.photo-info button {
+.bin-info button {
     font-size: 16px;
     background-color: var(--primary-yellow);
     padding: 3px 15px;
