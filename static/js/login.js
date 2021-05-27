@@ -5,7 +5,7 @@ window.onload = () => {
 
     loginButton.addEventListener('click', (event) => {
         event.preventDefault();
-        showSpinner()
+        showSpinner();
 
         $.ajax({
             url: "/login",
@@ -39,6 +39,6 @@ window.onload = () => {
                 clearSpinner();
                 showWarningPopup("Something is wrong, please try again!");
             }
-        })
+        });
     });
 }

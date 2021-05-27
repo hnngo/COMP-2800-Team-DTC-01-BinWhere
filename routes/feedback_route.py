@@ -1,4 +1,4 @@
-from flask import request, render_template, jsonify, session
+from flask import request, jsonify, session
 from . import utils
 
 
@@ -92,21 +92,6 @@ def init(app, db):
                 return jsonify({"error": 0, "type": "NEW", "reliability": reliability})
         else:
             return jsonify({"error": "There is no such bin"})
-
-    def calculate_reliability(bin_id):
-        bin_ref = db.collection('bins').document(bin_id)
-        bin_data = bin_ref.get()
-        upvote = bin_data.to_dict()["upvote"]
-        downvote = bin_data.to_dict()["downvote"]
-        if upvote == 0 and downvote == 0:
-            reliability = str(50) + "%"
-            return reliability
-        elif upvote == 0:
-            reliability = str(0) + "%"
-            return reliability
-        else:
-            reliability = str(upvote/(upvote+downvote) * 100) + "%"
-            return reliability
 
     @app.route('/comment', methods=['POST'])
     def post_comment():

@@ -21,7 +21,8 @@ def init(app, db, auth):
             return {}
             # return redirect("/login")
 
-        return render_template("profile-page.html", title="My Account",  show_back=True, user_avatar=user_avatar, profile_data=profile_data, postedbin_data=bin_data)
+        return render_template("profile-page.html", title="My Account",  show_back=True, user_avatar=user_avatar,
+                               profile_data=profile_data, postedbin_data=bin_data)
 
     @app.route("/profile/name", methods=["POST"])
     def modify_user_name():
