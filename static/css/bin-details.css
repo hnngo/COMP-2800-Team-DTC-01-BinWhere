@@ -12,6 +12,7 @@
     display: flex;
     flex-wrap: nowrap;
 }
+
 .masterContainer{
     flex-wrap: nowrap;
     justify-content: center;
@@ -62,7 +63,6 @@
     justify-items: center;
 }
 
-
 .modificationContainer {
     text-align: center;
     display: flex;
@@ -96,6 +96,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .reliability {
     margin-left: 5px;
 }
@@ -107,13 +108,11 @@
     margin-top: 10px
 }
 
-
 .percentage {
     display: inline-block;
     color: whitesmoke;
     padding: 0 1em 0 1em;
 }
-
 
 .wasteTypeContainer{
     text-align: center;
