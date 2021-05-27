@@ -1,4 +1,10 @@
 let search_result = [];
+const state = Object.freeze({
+    INIT: "INIT",
+    LIST: "LIST",
+    DETAIL: "DETAIL"
+})
+let currentState = state.INIT;
 
 window.onload = () => {
     showCategory();
@@ -42,10 +48,46 @@ function search(keyword) {
                 hideCategory();
                 setTimeout(() => {
                     renderCardResult(response.data);
+
+                    currentState = state.LIST;
+                    showBackToPrevious();
                 }, 600)
             }
         }
     })
+}
+
+function showBackToPrevious() {
+    const showBackButton = document.querySelector(".wiki-back-to-prev");
+    if (showBackButton) {
+        showBackButton.classList.remove("d-none");
+        showBackButton.removeEventListener('click', handleClickBackToPrev);
+        showBackButton.addEventListener('click', handleClickBackToPrev);
+    }
+}
+
+function hideBackToPrevious() {
+    const showBackButton = document.querySelector(".wiki-back-to-prev");
+    if (showBackButton) {
+        showBackButton.classList.add("d-none");
+        showBackButton.removeEventListener('click', handleClickBackToPrev);
+    }
+}
+
+function handleClickBackToPrev() {
+    if (currentState === state.LIST) {
+        document.querySelector(".wiki-search-input").value = "";
+        currentState = state.INIT;
+        hideBackToPrevious();
+        hideAllCurrentResultCard();
+        showCategory();
+    } else if (currentState === state.DETAIL) {
+        currentState = state.LIST;
+        hideBackToPrevious();
+        hideResultData();
+        renderCardResult(search_result);
+        setTimeout(() => showBackToPrevious(), 100);
+    }
 }
 
 function hideCategory() {
@@ -65,7 +107,7 @@ function showCategory() {
     const categoryContainer = document.createElement('div');
     categoryContainer.classList.add("wiki-common-search-container");
     categoryContainer.innerHTML = `
-        <div class="wiki-common-item">
+        <div class="wiki-common-item animate__animated animate__zoomIn">
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
@@ -74,7 +116,7 @@ function showCategory() {
             </div>
             <div class="wiki-common-title">Bottle</div>
         </div>
-        <div class="wiki-common-item">
+        <div class="wiki-common-item animate__animated animate__zoomIn">
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
@@ -83,7 +125,7 @@ function showCategory() {
             </div>
             <div class="wiki-common-title">Can</div>
         </div>
-        <div class="wiki-common-item">
+        <div class="wiki-common-item animate__animated animate__zoomIn">
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
@@ -92,16 +134,16 @@ function showCategory() {
             </div>
             <div class="wiki-common-title">Card box</div>
         </div>
-        <div class="wiki-common-item">
+        <div class="wiki-common-item animate__animated animate__zoomIn">
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
-                    src="/static/assets/icons/icon-glass.png"
+                    src="/static/assets/icons/icon-plastic.png"
                 />
             </div>
-            <div class="wiki-common-title">Glass</div>
+            <div class="wiki-common-title">Plastic</div>
         </div>
-        <div class="wiki-common-item">
+        <div class="wiki-common-item animate__animated animate__zoomIn">
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
@@ -110,7 +152,7 @@ function showCategory() {
             </div>
             <div class="wiki-common-title">Container</div>
         </div>
-        <div class="wiki-common-item">
+        <div class="wiki-common-item animate__animated animate__zoomIn">
             <div class="wiki-common-box">
                 <img
                     class="wiki-common-icon"
@@ -142,6 +184,14 @@ function hideAllCurrentResultCard() {
 function renderCardResult(items) {
     const resultContainer = document.querySelector(".wiki-common-search-result");
 
+    if (!items.length) {
+        const cardContainer = document.createElement("div");
+        cardContainer.setAttribute('class', "wiki-common-search-result-card wiki-common-no-result");
+        cardContainer.textContent = `No results found`;
+        resultContainer.appendChild(cardContainer);
+        return;
+    }
+
     items.forEach(item => {
         const cardContainer = document.createElement("div");
         cardContainer.classList.add("wiki-common-search-result-card", "animate__animated", "animate__fadeInRight");
@@ -156,6 +206,7 @@ function renderCardResult(items) {
         resultContainer.appendChild(cardContainer);
 
         cardContainer.addEventListener('click', () => {
+            currentState = state.DETAIL;
             hideAllCurrentResultCard();
             showResultDetail(item);
         })

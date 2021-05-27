@@ -7,48 +7,60 @@
 {% endblock %}
 
 {% block body %}
-    {%  include "includes/heading.html" %}
-    <form class="container" action="/" method="POST">
+    {% with show_back=show_back %}
+        {% include "includes/heading.html" %}
+    {% endwith %}
+    <form class="container d-none">
         <div class="locationContainer">
             <div class="locationHeader">
                 <img src= "{{ url_for('static', filename="assets/icons/icon-location.png") }}"
                             alt = "icon-location"/>
                 <h4 class = "location"> Location </h4>
             </div>
-            <div id="bin-details-location">location goes here {{ location }}</div>
+            <div id="bin-details-location"></div>
         </div>
-
         <div class="bin-image-container">
-                <div id="bin-details-images">Images goes here</div>
-            </div>
+            <img class="bin-add-image" src="{{ url_for("static", filename="assets/icons/icon-add-image.png") }}" alt="add to select image"/>
+            <input name="bin-img" type="file" id="bin-details-images"/>
+        </div>
 
         <div class = "wasteTypeContainer">
             <div class ="wasteTypeHeader">
                 <img src= "{{ url_for('static', filename="assets/icons/icon-waste-type.png") }}"
                             alt = "icon-wasteType" class ="icon-wasteType"/> <h4 class = "wasteType"> Waste Type </h4>
             </div>
-            <div id="bin-details-type">
-                <select id="types" name="types" required>
-                    <option value="placeholder" disabled selected hidden>Select type of waste</option>
-                    <option value="waste-type-Garbage">Garbage</option>
-                    <option value="waste-type-Recyclable">Recyclable</option>
-                    <option value="waste-type-Food">Food</option>
-                    <option value="waste-type-Hazardous">Hazardous</option>
-                    <option value="waste-type-Cardboard">Cardboard</option>
-                    <option value="waste-type-Glass">Glass</option>
-                    <option value="waste-type-Others">Others</option>
+
+            <div class="tag-wrapper" id="bin-details-type">
+                <div class="tag-chosen"></div>
+                <div class="break"></div>
+                <select id="types" name="types" class="tag-select">
+                    <option value="" disabled selected>Select type of waste</option>
+                    <option value="garbage">Garbage</option>
+                    <option value="container">Container</option>
+                    <option value="food">Food</option>
+                    <option value="hazardous">Hazardous</option>
+                    <option value="glass">Glass</option>
+                    <option value="others">Others</option>
                 </select>
             </div>
-        </div>
-        <div class="add-waste-type">
-                <img src="{{ url_for('static', filename="assets/icons/icon-add.png")}}"
-                       alt="add icon" class = "addIcon">
-                    <label for="types" class="click">Click to add more types</label>
+
         </div>
 
         <div class = "save-btn-container">
-            <button type="submit" value = "SAVE" class = "saveButton">SAVE</button>
+            <button value="SAVE" id="saveButton">SAVE</button>
         </div>
     </form>
+{% endblock %}
+
+{% block bottom %}
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+<script src="/static/js/add-location.js"></script>
+<script type="text/javascript">
+    const new_lat = {{ lat }};
+    const new_long = {{ lng }};
+    reverseGeoCode();
+</script>
+
+
 {% endblock %}
 

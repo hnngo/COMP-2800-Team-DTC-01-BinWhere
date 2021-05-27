@@ -5,7 +5,7 @@
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 .wiki-container {
@@ -20,12 +20,22 @@
     padding: 20px;
 }
 
+.wiki-back-to-prev {
+    background-color: var(--primary-yellow);
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: var(--primary-black);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
 .wiki-search-container {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
 }
 
 .wiki-search-input {
@@ -89,6 +99,14 @@
     padding: 10px;
     display: flex;
     margin: 15px 0;
+}
+
+.wiki-common-no-result {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
 }
 
 .wiki-search-result-image {

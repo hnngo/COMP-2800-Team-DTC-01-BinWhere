@@ -6,6 +6,26 @@ def sidebar_default():
     return {"name": "Welcome", "avatar": url_for("static", filename="assets/images/logo-v1.png")}
 
 
+def ICONS():
+    icon_path = "/static/assets/icons/map/"
+    return {
+        "container": icon_path + "icon-container.png",
+        "recyclable": icon_path + "icon-container.png",
+        "paper": icon_path + "icon-paper.png",
+        "hazardous": icon_path + "icon-hazardous.png",
+        "garbage":  icon_path + "icon-garbage.png",
+        "glass": icon_path + "icon-glass.png",
+        "food": icon_path + "icon-food.png",
+        "others": icon_path + "icon-multiple.png",
+        "multiple": icon_path + "icon-multiple.png"
+    }
+
+
+def get_icons(bin_types: list) -> list:
+    """Convert list of bin types to list of icon paths for those types."""
+    return [ICONS()[bin_type] for bin_type in bin_types]
+
+
 def search_item(db, keyword):
     """Search for a particular item
     """
@@ -44,21 +64,25 @@ def bin_data_array(db, uploaded_bin: list) -> list:
     for bin_id in uploaded_bin:
         bin_data = db.collection("bins").document(bin_id).get().to_dict()
         bin_data["bin_id"] = bin_id
-        try:
-            bin_data["reliability"] = calculate_reliability(bin_data["upvote"], bin_data["downvote"])
-            bin_data["date_created"] = bin_data["date_created"].strftime("%Y-%m-%d")
-            result.append(bin_data)
-        except ZeroDivisionError:
-            bin_data["reliability"] = "-"
-            bin_data["date_created"] = bin_data["date_created"].strftime("%Y-%m-%d")
-            result.append(bin_data)
+
+        # set the icon for mini map
+        bin_data["waste_type_icon"] = get_icons(bin_data["type"])[0]
+
+        # set the reliability
+        bin_data["reliability"] = calculate_reliability(bin_data["upvote"], bin_data["downvote"])
+        bin_data["date_created"] = bin_data["date_created"].strftime("%Y-%m-%d")
+        result.append(bin_data)
+
     return result
 
 
-def calculate_reliability(upvote: int, downvote: int) -> float:
+def calculate_reliability(upvote: int, downvote: int) -> int:
     """Calculate the reliability of bin
     """
-    return round(upvote / (upvote + downvote) * 100)
+    if upvote == 0 and downvote == 0:
+        return 50
+    else:
+        return round(upvote / (upvote + downvote) * 100)
 
 
 def encoding(photo_object):

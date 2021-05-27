@@ -14,10 +14,9 @@
         <main>
             <div class="profile-img">
                 <div class="profile-avatar">
-                    <img id="user-img" src="data:image/png;base64,{{ profile_data.avatar }}" alt="avatar">
-                    <input type="file" name="avatar" id="edit" enctype="multipart/form-data">
+                    <img id="user-img" src="data:image/png;base64,{{ user_avatar }}" alt="avatar">
+                    <input type="file" name="avatar" id="edit">
                 </div>
-{#                <input type="submit" value="Select" id="select">#}
 
             </div>
             <div class="username">
@@ -45,10 +44,16 @@
                             <div class="bin-photo">
                                 <img src="{{ postedbin_data[i].image }}" alt="garbage bin">
                             </div>
-                            <div class="photo-info">
+                            <div class="bin-info">
                                 <p id="reliability">Reliability: {{ postedbin_data[i].reliability }} %</p>
                                 <p id="date">Date Posted: {{ postedbin_data[i].date_created }}</p>
                                 <button data-id="{{ postedbin_data[i]["bin_id"] }}" id="delete-btn">Delete</button>
+                            </div>
+                            <div class="bin-location">
+                                <a href="/?filter={{ postedbin_data[i]["type"][0] }}&focus={{ postedbin_data[i]["lat"] }},{{ postedbin_data[i]["long"] }}">
+                                    <img id="map-search-preview"
+                         src="https://maps.googleapis.com/maps/api/staticmap?center={{ postedbin_data[i]["lat"] }},{{ postedbin_data[i]["long"] }}&zoom=17&size=225x225&markers={{ postedbin_data[i]["lat"] }},{{ postedbin_data[i]["long"] }}&key=AIzaSyCCHFhbJQACuCA70fcban9dr2GS8PuUiO8">
+                                </a>
                             </div>
                         </div>
                     {%  endfor %}

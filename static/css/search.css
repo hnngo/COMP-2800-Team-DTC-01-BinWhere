@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.pageContainer {
+    background-color: var(--primary-black);
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.masterContainer{
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.itemNameContainer {
+    text-align: center;
+}
+
+.itemNameHeader, .nearestBinHeader, .doesNotIncludeHeader {
+    color: var(--primary-yellow);
+    padding-bottom: 0.3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wasteTypeHeader, .descriptionHeader {
+    color: var(--primary-green);
+    padding-bottom: 0.3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.itemImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.itemImageContainer img {
+    background-color: var(--primary-green);
+    width: 280px;
+    height: 200px;
+    border-radius: 2rem;
+    text-align: center;
+    justify-items: center;
+}
+
+.nearestBinContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.nearestBinImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nearestBinImage img {
+    background-color: var(--primary-green);
+    border: 1px solid white;
+    border-radius: 2rem;
+    text-align: center;
+    justify-items: center;
+}
+
+.wasteTypeContainer, .descriptionContainer, .doesNotIncludeContainer {
+    text-align: center;
+    padding: 0 0 18px 0;
+    margin-top: 20px;
+}
+
+#bin-details-type img {
+    filter: brightness(0) invert(1);
+}
+
+.description, .doesNotInclude, #bin-details-type {
+    color: whitesmoke;
+    font-size: 14px;
+    margin-top: 10px;
+}

@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--primary-black);
+}
+
+.social {
+    height: calc(100vh - 62px);
+}
+
+.tweet-content {
+    overflow-y: scroll;
+}
