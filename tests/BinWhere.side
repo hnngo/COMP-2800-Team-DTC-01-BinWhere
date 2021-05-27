@@ -2399,11 +2399,11 @@
       "id": "c1c4df1a-608c-4714-aaea-dcbaff61ab1b",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "id=1jVOS2Qy3JsdFoNtTxtp",
+      "target": "id=3rcVrZPxYg5W69F2oAtk",
       "targets": [
-        ["id=1jVOS2Qy3JsdFoNtTxtp", "id"],
-        ["css=#\\31jVOS2Qy3JsdFoNtTxtp", "css:finder"],
-        ["xpath=//div[@id='1jVOS2Qy3JsdFoNtTxtp']", "xpath:attributes"],
+        ["id=3rcVrZPxYg5W69F2oAtk", "id"],
+        ["css=#\\33rcVrZPxYg5W69F2oAtk", "css:finder"],
+        ["xpath=//div[@id='3rcVrZPxYg5W69F2oAtk']", "xpath:attributes"],
         ["xpath=//section/div", "xpath:position"]
       ],
       "value": ""
