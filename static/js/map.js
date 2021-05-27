@@ -105,7 +105,7 @@ function initMap() {
     const instruction_msg = document.createElement("div");
     instruction_msg.textContent = "Place the pin on the desired location"
     instruction_msg.setAttribute("id", "instruction-message");
-    instruction_msg.style.transform = "translateX(-52px) translateY(74px)";
+    instruction_msg.style.transform = "translateY(74px)";
     instruction_msg.style.width = "250px";
     instruction_msg.style.backgroundColor = "var(--primary-black)";
     instruction_msg.style.color = "white";
@@ -150,22 +150,27 @@ function initMap() {
     // map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(buttonGroup);
 
     // Show and move the pin icon
-     addLocationButton.addEventListener("click",function() {
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].pop(addLocationButton);
-        map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(pinIcon);
-        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(instruction_msg);
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(buttonGroup);
+    addLocationButton.addEventListener("click",async function() {
+        const currentUserId = await getCurrentUserId();
+
+        if (currentUserId) {
+            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].pop(addLocationButton);
+            map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(pinIcon);
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(instruction_msg);
+            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(buttonGroup);
+        } else {
+            showWarningPopup("Please login first!");
+        }
     });
 
     cancelButton.addEventListener("click", function() {
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].pop();
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(addLocationButton);
         map.controls[google.maps.ControlPosition.RIGHT_CENTER].pop()
-        map.controls[google.maps.ControlPosition.RIGHT_TOP].pop();
+        map.controls[google.maps.ControlPosition.TOP_CENTER].pop();
     })
 
     addButton.addEventListener("click", function() {
-        console.log("clicked")
         showSpinner();
 
         let lat = map.getCenter().lat();
