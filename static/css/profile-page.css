@@ -180,6 +180,11 @@ article {
     margin: 3px auto 16px;
 }
 
+.bin-location img {
+    border: 1px solid white;
+    border-radius: 2rem;
+}
+
 #map-search-preview {
     width: 160px;
 }
