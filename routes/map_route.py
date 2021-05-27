@@ -139,12 +139,17 @@ def init(app, db):
         if user_id is None:
             return jsonify({"error": "You must login first!"})
 
+        try:
+            image = request.form["image"]
+        except KeyError:
+            image = constants.getImageBin()
+
         bin_data = {
             "comments": [],
             "date_created": datetime.now(),
             "downvote": 0,
             "upvote": 0,
-            "image": request.form["image"],
+            "image": image,
             "lat": float(request.form["lat"]),
             "long": float(request.form["long"]),
             "type": request.form["type"].split(","),
