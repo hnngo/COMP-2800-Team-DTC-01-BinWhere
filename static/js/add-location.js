@@ -99,7 +99,7 @@ function submitNewData(imageData) {
     submitBtn.addEventListener("click", (event) => {
         event.preventDefault();
         const selectedType = document.querySelector(".tag-chosen").getAttribute("data-chosen");
-        const selectedTypeList = selectedType.substr(1,)
+        const selectedTypeList = selectedType.substr(1,);
         showSpinner();
 
         $.ajax({
@@ -129,6 +129,6 @@ function submitNewData(imageData) {
                 clearSpinner();
                 showWarningPopup("Something is wrong, please try again!");
             }
-        })
-    })
+        });
+    });
 }
