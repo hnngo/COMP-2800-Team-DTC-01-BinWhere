@@ -158,10 +158,10 @@ function initMap() {
     });
 
     cancelButton.addEventListener("click", function() {
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].pop();
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(addLocationButton);
-        map.controls[google.maps.ControlPosition.RIGHT_CENTER].pop(pinIcon);
-        map.controls[google.maps.ControlPosition.RIGHT_TOP].pop(instruction_msg);
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].pop(buttonGroup);
+        map.controls[google.maps.ControlPosition.RIGHT_CENTER].pop()
+        map.controls[google.maps.ControlPosition.RIGHT_TOP].pop();
     })
 
     addButton.addEventListener("click", function() {

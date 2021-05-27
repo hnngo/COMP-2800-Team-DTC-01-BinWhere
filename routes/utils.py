@@ -16,6 +16,7 @@ def ICONS():
         "garbage":  icon_path + "icon-garbage.png",
         "glass": icon_path + "icon-glass.png",
         "food": icon_path + "icon-food.png",
+        "others": icon_path + "icon-multiple.png",
         "multiple": icon_path + "icon-multiple.png"
     }
 

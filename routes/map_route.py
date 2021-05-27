@@ -143,11 +143,11 @@ def init(app, db):
             "date_created": datetime.now(),
             "downvote": 0,
             "upvote": 0,
-            "img": request.form["image"],
+            "image": request.form["image"],
             "lat": request.form["lat"],
             "long": request.form["long"],
             "type": request.form["type"].split(","),
-            "userID": session.get("user_id"),
+            "userId": session.get("user_id"),
             "who_downvote": [],
             "who_upvote": []
         }
