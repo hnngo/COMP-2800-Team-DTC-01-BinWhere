@@ -7,6 +7,7 @@ from . import constants
 def init(app, db, auth):
     @app.route('/current-user', methods=['GET'])
     def get_current_user():
+        """Get Current User Information"""
         try:
             return jsonify({'error': 0, 'session_id': session['session_id'], 'user_id': session['user_id']})
         except KeyError:
@@ -14,15 +15,18 @@ def init(app, db, auth):
 
     @app.route('/logout', methods=['GET'])
     def post_logout():
+        """Log current user out"""
         session.clear()
         return redirect("/")
 
     @app.route('/login', methods=['GET'])
     def get_login():
+        """Get login page"""
         return render_template("login.html")
 
     @app.route('/login', methods=['POST'])
     def post_login():
+        """Log user in"""
         email = request.form['name']
         password = request.form['pass']
 
@@ -45,10 +49,12 @@ def init(app, db, auth):
 
     @app.route('/signup', methods=['GET'])
     def get_signup():
+        """Get Signup page"""
         return render_template("signup.html")
 
     @app.route('/signup', methods=['POST'])
     def post_signup():
+        """Signup user"""
         name = request.form['name']
         email = request.form['email']
         password = request.form['pass']

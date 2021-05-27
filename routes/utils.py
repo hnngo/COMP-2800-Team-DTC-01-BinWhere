@@ -3,10 +3,12 @@ from flask import url_for
 
 
 def sidebar_default():
+    """Get sidebar default options"""
     return {"name": "Welcome", "avatar": url_for("static", filename="assets/images/logo-v1.png")}
 
 
 def ICONS():
+    """Get icons image"""
     icon_path = "/static/assets/icons/map/"
     return {
         "container": icon_path + "icon-container.png",

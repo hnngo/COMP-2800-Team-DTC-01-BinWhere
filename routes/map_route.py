@@ -8,6 +8,7 @@ from google.api_core import exceptions
 def init(app, db, tweet_api):
     @app.route("/", methods=["GET"])
     def get_map():
+        """Get homepage"""
         user_id = session.get("user_id")
         user = db.collection("users").document(user_id).get().to_dict()
 
@@ -30,6 +31,7 @@ def init(app, db, tweet_api):
 
     @app.route("/bin", methods=["GET"])
     def get_bin_details():
+        """Get bin detail page"""
         bin_id = request.args.get("id")
         doc = db.collection("bins").document(bin_id).get()
         lat = doc.get("lat")
@@ -66,6 +68,7 @@ def init(app, db, tweet_api):
 
     @app.route("/search", methods=["POST"])
     def search_query():
+        """Perform search"""
         query = request.form["keyword"]
 
         try:
@@ -88,6 +91,7 @@ def init(app, db, tweet_api):
 
     @app.route("/search", methods=["GET"])
     def get_search_results():
+        """Get search result"""
         item_id = request.args.get("id")
         lat = request.args.get("lat")
         long = request.args.get("long")

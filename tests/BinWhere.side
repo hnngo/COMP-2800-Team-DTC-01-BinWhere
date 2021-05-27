@@ -23,14 +23,10 @@
     }, {
       "id": "2dbfd08c-fc3f-42b6-938c-d834818fd8db",
       "comment": "",
-      "command": "assertElementPresent",
+      "command": "waitForElementPresent",
       "target": "css=.gm-style > div:nth-child(1) > div:nth-child(3)",
-      "targets": [
-        ["css=.gm-style > div:nth-child(1) > div:nth-child(3)", "css:finder"],
-        ["xpath=//div[@id='map']/div/div/div/div[3]", "xpath:idRelative"],
-        ["xpath=//div[5]/div/div/div/div[3]", "xpath:position"]
-      ],
-      "value": ""
+      "targets": [],
+      "value": "30000"
     }, {
       "id": "733b32bf-ea6d-4318-afaf-10d21bbffe76",
       "comment": "",
