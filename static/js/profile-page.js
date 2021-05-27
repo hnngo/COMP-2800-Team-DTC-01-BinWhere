@@ -40,7 +40,7 @@ function editUsername() {
         submit_new_username.style.display = "none";
 
         event.preventDefault();
-        showSpinner()
+        showSpinner();
 
         $.ajax({
             url: "/profile/name",
@@ -62,7 +62,7 @@ function editUsername() {
                 clearSpinner();
                 showWarningPopup("Something is wrong, please try again!")
             }
-        })
+        });
     });
 }
 
@@ -89,7 +89,8 @@ function editUserAvatar() {
                 success: (response) => {
                     if (!response.error) {
                         clearSpinner();
-                        document.querySelector("#user-img").setAttribute("src", "data:image/png;base64," + response.updated_img);
+                        document.querySelector("#user-img")
+                            .setAttribute("src", "data:image/png;base64," + response.updated_img);
                         new_avatar.value = "";
 
                     } else {
@@ -102,7 +103,7 @@ function editUserAvatar() {
                     clearSpinner();
                     showWarningPopup("Something is wrong, please try again!");
                 }
-            })
+            });
         }
 
         // Read in the image file as a data URL.
@@ -138,7 +139,7 @@ function deletePicture() {
         // Delete the picture from the screen
         confirm_delete.addEventListener("click", function(event) {
             event.preventDefault();
-            showSpinner()
+            showSpinner();
 
             $.ajax({
                 url:"/profile/bin",
@@ -153,7 +154,7 @@ function deletePicture() {
                         if (delete_btn.getAttribute("data-id") === bin_id) {
                             document.getElementById(bin_id).remove();
                         }
-                        showSuccessPopup("Deleted Successfully!")
+                        showSuccessPopup("Deleted Successfully!");
                     } else {
                         showWarningPopup("Something is wrong, please try again!");
                     }
@@ -163,7 +164,7 @@ function deletePicture() {
                     clearSpinner();
                     showWarningPopup("Something is wrong, please try again!");
                 }
-            })
+            });
         });
-    })
+    });
 }
