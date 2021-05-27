@@ -22,7 +22,7 @@ window.onload = () => {
     // Add event to when click icon
     searchIcon.addEventListener("click", (event) => {
         search(searchInput.value);
-    })
+    });
 }
 
 
@@ -54,7 +54,7 @@ function search(keyword) {
                 }, 600)
             }
         }
-    })
+    });
 }
 
 function showBackToPrevious() {
@@ -161,7 +161,7 @@ function showCategory() {
             </div>
             <div class="wiki-common-title">Bag</div>
         </div>
-    `
+    `;
     wikiContainer.appendChild(categoryContainer);
     addEventClickCategory();
 }
@@ -178,7 +178,7 @@ function addEventClickCategory() {
 }
 
 function hideAllCurrentResultCard() {
-    $(".wiki-common-search-result-card").remove()
+    $(".wiki-common-search-result-card").remove();
 }
 
 function renderCardResult(items) {
@@ -201,7 +201,7 @@ function renderCardResult(items) {
                 <div class="wiki-search-result-name">${item.name}</div>
                 <p class="wiki-search-result-description">${shortContent(item.description)}</p>
             </div>
-        `
+        `;
 
         resultContainer.appendChild(cardContainer);
 
@@ -209,9 +209,8 @@ function renderCardResult(items) {
             currentState = state.DETAIL;
             hideAllCurrentResultCard();
             showResultDetail(item);
-        })
-    })
-
+        });
+    });
 }
 
 function shortContent(text) {
@@ -254,7 +253,7 @@ function showResultDetail(item) {
                 ${item.type}
             </div>
         </div>
-    `
+    `;
 
     if (otherItems.length) {
         let similar_html = "";
@@ -265,19 +264,16 @@ function showResultDetail(item) {
                     <div class="wiki-similar-name">${i.name}</div>
                 </div>
             `;
-        })
+        });
         cardDetailContainer.innerHTML += `
             <div class="wiki-detail-similar-title">Similar items:</div>
             <div class="wiki-detail-similar">
                 ${similar_html}
             </div>
-        `
-
+        `;
     }
-
     wikiContainer.appendChild(cardDetailContainer);
     addClickEventToSimilar(otherItems);
-
 }
 
 function addClickEventToSimilar(otherItems) {
