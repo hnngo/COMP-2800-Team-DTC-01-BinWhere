@@ -202,7 +202,12 @@ if (iconDeleteGarbage) {
     })
 }
 
-function shareOntwitter(){
+function shareOnTwitter() {
+    const url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=Check%20this%20out!`;
+    window.open(url, 'TwitterWindow',"menubar=1,resizable=1,width=600,height=600");
+}
+
+function shareOnOfficialTwitter(){
     const content = `Check%20this%20out!!%0A${encodeURIComponent(window.location.href)}`
     $.ajax({
         url: "/feed/post",

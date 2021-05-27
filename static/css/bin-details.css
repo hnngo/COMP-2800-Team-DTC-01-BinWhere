@@ -248,3 +248,7 @@
     background: #55ACEE;
     color: white;
 }
+
+.twitter-official {
+    background: var(--primary-green);
+}
