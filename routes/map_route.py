@@ -1,6 +1,5 @@
 from flask import render_template, request, redirect, session, jsonify
 import json
-import requests
 from . import utils, constants
 from datetime import datetime
 from google.api_core import exceptions
@@ -163,4 +162,3 @@ def init(app, db):
 
         except exceptions.InvalidArgument as error:
             return jsonify({"error": str(error)})
-
