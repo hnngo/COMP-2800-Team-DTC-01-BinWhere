@@ -121,7 +121,7 @@ function submitNewData(imageData) {
                 } else {
                     clearSpinner();
                     showWarningPopup("The image file is too big!", () => {
-                        document.querySelector(".bin-image-container img").src = "/static/assets/icons/icon-add-img.png";
+                        document.querySelector(".bin-image-container img").src = "/static/assets/icons/icon-add-image.png";
                     });
                 }
             },
