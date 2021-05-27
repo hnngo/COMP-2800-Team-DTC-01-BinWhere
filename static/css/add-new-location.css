@@ -47,6 +47,10 @@ form {
     position: relative;
 }
 
+.bin-add-image {
+    height: 200px;
+}
+
 #bin-details-images::-webkit-file-upload-button {
     visibility: hidden;
 }

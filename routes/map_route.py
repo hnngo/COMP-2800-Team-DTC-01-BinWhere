@@ -3,6 +3,7 @@ import json
 import requests
 from . import utils
 from datetime import datetime
+from google.api_core import exceptions
 
 
 def init(app, db):
@@ -144,7 +145,6 @@ def init(app, db):
             db.collection("bins").add(bin_data)
             return {'error': 0}
 
-        except (requests.HTTPError, requests.exceptions.HTTPError) as error:
-            error_dict = json.loads(error.strerror)
-            return jsonify({'error': error_dict["error"]["message"]})
+        except exceptions.InvalidArgument as error:
+            return jsonify({"error": str(error)})
 
