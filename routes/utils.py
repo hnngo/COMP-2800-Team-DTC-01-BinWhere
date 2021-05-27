@@ -10,11 +10,13 @@ def ICONS():
     icon_path = "/static/assets/icons/map/"
     return {
         "container": icon_path + "icon-container.png",
+        "recyclable": icon_path + "icon-container.png",
         "paper": icon_path + "icon-paper.png",
         "hazardous": icon_path + "icon-hazardous.png",
         "garbage":  icon_path + "icon-garbage.png",
         "glass": icon_path + "icon-glass.png",
         "food": icon_path + "icon-food.png",
+        "others": icon_path + "icon-multiple.png",
         "multiple": icon_path + "icon-multiple.png"
     }
 
