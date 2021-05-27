@@ -1,14 +1,14 @@
 from flask import render_template, request, redirect, session, jsonify
 import json
-import requests
 from . import utils, constants
 from datetime import datetime
 from google.api_core import exceptions
 
 
-def init(app, db):
+def init(app, db, tweet_api):
     @app.route("/", methods=["GET"])
     def get_map():
+        """Get homepage"""
         user_id = session.get("user_id")
         user = db.collection("users").document(user_id).get().to_dict()
 
@@ -16,9 +16,11 @@ def init(app, db):
         all_bins = [{doc.id: doc.to_dict()} for doc in map_data.stream()]
 
         if user_id is not None:
-            return render_template("map.html", title="Map", user_name=user["name"], user_avatar="data:image/png;base64,"+user["avatar"], bins=all_bins, is_login=True)
+            return render_template("map.html", title="Map", user_name=user["name"],
+                                   user_avatar="data:image/png;base64,"+user["avatar"], bins=all_bins, is_login=True)
         else:
-            return render_template("map.html", title="Map", user_name=utils.sidebar_default()["name"], user_avatar=utils.sidebar_default()["avatar"], bins=all_bins, is_login=False)
+            return render_template("map.html", title="Map", user_name=utils.sidebar_default()["name"],
+                                   user_avatar=utils.sidebar_default()["avatar"], bins=all_bins, is_login=False)
 
     @app.route('/bin', methods=['DELETE'])
     def delete_bin_location():
@@ -29,6 +31,7 @@ def init(app, db):
 
     @app.route("/bin", methods=["GET"])
     def get_bin_details():
+        """Get bin detail page"""
         bin_id = request.args.get("id")
         doc = db.collection("bins").document(bin_id).get()
         lat = doc.get("lat")
@@ -65,6 +68,7 @@ def init(app, db):
 
     @app.route("/search", methods=["POST"])
     def search_query():
+        """Perform search"""
         query = request.form["keyword"]
 
         try:
@@ -87,6 +91,7 @@ def init(app, db):
 
     @app.route("/search", methods=["GET"])
     def get_search_results():
+        """Get search result"""
         item_id = request.args.get("id")
         lat = request.args.get("lat")
         long = request.args.get("long")
@@ -157,10 +162,19 @@ def init(app, db):
             "who_downvote": [],
             "who_upvote": []
         }
+
         try:
             db.collection("bins").add(bin_data)
+
+            new_bin_ref = db.collection("bins")\
+                            .where("lat", "==", float(request.form["lat"]))\
+                            .where("long", "==", float(request.form["long"]))\
+                            .get()
+
+            tweet_api.update_status(f"Check this out!!\n"
+                                    f"https://binwhere.azurewebsites.net/bin?id={new_bin_ref[0].id}")
+
             return {'error': 0}
 
         except exceptions.InvalidArgument as error:
             return jsonify({"error": str(error)})
-

@@ -8,6 +8,7 @@ from google.api_core import exceptions
 def init(app, db, auth):
     @app.route("/profile", methods=["GET"])
     def get_profile_page():
+        """Get profile page"""
         try:
             user_id = db.collection("users").document(session.get("user_id")).get()
 
@@ -21,10 +22,12 @@ def init(app, db, auth):
             return {}
             # return redirect("/login")
 
-        return render_template("profile-page.html", title="My Account",  show_back=True, user_avatar=user_avatar, profile_data=profile_data, postedbin_data=bin_data)
+        return render_template("profile-page.html", title="My Account",  show_back=True, user_avatar=user_avatar,
+                               profile_data=profile_data, postedbin_data=bin_data)
 
     @app.route("/profile/name", methods=["POST"])
     def modify_user_name():
+        """Edit user name"""
         try:
             db.collection("users").document(session.get("user_id")).update({
                 "name": request.form["name"],
@@ -36,6 +39,7 @@ def init(app, db, auth):
 
     @app.route("/profile/avatar", methods=["POST"])
     def modify_user_avatar():
+        """Edit user avatar"""
         try:
             avatar = request.form.to_dict()['avatar'][22:]
 
@@ -49,6 +53,7 @@ def init(app, db, auth):
 
     @app.route("/profile/bin", methods=["DELETE"])
     def delete_bin():
+        """Delete a bin location in profile page"""
         bin_id = request.form["bin_id"]
         try:
             user = db.collection("users").document(session.get("user_id"))

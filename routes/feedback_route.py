@@ -1,10 +1,11 @@
-from flask import request, render_template, jsonify, session
+from flask import request, jsonify, session
 from . import utils
 
 
 def init(app, db):
     @app.route('/upvote', methods=['POST'])
     def thumbs_up():
+        """Upvote a bin"""
         bin_id = request.json['bin_id']
         user_id = session.get("user_id")
         if user_id is None:
@@ -50,6 +51,7 @@ def init(app, db):
 
     @app.route('/downvote', methods=['POST'])
     def thumbs_down():
+        """Downvote a bin"""
         bin_id = request.json['bin_id']
         user_id = session.get("user_id")
         if user_id is None:
@@ -93,23 +95,9 @@ def init(app, db):
         else:
             return jsonify({"error": "There is no such bin"})
 
-    def calculate_reliability(bin_id):
-        bin_ref = db.collection('bins').document(bin_id)
-        bin_data = bin_ref.get()
-        upvote = bin_data.to_dict()["upvote"]
-        downvote = bin_data.to_dict()["downvote"]
-        if upvote == 0 and downvote == 0:
-            reliability = str(50) + "%"
-            return reliability
-        elif upvote == 0:
-            reliability = str(0) + "%"
-            return reliability
-        else:
-            reliability = str(upvote/(upvote+downvote) * 100) + "%"
-            return reliability
-
     @app.route('/comment', methods=['POST'])
     def post_comment():
+        """Add comment to a bin location"""
         content = request.form["content"]
         current_user_id = session.get("user_id")
         bin_id = request.form["bin_id"]
@@ -136,6 +124,7 @@ def init(app, db):
 
     @app.route('/comment', methods=['DELETE'])
     def delete_comment():
+        """Delete comment of a bin location"""
         comment_index = int(request.form["comment_index"])
         bin_id = request.form["bin_id"]
 

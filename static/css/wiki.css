@@ -20,6 +20,23 @@
     padding: 20px;
 }
 
+.wiki-quote {
+    background-color: var(--primary-black);
+    font-size: 12px;
+    font-style: italic;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+}
+
+.wiki-quote a:visited,
+.wiki-quote a:link,
+.wiki-quote a {
+    color: #1292ea;
+    text-decoration: none;
+}
+
 .wiki-back-to-prev {
     background-color: var(--primary-yellow);
     padding: 5px 10px;

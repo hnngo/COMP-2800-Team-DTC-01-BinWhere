@@ -48,8 +48,8 @@ window.onload = () => {
     }
 
     // Event listeners for clicking search icon
-    let searchIcon = document.getElementById('search-submit')
-    let searchInput = document.getElementById('search-input')
+    let searchIcon = document.getElementById('search-submit');
+    let searchInput = document.getElementById('search-input');
     searchIcon.addEventListener('click', (event) => {
         event.stopPropagation();
         submitSearch();
@@ -64,5 +64,4 @@ window.onload = () => {
             submitSearch();
         }
     });
-
 }

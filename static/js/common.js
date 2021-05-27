@@ -35,7 +35,7 @@ function getCurrentUserId() {
                     res(null);
                 }
             }
-        })
+        });
     });
 }
 
@@ -103,7 +103,7 @@ function showErrorPopup(message, onClose) {
                 onClose();
             }
             popup.remove();
-        })
+        });
     }
 }
 
@@ -137,6 +137,6 @@ function showSuccessPopup(message, onClose) {
                 onClose();
             }
             popup.remove();
-        })
+        });
     }
 }

@@ -47,8 +47,8 @@ upvote.addEventListener('click', function () {
                 showWarningPopup(response.error);
             }
         }
-    })
-})
+    });
+});
 
 
 downvote.addEventListener('click', function () {
@@ -75,8 +75,8 @@ downvote.addEventListener('click', function () {
                 showWarningPopup(response.error);
             }
         }
-    })
-})
+    });
+});
 
 
 // Commenting
@@ -109,7 +109,7 @@ if (commentInputElem) {
                 clearSpinner();
                 showErrorPopup('Something is wrong, please try again');
             }
-        })
+        });
     });
 }
 
@@ -131,6 +131,7 @@ function addNewComment(commentContent, name, avatar) {
 }
 
 addFunctionToDeleteIcon();
+
 function addFunctionToDeleteIcon() {
     const allDeleteIcons = document.querySelectorAll('.comment-delete');
     allDeleteIcons.forEach(element => {
@@ -160,8 +161,8 @@ function addFunctionToDeleteIcon() {
                     clearSpinner();
                     showErrorPopup('Something is wrong, please try again');
                 }
-            })
-        })
+            });
+        });
     });
 }
 
@@ -191,18 +192,43 @@ if (iconDeleteGarbage) {
                 } else {
                     showSuccessPopup('Deleted successfully', () => {
                         window.location.href = "/";
-                    })
+                    });
                 }
             },
             fail: (error) => {
                 clearSpinner();
                 showErrorPopup('Something is wrong, please try again');
             }
-        })
-    })
+        });
+    });
 }
 
-function shareOntwitter(){
+function shareOnTwitter() {
     const url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=Check%20this%20out!`;
     window.open(url, 'TwitterWindow',"menubar=1,resizable=1,width=600,height=600");
+}
+
+function shareOnOfficialTwitter(){
+    const content = `Check%20this%20out!!%0A${encodeURIComponent(window.location.href)}`
+    $.ajax({
+        url: "/feed/post",
+        method: "POST",
+        data: {
+            content: content,
+        },
+        success: (response) => {
+            clearSpinner();
+            if (response.error) {
+                showErrorPopup('Something is wrong, please try again');
+            } else {
+                showSuccessPopup("Tweet successfully!!", () => {
+                    window.location.href = "/feed";
+                })
+            }
+        },
+        fail: (error) => {
+            clearSpinner();
+            showErrorPopup('Something is wrong, please try again');
+        }
+    });
  }

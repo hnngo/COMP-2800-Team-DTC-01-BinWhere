@@ -78,6 +78,7 @@ form {
 .icon-wasteType{
     padding-right: 8px;
 }
+
 .add-waste-type{
     color: whitesmoke;
     display: flex;
@@ -135,13 +136,16 @@ form {
 .addIcon{
     padding-right: 10px;
 }
+
 label{
     color: whitesmoke;
     font-size: smaller;
 }
+
 .save-btn-container{
         margin: 25px 0 25px 0;
 }
+
 #saveButton{
     background-color: var(--primary-green);
     height: 60px;

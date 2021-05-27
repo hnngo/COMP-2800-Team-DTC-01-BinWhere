@@ -21,7 +21,6 @@ body {
     display: none;
 }
 
-
 /*Profile*/
 main {
     margin: 20px auto;
@@ -200,7 +199,6 @@ article {
     margin-top: 7px;
 }
 
-
 /*MODAL*/
 .modal {
     display: none;
@@ -263,4 +261,3 @@ article {
     background-color: white;
     border: 0.5px solid var(--primary-black)
 }
-
