@@ -13,9 +13,7 @@ def init(app, db, tweet_api):
     @app.route("/feed/post", methods=["POST"])
     def post_tweet():
         content = request.form["content"]
-        print(content)
         content = unquote(unquote(content))
-        print(content)
         tweet_api.update_status(content)
         return {"error": 0}
 

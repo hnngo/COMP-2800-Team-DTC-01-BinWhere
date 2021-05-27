@@ -6,7 +6,7 @@ from datetime import datetime
 from google.api_core import exceptions
 
 
-def init(app, db):
+def init(app, db, tweet_api):
     @app.route("/", methods=["GET"])
     def get_map():
         user_id = session.get("user_id")
@@ -157,8 +157,18 @@ def init(app, db):
             "who_downvote": [],
             "who_upvote": []
         }
+
         try:
             db.collection("bins").add(bin_data)
+
+            new_bin_ref = db.collection("bins")\
+                            .where("lat", "==", float(request.form["lat"]))\
+                            .where("long", "==", float(request.form["long"]))\
+                            .get()
+
+            tweet_api.update_status(f"Check this out!!\n"
+                                    f"https://binwhere.azurewebsites.net/bin?id={new_bin_ref[0].id}")
+
             return {'error': 0}
 
         except exceptions.InvalidArgument as error:

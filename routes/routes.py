@@ -11,7 +11,7 @@ def initialize(app, db, auth, tweet_api):
     """
     authentication_route.init(app, db, auth)
     user_route.init(app, db, auth)
-    map_route.init(app, db)
+    map_route.init(app, db, tweet_api)
     feedback_route.init(app, db)
     wiki_route.init(app)
     other_routes.init(app, db, tweet_api)
