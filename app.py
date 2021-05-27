@@ -3,6 +3,7 @@ from flask_session import Session
 from routes import routes
 import pyrebase_auth
 import firebase
+import tweepy_setup
 
 
 # Init application
@@ -14,8 +15,11 @@ auth = pyrebase_auth.init().auth()
 # Init firebase
 db = firebase.initialize()
 
+# Tweet
+tweet_api = tweepy_setup.init()
+
 # Setup routes
-routes.initialize(app, db, auth)
+routes.initialize(app, db, auth, tweet_api)
 
 # Session
 app.secret_key = 'super secret key'
