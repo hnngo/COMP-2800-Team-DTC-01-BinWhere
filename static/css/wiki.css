@@ -101,6 +101,14 @@
     margin: 15px 0;
 }
 
+.wiki-common-no-result {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
 .wiki-search-result-image {
     width: 100px;
     height: 100%;

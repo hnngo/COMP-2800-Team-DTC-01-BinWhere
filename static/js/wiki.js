@@ -184,6 +184,14 @@ function hideAllCurrentResultCard() {
 function renderCardResult(items) {
     const resultContainer = document.querySelector(".wiki-common-search-result");
 
+    if (!items.length) {
+        const cardContainer = document.createElement("div");
+        cardContainer.setAttribute('class', "wiki-common-search-result-card wiki-common-no-result");
+        cardContainer.textContent = `No results found`;
+        resultContainer.appendChild(cardContainer);
+        return;
+    }
+
     items.forEach(item => {
         const cardContainer = document.createElement("div");
         cardContainer.classList.add("wiki-common-search-result-card", "animate__animated", "animate__fadeInRight");
