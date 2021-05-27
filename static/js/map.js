@@ -125,7 +125,7 @@ function initMap() {
 
     const cancelButton = document.createElement("input");
     cancelButton.type = "button";
-    cancelButton.setAttribute("id", "cancel-btn")
+    cancelButton.setAttribute("id", "cancel-btn");
     cancelButton.style.width = "94px";
     cancelButton.style.height = "56px";
     cancelButton.value = "Cancel";
@@ -137,7 +137,7 @@ function initMap() {
 
     const addButton = document.createElement("input");
     addButton.type = "submit";
-    addButton.setAttribute("id", "add-btn")
+    addButton.setAttribute("id", "add-btn");
     addButton.style.width = "94px";
     addButton.style.height = "56px";
     addButton.value = "Add";
@@ -160,12 +160,12 @@ function initMap() {
     cancelButton.addEventListener("click", function() {
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].pop();
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(addLocationButton);
-        map.controls[google.maps.ControlPosition.RIGHT_CENTER].pop()
+        map.controls[google.maps.ControlPosition.RIGHT_CENTER].pop();
         map.controls[google.maps.ControlPosition.RIGHT_TOP].pop();
     })
 
     addButton.addEventListener("click", function() {
-        console.log("clicked")
+        console.log("clicked");
         showSpinner();
 
         let lat = map.getCenter().lat();
