@@ -94,16 +94,16 @@ def init(app, db):
         doc = db.collection("items").document(item_id).get()
         description = doc.get("description")
         image = doc.get("image")
-        name = doc.get("name")
+        name = doc.get("name").capitalize()
         not_include = doc.get("not_include")
         waste_type = doc.get("type").lower()
         waste_type_icon = utils.get_icons([waste_type])[0]
 
         closest_bin = get_closest_bin(lat, long, waste_type)
 
-        return render_template("search-results.html", title="Search Result", description=description, image=image,
+        return render_template("search-results.html", item_name=name, description=description, image=image,
                                not_include=not_include, waste_type_icon=waste_type_icon, waste_type=waste_type,
-                               closest_bin=closest_bin, show_back=True)
+                               closest_bin=closest_bin, show_back=True, title="Search Result")
 
     def get_closest_bin(lat: str, long: str, waste_type: str) -> dict:
         """Get the id of the closest bin to the user's current location."""
