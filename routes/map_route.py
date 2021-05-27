@@ -15,9 +15,11 @@ def init(app, db):
         all_bins = [{doc.id: doc.to_dict()} for doc in map_data.stream()]
 
         if user_id is not None:
-            return render_template("map.html", title="Map", user_name=user["name"], user_avatar="data:image/png;base64,"+user["avatar"], bins=all_bins, is_login=True)
+            return render_template("map.html", title="Map", user_name=user["name"],
+                                   user_avatar="data:image/png;base64,"+user["avatar"], bins=all_bins, is_login=True)
         else:
-            return render_template("map.html", title="Map", user_name=utils.sidebar_default()["name"], user_avatar=utils.sidebar_default()["avatar"], bins=all_bins, is_login=False)
+            return render_template("map.html", title="Map", user_name=utils.sidebar_default()["name"],
+                                   user_avatar=utils.sidebar_default()["avatar"], bins=all_bins, is_login=False)
 
     @app.route('/bin', methods=['DELETE'])
     def delete_bin_location():
