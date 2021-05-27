@@ -64,4 +64,3 @@ def init(app, db):
             print(f'{doc.id} => {doc.to_dict()}')
             text += f"{doc.id} => {doc.to_dict()}\n"
         return text
-
