@@ -6,9 +6,7 @@ function reverseGeoCode() {
     $.getJSON(geoAPIStart + lat + ',' + long + geoAPIEnd)
         .done(function (geoData) {
             if (geoData["status"] === "OK") {
-                console.log(geoData);
                 bin_address = geoData.results[0].formatted_address;
-                console.log("Address:" + bin_address);
                 $('#bin-details-location').append(bin_address);
             } else {
                 $('#bin-details-location').append("Vancouver");
@@ -169,3 +167,37 @@ function updateDataIndex() {
         element.setAttribute("data-index", index + 1);
     });
 }
+
+
+// Delete bin
+const iconDeleteGarbage = document.querySelector(".deleteButton");
+if (iconDeleteGarbage) {
+    iconDeleteGarbage.addEventListener('click', () => {
+        $.ajax({
+            url: "/bin",
+            method: "DELETE",
+            data: {
+                bin_id: binId
+            },
+            success: (response) => {
+                clearSpinner();
+                if (response.error) {
+                    showErrorPopup('Something is wrong, please try again');
+                } else {
+                    showSuccessPopup('Deleted successfully', () => {
+                        window.location.href = "/";
+                    })
+                }
+            },
+            fail: (error) => {
+                clearSpinner();
+                showErrorPopup('Something is wrong, please try again');
+            }
+        })
+    })
+}
+
+function shareOntwitter(){
+    const url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=Check%20this%20out!`;
+    window.open(url, 'TwitterWindow',"menubar=1,resizable=1,width=600,height=600");
+ }

@@ -1,6 +1,8 @@
 from flask import render_template, request, redirect, session, jsonify
 import json
-from . import utils
+import requests
+from . import utils, constants
+from datetime import datetime
 
 
 def init(app, db):
@@ -17,6 +19,13 @@ def init(app, db):
         else:
             return render_template("map.html", title="Map", user_name=utils.sidebar_default()["name"], user_avatar=utils.sidebar_default()["avatar"], bins=all_bins, is_login=False)
 
+    @app.route('/bin', methods=['DELETE'])
+    def delete_bin_location():
+        """Delete bin"""
+        bin_id = request.form["bin_id"]
+        db.collection('bins').document(bin_id).delete()
+        return {"error": 0}
+
     @app.route("/bin", methods=["GET"])
     def get_bin_details():
         bin_id = request.args.get("id")
@@ -24,6 +33,9 @@ def init(app, db):
         lat = doc.get("lat")
         long = doc.get("long")
         bin_type = doc.get("type")
+        bin_image = doc.get("image")
+        bin_date = doc.get("date_created")
+        bin_creator_id = doc.get("userId")
         who_upvote = doc.get("who_upvote")
         who_downvote = doc.get("who_downvote")
         upvote = doc.get("upvote")
@@ -47,7 +59,8 @@ def init(app, db):
 
         return render_template("bin-details.html", title="Details", lat=lat, long=long, bin_type=bin_type_icons,
                                who_upvote=who_upvote, who_downvote=who_downvote, user_id=current_user_id, show_back=True,
-                               comments=formatted_comments, reliability=reliability)
+                               comments=formatted_comments, reliability=reliability, bin_image=bin_image,
+                               bin_date=str(bin_date)[:10], bin_creator_id=bin_creator_id)
 
     @app.route("/search", methods=["POST"])
     def search_query():
@@ -87,9 +100,9 @@ def init(app, db):
 
         closest_bin = get_closest_bin(lat, long, waste_type)
 
-        return render_template("search-results.html", title=name, description=description, image=image,
+        return render_template("search-results.html", title="Search Result", description=description, image=image,
                                not_include=not_include, waste_type_icon=waste_type_icon, waste_type=waste_type,
-                               closest_bin=closest_bin)
+                               closest_bin=closest_bin, show_back=True)
 
     def get_closest_bin(lat: str, long: str, waste_type: str) -> dict:
         """Get the id of the closest bin to the user's current location."""
@@ -104,3 +117,45 @@ def init(app, db):
     def euclidean_distance(user_coords: tuple, bin_coords: tuple) -> float:
         """Calculate euclidean distance between two coordinates. I know the Earth is a sphere, shut up."""
         return ((user_coords[0] - bin_coords[0]) ** 2 + (user_coords[1] - bin_coords[1]) ** 2) ** 0.5
+
+    @app.route("/add", methods=["POST"])
+    def get_new_location():
+        """Get a new bin location"""
+        lat = request.form["lat"]
+        lng = request.form["lng"]
+        return jsonify({"error": 0, "lat": lat, "lng": lng})
+
+    @app.route("/add/<lat>/<lng>", methods=["GET"])
+    def create_new_location(lat, lng):
+        """Create a new bin location"""
+        print(lat, lng)
+        return render_template("add-location.html", title="New Location", show_back=True, lat=lat, lng=lng)
+
+    @app.route("/add/save", methods=['POST'])
+    def submit_new_location():
+        """Submit newly written location form"""
+        user_id = session.get("user_id")
+        if user_id is None:
+            return jsonify({"error": "You must login first!"})
+
+        bin_data = {
+            "comments": [],
+            "date_created": datetime.now(),
+            "downvote": 0,
+            "upvote": 0,
+            "image": request.form["image"],
+            "lat": request.form["lat"],
+            "long": request.form["long"],
+            "type": request.form["type"].split(","),
+            "userId": session.get("user_id"),
+            "who_downvote": [],
+            "who_upvote": []
+        }
+        try:
+            db.collection("bins").add(bin_data)
+            return {'error': 0}
+
+        except (requests.HTTPError, requests.exceptions.HTTPError) as error:
+            error_dict = json.loads(error.strerror)
+            return jsonify({'error': error_dict["error"]["message"]})
+
