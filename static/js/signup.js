@@ -21,7 +21,7 @@ window.onload = () => {
             return;
         }
 
-        showSpinner()
+        showSpinner();
 
         $.ajax({
             url: "/signup",
@@ -54,6 +54,6 @@ window.onload = () => {
                 clearSpinner();
                 showWarningPopup("Something is wrong, please try again!");
             }
-        })
+        });
     });
 }
