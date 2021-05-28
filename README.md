@@ -109,10 +109,6 @@ We use [Github](http://semver.org/) for versioning. For the versions available, 
 * **Heather** - (https://github.com/leeh1102)
 * **Kaz** - (https://github.com/kazma-ku)
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
 ## Acknowledgments
 
 * Loading spinner by loading.io can be found in here https://loading.io/css/ 
